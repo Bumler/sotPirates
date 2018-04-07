@@ -1,0 +1,27 @@
+{
+  "name": "sotpirates",
+  "version": "1.0.0",
+  "description": "A descriptive island tracker for Sea of Thieves",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bumler/sotPirates.git"
+  },
+  "author": "Henry Bulmer, Ryan Pelaez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bumler/sotPirates/issues"
+  },
+  "homepage": "https://github.com/Bumler/sotPirates#readme",
+  "dependencies": {
+    "angular": "^1.6.9",
+    "angular-route": "^1.6.9",
+    "bootstrap": "^4.0.0",
+    "browser-sync": "^2.23.6",
+    "jquery": "^1.9.1",
+    "popper.js": "^1.12.9"
+  }
+}
