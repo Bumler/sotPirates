@@ -19,6 +19,7 @@
   "dependencies": {
     "angular": "^1.6.9",
     "bootstrap": "^4.0.0",
+    "browser-sync": "^2.23.6",
     "jquery": "^1.9.1",
     "popper.js": "^1.12.9"
   }
