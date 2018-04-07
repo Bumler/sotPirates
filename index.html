@@ -11,20 +11,24 @@
     <title>SoT Pirates</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="node_modules\bootstrap\dist\css\bootstrap.css" rel="stylesheet">
-    <script src ="node_modules\bootstrap\dist\js\bootstrap.min.js"></script>
+    <link href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/html" />
+	<link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/html" />
 
-    <!-- Custom styles for this template -->
+    <!-- C S S -->
     <link href="css/general.css" rel="stylesheet">
 
-    <!-- A P P !-->
-    <script src = "node_modules\angular\angular.min.js"></script>
+    <!-- A N G U L A R !-->
+    <script src="/node_modules/angular/angular.js"></script>
+    <script src="/node_modules/angular-route/angular-route.min.js"></script>
+
+    <!-- J S !-->
     <script src = "js/app.js"></script>
     
   </head>
-
+  
+  <header ng-include="'html/header.html'"></header>
+  
   <main ng-view></main>
-  <div>Hello World</div>
 
   <footer>
   </footer>
