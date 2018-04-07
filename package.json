@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/Bumler/sotPirates#readme",
   "dependencies": {
-    "angular": "^1.6.9"
+    "angular": "^1.6.9",
+    "bootstrap": "^4.0.0",
+    "jquery": "^1.9.1",
+    "popper.js": "^1.12.9"
   }
 }
