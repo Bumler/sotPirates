@@ -1,0 +1,1 @@
+var sotPirates = angular.module('sotPirates');
