@@ -2,6 +2,11 @@
 Thumbs.db
 ehthumbs.db
 
+# Eclipse Setting Files
+*.settings
+*.project
+*.classpath
+
 # Folder config file
 Desktop.ini
 
@@ -45,3 +50,4 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+/.metadata/
