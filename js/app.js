@@ -1,12 +1,10 @@
-var sotPirates = angular.module('sotPirates', ['ngRoute']).run(function($rootScope) {
-    $rootScope.data = "";
-});
+var sotPirates = angular.module('sotPirates', ['ngRoute']);
 
 sotPirates.config(['$routeProvider', function($routeProvider){
 	$routeProvider
 	.when('/gallery',{
 		templateUrl: 'html/gallery.html',
-		controller: 'galleryController'
+		controller: 'mainController'
 	})
 	.otherwise({
 		redirectTo: '/gallery'
@@ -14,7 +12,16 @@ sotPirates.config(['$routeProvider', function($routeProvider){
 
 }]);
 
-sotPirates.controller('galleryController', function($scope, $http, $rootScope){
+sotPirates.factory('SelectedIslands', function(){
+    return [
+		{name: 'Sanctuary Outpost'},
+		{name: 'Snake Island'},
+		{name: 'Pig Island'}
+	];
+});
+
+sotPirates.controller('mainController', function($scope, $http, SelectedIslands){
+	$scope.selectedIslands = SelectedIslands;
 	requestURL = "http://192.168.1.209:9099/islands";
 
 	$scope.sendRequest = function(){
@@ -40,6 +47,10 @@ sotPirates.controller('galleryController', function($scope, $http, $rootScope){
 	}
 });
 
-sotPirates.controller('filterController', function($scope, $http, $rootScope){
+sotPirates.controller('filterController', function($scope, SelectedIslands){
+	$scope.selectedIslands = SelectedIslands;
 
+	$scope.updateData = function() {
+		$scope.selectedIslands.push({name:'New Island'});
+	}
 });

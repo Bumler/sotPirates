@@ -1,4 +1,4 @@
-<div ng-controller="filterController as filter">
+<div ng-controller="filterController">
     <div ng-click="addingTrait = !addingTrait" class="fa faux-button-circle abs-bottom" ng-class="{'fa-filter' : !addingTrait, 'fa-times' : addingTrait}"
         title="Find an Island!"></div>
 
@@ -20,7 +20,12 @@
                 <div class="col-sm-12">
                     <div class="input-group">
                         <span class="input-group-addon">Name</span>
-                        <input ng-model="data" type="text" class="form-control" name="msg" placeholder="Sanctuary Outpost">
+                        <input ng-blur="updateData()" type="text" class="form-control" name="msg" placeholder="Sanctuary Outpost">
+                    </div>
+                    <div>
+                            <div ng-repeat="island in selectedIslands">
+                                    {{island.name}}
+                                </div> 
                     </div>
                 </div>
             </div>

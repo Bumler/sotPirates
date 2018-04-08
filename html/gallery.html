@@ -1,3 +1,5 @@
 <div>Gallery</div>
 <div ng-click="sendRequest()">Click ME</div>
-<div>{{data}}
+<div ng-repeat="island in selectedIslands">
+    {{island.name}}
+</div> 
