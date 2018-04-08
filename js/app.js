@@ -12,6 +12,26 @@ sotPirates.config(['$routeProvider', function($routeProvider){
 
 }]);
 
-sotPirates.controller('galleryController', function($scope){
+sotPirates.controller('galleryController', function($scope, $http){
+	requestURL = "http://192.168.1.209:9099/islands";
+	$scope.data = "";
 
+	$scope.sendRequest = function(){
+		var req = {
+			method: 'GET',
+ 			url: requestURL,
+ 			headers: {
+   				'Content-Type': 'application/json'
+ 			},
+ 		}
+		
+		$http(req)
+			.then(function (response) {
+				viewData(response.data);
+			})
+	}
+
+	function viewData (data){
+		$scope.data = data;
+	}
 });
