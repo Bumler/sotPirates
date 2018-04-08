@@ -7,21 +7,24 @@ import Resources.Attribute;
 import Resources.Island;
 
 /**
- * Custom class used to filter Islands. 
+ * Custom class used to filter Islands.
+ * 
  * @author ryanpelaez
  *
  */
 public class Filter {
 
 	/**
-	 * Send in a list of islands and filters and get back a list of islands that meet the criteria
+	 * Send in a list of islands and filters and get back a list of islands that
+	 * meet the criteria
+	 * 
 	 * @param islands
 	 * @param filters
 	 * @return filteredIslands - ArrayList<Island>
 	 */
 	public static List<Island> filterIslands(List<Island> islands, List<Attribute> filters) {
 		List<Island> filteredIslands = new ArrayList<>();
-		
+
 		for (Island island : islands) {
 			if (matchesFilter(island, filters)) {
 				filteredIslands.add(island);
@@ -29,8 +32,10 @@ public class Filter {
 		}
 		return filteredIslands;
 	}
+
 	/**
 	 * Checks to see if the specific island matches the criteria.
+	 * 
 	 * @param island
 	 * @param filters
 	 * @return True if Island Matches, False if it does not
@@ -39,7 +44,7 @@ public class Filter {
 		boolean matchesFilter = true;
 
 		for (Attribute attribute : filters) {
-			if (island.getAttribute(attribute.getName()) != attribute.getValue()) {
+			if (!island.getAttribute(attribute.getName()).equals(attribute.getValue())) {
 				return false;
 			}
 		}
