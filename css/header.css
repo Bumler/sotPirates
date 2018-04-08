@@ -1,0 +1,42 @@
+.nav-header{
+    width: 100%;
+    position: fixed;
+
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    background-color: #d2b48c;
+
+    font-family: 'Yeon Sung', cursive;
+}
+
+.logo{
+    width:100%;
+}
+
+.logo-text{
+    font-size: 60px;
+    font-weight: 500;
+}
+
+.subheader{
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.filter-box{
+    margin-right: 5px;
+}
+
+.filter-text{
+    margin-left: 5px;
+}
+
+.filter-row{
+    margin-top: 5px;
+}
+
+.header-section{
+    height: 15vh;
+    position: relative;
+}

@@ -1,0 +1,44 @@
+.filter{
+    display: block;
+    width: 100%;
+
+    margin: 0px 15px 30px 0px;
+    padding: 0px 10px 10px 10px;
+
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,f6f6f6+47,ededed+100;White+3D+%231 */
+    background: #ffffff; /* Old browsers */
+    background: -moz-linear-gradient(-45deg, #ffffff 0%, #f6f6f6 47%, #ededed 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg, #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg, #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.faux-button-circle{
+    color: white;
+    background-color: #d2b48c;
+    cursor: pointer;
+    font-size: 6rem;
+    padding: 10px 15px;
+    border-radius: 100%;
+}
+
+.faux-button-circle:hover{
+    background-color: #9F8159;
+}
+
+.abs-bottom {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    z-index: 9000;
+}
+
+.new-trait{
+    height: 400px;
+    width: 300px;
+    z-index: 8999;
+}
