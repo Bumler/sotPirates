@@ -29,6 +29,7 @@ import utils.Constants;
 import utils.Constants.IslandConstants;
 import utils.IslandManager;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -44,18 +45,19 @@ public class IslandEndpoints {
 
 	@GET
 	@Produces({ "application/json", "application/json" })
-
+	
 	@ApiOperation(value = "Return the user with the given id", notes = "Returns HTTP 200 if the user is found.")
 
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Valid island is found"),
 			@ApiResponse(code = 404, message = "Valid island is not found") })
 
 	public Response getUser(
-			@ApiParam(value = "Filters for islands.", required = false) @QueryParam(Constants.FILTERS) String filters) {
+			@ApiParam(value = "Filters for islands.", required = false) @QueryParam(Constants.FILTERS) String filters,
+			@ApiParam(value = "Determines if the filters are AND or OR.", required = false) @QueryParam(Constants.EXCLUSIVE) String exclusive) {
 
 		IslandManager im = new IslandManager();
 
-		return im.getIslands(filters);
+		return im.getIslands(filters, exclusive);
 	}
 
 }

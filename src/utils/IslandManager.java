@@ -23,31 +23,63 @@ public class IslandManager {
 		islands = IslandList.getIslands();
 	}
 
-	public Response getIslands(String filters) {
-		String responsePayload;
+	public Response getIslands(String filters, String isExclusive) {
+
+		JSONObject responsePayload;
+
+		// Check to see if there are filters. If there are none, assume we are grabbing
+		// all islands
 		if (filters != null && !filters.isEmpty()) {
+			System.out.println("VALUE: " + isExclusive);
+			boolean exclusiveSearch = determineExclusivity(isExclusive);
+			// Check if the isExclusive parameter was passed. Assume we are
+			// filtering exclusively
+			if (isExclusive != null && isExclusive.isEmpty()) {
+				exclusiveSearch = true;
+			} else {
+				exclusiveSearch = Boolean.parseBoolean(isExclusive);
+			}
+			System.out.println(exclusiveSearch);
 			List<Attribute> attributes = determineAttributes(filters);
 			// Send the islands and filters to be filtered
-			List<Island> filteredIslands = Filter.filterIslands(islands, attributes);
+			List<Island> filteredIslands = Filter.filterIslands(islands, attributes, exclusiveSearch);
 
 			responsePayload = islandListToJSON(filteredIslands);
 		} else {
 			responsePayload = islandListToJSON(islands);
 		}
+
 		Map<String, String> responseHeaders = new HashMap<String, String>();
 		responseHeaders.put(httpsConstants.CONTENT_TYPE_HEADER, httpsConstants.APP_JSON);
 		responseHeaders.put("Access-Control-Allow-Origin", "*");
-		return buildResponse(responseHeaders, 200, responsePayload);
+
+		return buildResponse(responseHeaders, 200, responsePayload.toString());
 	}
 
-	private String islandListToJSON(List<Island> filteredIslands) {
+	/**
+	 * Converts a list of islands into a JSON
+	 * 
+	 * @param filteredIslands
+	 * @return
+	 */
+	private JSONObject islandListToJSON(List<Island> filteredIslands) {
 		JSONObject islands = new JSONObject();
 		islands.put("islandCount", filteredIslands.size());
-		
+
 		for (Island island : filteredIslands) {
 			islands.put(island.getIslandName(), island.getAttributes());
 		}
-		return islands.toString();
+		return islands;
+	}
+
+	private boolean determineExclusivity(String isExclusive) {
+		// Check if the isExclusive parameter was passed. Assume we are
+		// filtering exclusively
+		if (isExclusive != null && isExclusive.isEmpty()) {
+			return true;
+		} else {
+			return Boolean.parseBoolean(isExclusive);
+		}
 	}
 
 	/**

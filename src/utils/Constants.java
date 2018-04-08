@@ -9,6 +9,7 @@ public class Constants {
 	 *
 	 */
 	public static final String FILTERS = "filters";
+	public static final String EXCLUSIVE = "exclusive";
 
 	public static class httpsConstants {
 		public static final String CONTENT_TYPE_HEADER = "Content-Type";

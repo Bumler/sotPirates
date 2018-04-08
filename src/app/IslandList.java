@@ -32,9 +32,9 @@ public class IslandList {
 		islands.add(new Island("Kraken Watchtower", "O6", "false", "true", "false", "false", "false"));
 		islands.add(new Island("Lone Cove", "J6", "false", "false", "false", "false", "false"));
 		islands.add(new Island("Keel Haul Fort", "C7", "false", "true", "false", "false", "false"));
-		islands.add(new Island("Sanctuary OutPost", "F7/F8/G7/G8", "true", "false", "false", "false", "false"));
+		islands.add(new Island("Sanctuary Outpost", "F7/F8/G7/G8", "true", "false", "false", "false", "false"));
 		islands.add(new Island("The Sunken Grove", "T8/U8", "false", "false", "false", "false", "false"));
-		islands.add(new Island("Dagger Tooth OutPost", "Q8/Q9", "true", "false", "false", "false", "false"));
+		islands.add(new Island("Dagger Tooth Outpost", "Q8/Q9", "true", "false", "false", "false", "false"));
 		islands.add(new Island("Rapier Cay", "D9", "false", "false", "false", "false", "false"));
 		islands.add(new Island("Lonely Isle", "I9", "false", "false", "false", "false", "false"));
 		islands.add(new Island("Hidden Spring Keep", "K9", "false", "true", "false", "false", "false"));

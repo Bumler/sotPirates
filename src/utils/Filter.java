@@ -22,11 +22,11 @@ public class Filter {
 	 * @param filters
 	 * @return filteredIslands - ArrayList<Island>
 	 */
-	public static List<Island> filterIslands(List<Island> islands, List<Attribute> filters) {
+	public static List<Island> filterIslands(List<Island> islands, List<Attribute> filters, boolean exclusiveSearch) {
 		List<Island> filteredIslands = new ArrayList<>();
 
 		for (Island island : islands) {
-			if (matchesFilter(island, filters)) {
+			if (matchesFilter(island, filters, exclusiveSearch)) {
 				filteredIslands.add(island);
 			}
 		}
@@ -34,19 +34,51 @@ public class Filter {
 	}
 
 	/**
-	 * Checks to see if the specific island matches the criteria.
+	 * Checks to see which type of filter (inclusive or exclusive) search it is.
+	 * Then determines if the island matches the filters.
 	 * 
 	 * @param island
 	 * @param filters
-	 * @return True if Island Matches, "false" if it does not
+	 * @param exclusiveSearch
+	 * @return
 	 */
-	private static boolean matchesFilter(Island island, List<Attribute> filters) {
+	private static boolean matchesFilter(Island island, List<Attribute> filters, boolean exclusiveSearch) {
+		if (exclusiveSearch) {
+			return matchesExclusive(island, filters);
+		}
+		return matchesInclusive(island, filters);
+	}
 
+	/**
+	 * If one attribute does not match return false.
+	 * 
+	 * @param island
+	 * @param filters
+	 * @return
+	 */
+	private static boolean matchesExclusive(Island island, List<Attribute> filters) {
+		System.out.println("here");
 		for (Attribute attribute : filters) {
 			if (!island.getAttribute(attribute.getName()).equals(attribute.getValue())) {
 				return false;
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * if at least one attribute matches. return true
+	 * 
+	 * @param island
+	 * @param filters
+	 * @return
+	 */
+	private static boolean matchesInclusive(Island island, List<Attribute> filters) {
+		for (Attribute attribute : filters) {
+			if (island.getAttribute(attribute.getName()).equals(attribute.getValue())) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
