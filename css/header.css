@@ -7,6 +7,8 @@
     -moz-box-shadow: 0 0 10px rgba(0,0,0,0.3);
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
     background-color: #d2b48c;
+
+    font-family: 'Yeon Sung', cursive;
 }
 
 .logo{
@@ -14,7 +16,23 @@
 }
 
 .logo-text{
-    font-family: 'Yeon Sung', cursive;
     font-size: 60px;
     font-weight: 500;
+}
+
+.subheader{
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.filter-box{
+    margin-right: 5px;
+}
+
+.filter-text{
+    margin-left: 5px;
+}
+
+.filter-row{
+    margin-top: 5px;
 }
