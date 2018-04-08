@@ -23,6 +23,9 @@ sotPirates.controller('galleryController', function($scope, $http){
  			headers: {
    				'Content-Type': 'application/json'
  			},
+			 body: {
+				 'payload' : 'Henry is cool'
+			 }
  		}
 		
 		$http(req)

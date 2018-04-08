@@ -36,3 +36,8 @@
 .filter-row{
     margin-top: 5px;
 }
+
+.header-section{
+    height: 20vh;
+    position: relative;
+}
