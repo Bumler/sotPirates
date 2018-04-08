@@ -1,4 +1,6 @@
-var sotPirates = angular.module('sotPirates', ['ngRoute']);
+var sotPirates = angular.module('sotPirates', ['ngRoute']).run(function($rootScope) {
+    $rootScope.data = "";
+});
 
 sotPirates.config(['$routeProvider', function($routeProvider){
 	$routeProvider
@@ -12,9 +14,8 @@ sotPirates.config(['$routeProvider', function($routeProvider){
 
 }]);
 
-sotPirates.controller('galleryController', function($scope, $http){
+sotPirates.controller('galleryController', function($scope, $http, $rootScope){
 	requestURL = "http://192.168.1.209:9099/islands";
-	$scope.data = "";
 
 	$scope.sendRequest = function(){
 		var req = {
@@ -37,4 +38,8 @@ sotPirates.controller('galleryController', function($scope, $http){
 	function viewData (data){
 		$scope.data = data;
 	}
+});
+
+sotPirates.controller('filterController', function($scope, $http, $rootScope){
+
 });

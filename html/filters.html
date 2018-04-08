@@ -1,0 +1,29 @@
+<div ng-controller="filterController as filter">
+    <div ng-click="addingTrait = !addingTrait" class="fa faux-button-circle abs-bottom" ng-class="{'fa-filter' : !addingTrait, 'fa-times' : addingTrait}"
+        title="Find an Island!"></div>
+
+    <div ng-show="addingTrait" class="filter new-trait abs-bottom">
+        <div class="subheader">I'm looking for...</div>
+            <div class="row filter-row">
+                <div class="col-sm-4"><span><input class="filter-box" type="checkbox" name="checkbox" value="value">Chickens</span></div>
+                <div class="col-sm-4"><span><input class="filter-box" type="checkbox" name="checkbox" value="value">Snakes</span></div>
+                <div class="col-sm-4"><span><input class="filter-box" type="checkbox" name="checkbox" value="value">Pigs</span></div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4"><span><input class="filter-box" type="checkbox" name="checkbox" value="value">Forts</span></div>
+                <div class="col-sm-4"><span><input class="filter-box" type="checkbox" name="checkbox" value="value">Outposts</span></div>
+                <div class="col-sm-4"></div>
+            </div>
+
+            <div class="row filter-row">
+                <div class="col-sm-12">
+                    <div class="input-group">
+                        <span class="input-group-addon">Name</span>
+                        <input ng-model="data" type="text" class="form-control" name="msg" placeholder="Sanctuary Outpost">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

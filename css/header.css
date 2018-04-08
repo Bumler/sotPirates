@@ -1,5 +1,4 @@
 .nav-header{
-    height: 20vh;
     width: 100%;
     position: fixed;
 
@@ -38,6 +37,6 @@
 }
 
 .header-section{
-    height: 20vh;
+    height: 15vh;
     position: relative;
 }
