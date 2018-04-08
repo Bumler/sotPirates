@@ -95,7 +95,7 @@ public class IslandManager {
 		String[] attributeArray = filters.split(",");
 
 		for (String attribute : attributeArray) {
-			String[] attributeProperties = attribute.split("=");
+			String[] attributeProperties = attribute.split(":");
 			attributesList.add(new Attribute(attributeProperties[0], attributeProperties[1]));
 		}
 		return attributesList;
