@@ -53,8 +53,6 @@ public class IslandEndpoints {
 	public Response getUser(
 			@ApiParam(value = "Filters for islands.", required = false) @QueryParam(Constants.FILTERS) String filters) {
 
-		System.out.println("We made it here");
-		System.out.println(filters);
 		IslandManager im = new IslandManager();
 
 		return im.getIslands(filters);

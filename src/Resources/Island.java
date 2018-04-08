@@ -24,17 +24,17 @@ public class Island {
 
 	/**
 	 * Constructs an island with the following properties
-	 * @param name - String
-	 * @param location - String
-	 * @param outpost - boolean
-	 * @param fort - boolean
-	 * @param snakes - boolean
-	 * @param chickens - boolean
-	 * @param pigs - boolean
+	 * @param name
+	 * @param location
+	 * @param outpost 
+	 * @param fort 
+	 * @param snakes
+	 * @param chickens 
+	 * @param pigs
 	 */
-	public Island(String name, String location, boolean outpost, boolean fort, boolean snakes, boolean chickens, boolean pigs) {
+	public Island(String name, String location, String outpost, String fort, String snakes, String chickens, String pigs) {
 		islandProperties = new JSONObject();
-	
+	 
 		islandProperties.put(IslandConstants.NAME, name);
 		islandProperties.put(IslandConstants.LOCATION, location);
 		islandProperties.put(IslandConstants.OUTPOST, outpost);

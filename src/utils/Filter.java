@@ -38,16 +38,15 @@ public class Filter {
 	 * 
 	 * @param island
 	 * @param filters
-	 * @return True if Island Matches, False if it does not
+	 * @return True if Island Matches, "false" if it does not
 	 */
 	private static boolean matchesFilter(Island island, List<Attribute> filters) {
-		boolean matchesFilter = true;
 
 		for (Attribute attribute : filters) {
 			if (!island.getAttribute(attribute.getName()).equals(attribute.getValue())) {
 				return false;
 			}
 		}
-		return matchesFilter;
+		return true;
 	}
 }

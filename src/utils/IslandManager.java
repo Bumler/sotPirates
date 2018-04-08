@@ -19,38 +19,31 @@ public class IslandManager {
 	static List<Island> islands;
 
 	public IslandManager() {
-
+		// Get the list of islands
+		islands = IslandList.getIslands();
 	}
 
 	public Response getIslands(String filters) {
-		List<Attribute> attributes = determineAttributes(filters);
+		String responsePayload;
+		if (filters != null && !filters.isEmpty()) {
+			List<Attribute> attributes = determineAttributes(filters);
+			// Send the islands and filters to be filtered
+			List<Island> filteredIslands = Filter.filterIslands(islands, attributes);
 
-		// Get the list of islands
-		islands = IslandList.getIslands();
-
-		// Send the islands and filters to be filtered
-		List<Island> filteredIslands = Filter.filterIslands(islands, attributes);
-
-		// Check to see if any islands came back
-		if (filteredIslands.isEmpty()) {
-			System.out.print("No islands matching the criteria");
+			responsePayload = islandListToJSON(filteredIslands);
+		} else {
+			responsePayload = islandListToJSON(islands);
 		}
-		// Iterated through the islands that match the filter
-		for (Island island : filteredIslands) {
-			System.out.println("Matched Filter: " + island.toString());
-		}
-
-		String responsePayload = islandListToJSON(filteredIslands);
-
 		Map<String, String> responseHeaders = new HashMap<String, String>();
 		responseHeaders.put(httpsConstants.CONTENT_TYPE_HEADER, httpsConstants.APP_JSON);
-
+		responseHeaders.put("Access-Control-Allow-Origin", "*");
 		return buildResponse(responseHeaders, 200, responsePayload);
 	}
 
 	private String islandListToJSON(List<Island> filteredIslands) {
 		JSONObject islands = new JSONObject();
-
+		islands.put("islandCount", filteredIslands.size());
+		
 		for (Island island : filteredIslands) {
 			islands.put(island.getIslandName(), island.getAttributes());
 		}
