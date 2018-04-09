@@ -37,8 +37,13 @@
     z-index: 9000;
 }
 
-.new-trait{
+.filter-window{
     height: 400px;
     width: 300px;
     z-index: 8999;
+}
+
+label{
+    font-weight: normal;
+    margin-bottom: 0px;
 }

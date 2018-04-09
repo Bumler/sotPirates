@@ -49,8 +49,33 @@ sotPirates.controller('mainController', function($scope, $http, SelectedIslands)
 
 sotPirates.controller('filterController', function($scope, SelectedIslands){
 	$scope.selectedIslands = SelectedIslands;
+	$scope.filters = 
+		{chickens:false,
+		snakes:false,
+		pigs:false,
+		outpost:false,
+		fort:false,
+		name:""};
 
-	$scope.updateData = function() {
-		$scope.selectedIslands.push({name:'New Island'});
+	baseFilter = "/islands?exclusive=true&filters=";
+
+	$scope.updateFilter = function() {
+		filter = buildFilter();
+		console.log(filter);
+	}
+
+	function buildFilter(){
+		filter = baseFilter;
+		
+		filter = filter.concat('chickens:'+$scope.filters.chickens+',');
+		filter = filter.concat('snakes:'+$scope.filters.snakes+',');
+		filter = filter.concat('pigs:'+$scope.filters.pigs+',');
+
+		filter = filter.concat('outpost:'+$scope.filters.outpost+',');
+		filter = filter.concat('fort:'+$scope.filters.fort+',');
+
+		filter = filter.concat('name:'+$scope.filters.name);
+
+		return filter;
 	}
 });
