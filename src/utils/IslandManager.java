@@ -72,6 +72,7 @@ public class IslandManager {
 
 	/**
 	 * Checks whether the request will be inclusive or exclusive)
+	 * 
 	 * @param isExclusive
 	 * @return
 	 */
@@ -96,10 +97,12 @@ public class IslandManager {
 		List<Attribute> attributesList = new ArrayList<>();
 
 		String[] attributeArray = filters.split(",");
-
+		String[] attributeProperties;
 		for (String attribute : attributeArray) {
-			String[] attributeProperties = attribute.split(":");
-			attributesList.add(new Attribute(attributeProperties[0], attributeProperties[1]));
+			attributeProperties = attribute.split(":");
+			if (attributeProperties.length == 2) {
+				attributesList.add(new Attribute(attributeProperties[0], attributeProperties[1]));
+			}
 		}
 		return attributesList;
 	}
