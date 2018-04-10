@@ -5,6 +5,7 @@ import java.util.List;
 
 import Resources.Attribute;
 import Resources.Island;
+import utils.Constants.IslandConstants;
 
 /**
  * Custom class used to filter Islands.
@@ -74,7 +75,7 @@ public class Filter {
 	 */
 	private static boolean matchesInclusive(Island island, List<Attribute> filters) {
 		for (Attribute attribute : filters) {
-			if (attribute.getName().equals("name")) {
+			if (attribute.getName().equals(IslandConstants.NAME)) {
 				if (island.getIslandName().toLowerCase().contains(attribute.getValue().toString().toLowerCase())) {
 					return true;
 				}

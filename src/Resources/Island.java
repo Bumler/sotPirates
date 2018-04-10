@@ -90,11 +90,4 @@ public class Island {
 	public JSONObject getAttributes() {
 		return islandProperties;
 	}
-	/**
-	 * Returns the island's attributes in JSON formatting
-	 */
-	public String toString() {
-		return islandProperties.toString();
-	}
-
 }
