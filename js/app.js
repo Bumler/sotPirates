@@ -20,9 +20,9 @@ sotPirates.controller('mainController', function($scope, $http, SelectedIslands)
 	$scope.selectedIslands = SelectedIslands;
 });
 
-sotPirates.controller('filterController', function($scope, SelectedIslands){
+sotPirates.controller('filterController', function($scope, $http, SelectedIslands){
 	$scope.selectedIslands = SelectedIslands;
-	requestURL = "http://192.168.1.209:9099";
+	requestURL = "http://192.168.1.116:9099";
 
 	$scope.filters = 
 		{chickens:false,
@@ -36,20 +36,29 @@ sotPirates.controller('filterController', function($scope, SelectedIslands){
 
 	$scope.updateFilter = function() {
 		filter = buildFilter();
-
+		filterIslands(filter);
 	}
 
 	function buildFilter(){
 		filter = baseFilter;
 		
-		filter = filter.concat('chickens:'+$scope.filters.chickens+',');
-		filter = filter.concat('snakes:'+$scope.filters.snakes+',');
-		filter = filter.concat('pigs:'+$scope.filters.pigs+',');
+		filter = addToFilter(filter, "chickens", $scope.filters.chickens);
+		filter = addToFilter(filter, "snakes", $scope.filters.snakes);
+		filter = addToFilter(filter, "pigs", $scope.filters.pigs);
 
-		filter = filter.concat('outpost:'+$scope.filters.outpost+',');
-		filter = filter.concat('fort:'+$scope.filters.fort+',');
+		filter = addToFilter(filter, "outpost", $scope.filters.outpost);
+		filter = addToFilter(filter, "fort", $scope.filters.fort);
 
-		filter = filter.concat('name:'+$scope.filters.name);
+		filter = addToFilter(filter, "name", $scope.filters.name);
+
+		filter = filter.trim(',');
+
+		return filter;
+	}
+
+	function addToFilter(filter, label, value){
+		if (value || value != "")
+			filter = filter.concat(label + ':' + value + ',');
 
 		return filter;
 	}
@@ -72,6 +81,10 @@ sotPirates.controller('filterController', function($scope, SelectedIslands){
 	}
 
 	function updateSelectedIslands (newIslands){
-		//Process data here
+		$scope.selectedIslands = [];
+
+		angular.forEach(newIslands, function(value, key) {
+  			$scope.selectedIslands.push(value);
+		});
 	}
 });
