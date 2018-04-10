@@ -30,7 +30,6 @@ public class IslandManager {
 		// Check to see if there are filters. If there are none, assume we are grabbing
 		// all islands
 		if (filters != null && !filters.isEmpty()) {
-			System.out.println("VALUE: " + isExclusive);
 			boolean exclusiveSearch = determineExclusivity(isExclusive);
 			// Check if the isExclusive parameter was passed. Assume we are
 			// filtering exclusively
@@ -39,7 +38,6 @@ public class IslandManager {
 			} else {
 				exclusiveSearch = Boolean.parseBoolean(isExclusive);
 			}
-			System.out.println(exclusiveSearch);
 			List<Attribute> attributes = determineAttributes(filters);
 			// Send the islands and filters to be filtered
 			List<Island> filteredIslands = Filter.filterIslands(islands, attributes, exclusiveSearch);
@@ -72,6 +70,11 @@ public class IslandManager {
 		return islands;
 	}
 
+	/**
+	 * Checks whether the request will be inclusive or exclusive)
+	 * @param isExclusive
+	 * @return
+	 */
 	private boolean determineExclusivity(String isExclusive) {
 		// Check if the isExclusive parameter was passed. Assume we are
 		// filtering exclusively
@@ -101,11 +104,12 @@ public class IslandManager {
 		return attributesList;
 	}
 
-	/*
-	 * build the jaxrs response
+	/**
+	 * Create a response to send back the user.
 	 * 
-	 * @param scimResponse
-	 * 
+	 * @param responseHeaders
+	 * @param responseCode
+	 * @param responsePayload
 	 * @return
 	 */
 	public Response buildResponse(Map<String, String> responseHeaders, int responseCode, String responsePayload) {

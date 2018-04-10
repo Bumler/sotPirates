@@ -51,7 +51,7 @@ public class IslandEndpoints {
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Valid island is found"),
 			@ApiResponse(code = 404, message = "Valid island is not found") })
 
-	public Response getUser(
+	public Response getIslands(
 			@ApiParam(value = "Filters for islands.", required = false) @QueryParam(Constants.FILTERS) String filters,
 			@ApiParam(value = "Determines if the filters are AND or OR.", required = false) @QueryParam(Constants.EXCLUSIVE) String exclusive) {
 

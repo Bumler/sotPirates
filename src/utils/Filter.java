@@ -57,7 +57,6 @@ public class Filter {
 	 * @return
 	 */
 	private static boolean matchesExclusive(Island island, List<Attribute> filters) {
-		System.out.println("here");
 		for (Attribute attribute : filters) {
 			if (!island.getAttribute(attribute.getName()).equals(attribute.getValue())) {
 				return false;

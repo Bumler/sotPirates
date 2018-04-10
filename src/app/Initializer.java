@@ -13,9 +13,11 @@ public class Initializer {
 
 	public static void main(String[] args) {
 
+		//Determine a port
 		int port = 9099;
 		MicroservicesRunner mr = new MicroservicesRunner(port);
 
+		//Start up the service
 		mr.deploy(new IslandEndpoints()).start();
 
 	}
