@@ -71,16 +71,17 @@ public class IslandManager {
 	}
 
 	/**
-	 * Checks whether the request will be inclusive or exclusive)
+	 * Checks whether the request will be inclusive or exclusive. <br>
+	 * By default it is <b>inclusive</b>.
 	 * 
 	 * @param isExclusive
 	 * @return
 	 */
 	private boolean determineExclusivity(String isExclusive) {
 		// Check if the isExclusive parameter was passed. Assume we are
-		// filtering exclusively
+		// filtering inclusively
 		if (isExclusive != null && isExclusive.isEmpty()) {
-			return true;
+			return false;
 		} else {
 			return Boolean.parseBoolean(isExclusive);
 		}
