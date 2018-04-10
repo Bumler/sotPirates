@@ -74,8 +74,14 @@ public class Filter {
 	 */
 	private static boolean matchesInclusive(Island island, List<Attribute> filters) {
 		for (Attribute attribute : filters) {
-			if (island.getAttribute(attribute.getName()).equals(attribute.getValue())) {
-				return true;
+			if (attribute.getName().equals("name")) {
+				if (island.getIslandName().toLowerCase().contains(attribute.getValue().toString().toLowerCase())) {
+					return true;
+				}
+			} else {
+				if (island.getAttribute(attribute.getName()).equals(attribute.getValue())) {
+					return true;
+				}
 			}
 		}
 		return false;
