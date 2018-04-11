@@ -12,7 +12,7 @@ sotPirates.config(['$routeProvider', function($routeProvider){
 
 }]);
 
-sotPirates.service('SelectIslands', function($http, $q){
+sotPirates.service('IslandFilterService', function($http, $q){
 	requestURL = "http://localhost:9099";
 	this.baseFilter = "/islands?exclusive=true&filters=";
 	
@@ -49,18 +49,18 @@ sotPirates.service('SelectIslands', function($http, $q){
 	}
 });
 
-sotPirates.factory('SelectedIslands', function(SelectIslands){
+sotPirates.factory('SelectedIslands', function(IslandFilterService){
 	var currentIslands = [];
 	return {islands: currentIslands};
 });
 
-sotPirates.controller('galleryController', function($scope, $http, SelectedIslands, SelectIslands){
+sotPirates.controller('galleryController', function($scope, $http, SelectedIslands, IslandFilterService){
 	$scope.selectedIslands = SelectedIslands;
 
 	function loadInitialIslands(){
-		filter = SelectIslands.baseFilter;
+		filter = IslandFilterService.baseFilter;
 
-		promise = SelectIslands.filterIslands(filter);
+		promise = IslandFilterService.filterIslands(filter);
 		promise.then(function(newIslands){
 			$scope.selectedIslands.islands = newIslands;
 		});
@@ -69,7 +69,7 @@ sotPirates.controller('galleryController', function($scope, $http, SelectedIslan
 	loadInitialIslands();
 });
 
-sotPirates.controller('filterController', function($scope, $http, SelectIslands, SelectedIslands){
+sotPirates.controller('filterController', function($scope, $http, IslandFilterService, SelectedIslands){
 	$scope.selectedIslands = SelectedIslands;
 
 	$scope.filters = 
@@ -83,14 +83,14 @@ sotPirates.controller('filterController', function($scope, $http, SelectIslands,
 	$scope.updateFilter = function() {
 		filter = buildFilter();
 
-		promise = SelectIslands.filterIslands(filter);
+		promise = IslandFilterService.filterIslands(filter);
 		promise.then(function(newIslands){
 			$scope.selectedIslands.islands = newIslands;
 		});
 	}
 
 	function buildFilter(){
-		filter = SelectIslands.baseFilter;
+		filter = IslandFilterService.baseFilter;
 		
 		filter = addToFilter(filter, "chickens", $scope.filters.chickens);
 		filter = addToFilter(filter, "snakes", $scope.filters.snakes);
