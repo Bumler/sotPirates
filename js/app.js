@@ -4,7 +4,7 @@ sotPirates.config(['$routeProvider', function($routeProvider){
 	$routeProvider
 	.when('/gallery',{
 		templateUrl: 'html/gallery.html',
-		controller: 'mainController'
+		controller: 'galleryController'
 	})
 	.otherwise({
 		redirectTo: '/gallery'
@@ -12,17 +12,65 @@ sotPirates.config(['$routeProvider', function($routeProvider){
 
 }]);
 
-sotPirates.factory('SelectedIslands', function(){
-    return [];
+sotPirates.service('SelectIslands', function($http, $q){
+	this.selectedIslands = "hi";
+	//this.selectedIslands = [{"Scurvy Isley":{"chickens":"false","pigs":"false","name":"Scurvy Isley","location":"N4","snakes":"false","fort":"false","outpost":"false"}}];
+	requestURL = "http://localhost:9099";
+	this.baseFilter = "/islands?exclusive=true&filters=";
+	
+	this.filterIslands = function(filter){
+		var deferred = $q.defer();
+
+		addressURL = requestURL.concat(filter);
+
+		var req = {
+			method: 'GET',
+ 			url: addressURL,
+ 			headers: {
+   				'Content-Type': 'application/json'
+ 			}
+ 		}
+		
+		$http(req)
+			.then(function (response) {
+				var updatedIslands = updateSelectedIslands(response.data)
+				deferred.resolve(updatedIslands);
+			});
+		
+		return deferred.promise;
+	}
+
+	function updateSelectedIslands (newIslands){
+		currentIslands = [];
+
+		angular.forEach(newIslands, function(value, key) {
+			currentIslands.push(value);
+		});
+
+		return currentIslands;
+	}
 });
 
-sotPirates.controller('mainController', function($scope, $http, SelectedIslands){
-	$scope.selectedIslands = SelectedIslands;
+sotPirates.factory('SelectedIslands', function(SelectIslands){
+	//var promise = SelectIslands.filterIslands(SelectIslands.baseFilter);
+	var currentIslands = [];
+
+	// promise.(function(data){
+	// 	debugger;
+	// 	currentIslands = data;
+	// });
+
+	// debugger;
+	return {islands: currentIslands};
 });
 
-sotPirates.controller('filterController', function($scope, $http, SelectedIslands){
+sotPirates.controller('galleryController', function($scope, $http, SelectedIslands){
 	$scope.selectedIslands = SelectedIslands;
-	requestURL = "http://192.168.1.116:9099";
+	debugger;
+});
+
+sotPirates.controller('filterController', function($scope, $http, SelectIslands, SelectedIslands){
+	$scope.selectedIslands = SelectedIslands;
 
 	$scope.filters = 
 		{chickens:false,
@@ -32,15 +80,19 @@ sotPirates.controller('filterController', function($scope, $http, SelectedIsland
 		fort:false,
 		name:""};
 
-	baseFilter = "/islands?exclusive=true&filters=";
-
 	$scope.updateFilter = function() {
+		debugger;
 		filter = buildFilter();
-		filterIslands(filter);
+
+		promise = SelectIslands.filterIslands(filter);
+		promise.then(function(newIslands){
+			$scope.selectedIslands.islands = newIslands;
+			debugger;
+		});
 	}
 
 	function buildFilter(){
-		filter = baseFilter;
+		filter = SelectIslands.baseFilter;
 		
 		filter = addToFilter(filter, "chickens", $scope.filters.chickens);
 		filter = addToFilter(filter, "snakes", $scope.filters.snakes);
@@ -61,30 +113,5 @@ sotPirates.controller('filterController', function($scope, $http, SelectedIsland
 			filter = filter.concat(label + ':' + value + ',');
 
 		return filter;
-	}
-
-	function filterIslands (filter){
-		addressURL = requestURL.concat(filter);
-
-		var req = {
-			method: 'GET',
- 			url: addressURL,
- 			headers: {
-   				'Content-Type': 'application/json'
- 			}
- 		}
-		
-		$http(req)
-			.then(function (response) {
-				updateSelectedIslands(response.data);
-			})
-	}
-
-	function updateSelectedIslands (newIslands){
-		$scope.selectedIslands = [];
-
-		angular.forEach(newIslands, function(value, key) {
-  			$scope.selectedIslands.push(value);
-		});
 	}
 });
