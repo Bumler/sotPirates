@@ -13,8 +13,6 @@ sotPirates.config(['$routeProvider', function($routeProvider){
 }]);
 
 sotPirates.service('SelectIslands', function($http, $q){
-	this.selectedIslands = "hi";
-	//this.selectedIslands = [{"Scurvy Isley":{"chickens":"false","pigs":"false","name":"Scurvy Isley","location":"N4","snakes":"false","fort":"false","outpost":"false"}}];
 	requestURL = "http://localhost:9099";
 	this.baseFilter = "/islands?exclusive=true&filters=";
 	
@@ -52,21 +50,23 @@ sotPirates.service('SelectIslands', function($http, $q){
 });
 
 sotPirates.factory('SelectedIslands', function(SelectIslands){
-	//var promise = SelectIslands.filterIslands(SelectIslands.baseFilter);
 	var currentIslands = [];
-
-	// promise.(function(data){
-	// 	debugger;
-	// 	currentIslands = data;
-	// });
-
-	// debugger;
 	return {islands: currentIslands};
 });
 
-sotPirates.controller('galleryController', function($scope, $http, SelectedIslands){
+sotPirates.controller('galleryController', function($scope, $http, SelectedIslands, SelectIslands){
 	$scope.selectedIslands = SelectedIslands;
-	debugger;
+
+	function loadInitialIslands(){
+		filter = SelectIslands.baseFilter;
+
+		promise = SelectIslands.filterIslands(filter);
+		promise.then(function(newIslands){
+			$scope.selectedIslands.islands = newIslands;
+		});
+	}
+
+	loadInitialIslands();
 });
 
 sotPirates.controller('filterController', function($scope, $http, SelectIslands, SelectedIslands){
@@ -81,13 +81,11 @@ sotPirates.controller('filterController', function($scope, $http, SelectIslands,
 		name:""};
 
 	$scope.updateFilter = function() {
-		debugger;
 		filter = buildFilter();
 
 		promise = SelectIslands.filterIslands(filter);
 		promise.then(function(newIslands){
 			$scope.selectedIslands.islands = newIslands;
-			debugger;
 		});
 	}
 
