@@ -46,7 +46,7 @@ public class IslandEndpoints {
 	@GET
 	@Path("/{id}")
 	@Produces({ "application/json" })
-	@ApiOperation(value = "Return the user with the given id", notes = "Returns HTTP 200 if the user is found.")
+	@ApiOperation(value = "Return the island with the given name", notes = "Returns HTTP 200 if the island is found.")
 
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Valid island is found"),
 			@ApiResponse(code = 404, message = "Valid island is not found") })
@@ -61,7 +61,7 @@ public class IslandEndpoints {
 	@GET
 	@Produces({ "application/json" })
 
-	@ApiOperation(value = "Return the user with the given id", notes = "Returns HTTP 200 if the user is found.")
+	@ApiOperation(value = "Returns all islands", notes = "Returns HTTP 200 if island(s) are found.")
 
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Valid island is found"),
 			@ApiResponse(code = 404, message = "Valid island is not found") })
@@ -78,7 +78,7 @@ public class IslandEndpoints {
 	@GET
 	@Path("/images/{id}")
 	@Produces({ "image/jpeg,image/png" })
-	@ApiOperation(value = "Return the user with the given id", notes = "Returns HTTP 200 if the user is found.")
+	@ApiOperation(value = "Return the PNG image of the island", notes = "Returns Input Stream if found")
 
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Valid island is found"),
 			@ApiResponse(code = 404, message = "Valid island is not found") })
