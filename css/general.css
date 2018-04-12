@@ -16,6 +16,10 @@ main{
     padding-top: 10px;
 }
 
+.mar-top{
+    margin-top: 10px;
+}
+
 .bg-parchment{
     background: url("../assets/parchment-high-res.jpg");
     background-size: cover;
