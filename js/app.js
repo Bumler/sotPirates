@@ -4,7 +4,7 @@ sotPirates.config(['$routeProvider', function($routeProvider){
 	$routeProvider
 	.when('/gallery',{
 		templateUrl: 'html/gallery.html',
-		controller: 'mainController'
+		controller: 'galleryController'
 	})
 	.otherwise({
 		redirectTo: '/gallery'
@@ -12,49 +12,13 @@ sotPirates.config(['$routeProvider', function($routeProvider){
 
 }]);
 
-sotPirates.factory('SelectedIslands', function(){
-    return [];
-});
+sotPirates.service('IslandFilterService', function($http, $q){
+	requestURL = "http://localhost:9099";
+	this.baseFilter = "/islands?exclusive=true&filters=";
+	
+	this.filterIslands = function(filter){
+		var deferred = $q.defer();
 
-sotPirates.controller('mainController', function($scope, $http, SelectedIslands){
-	$scope.selectedIslands = SelectedIslands;
-});
-
-sotPirates.controller('filterController', function($scope, SelectedIslands){
-	$scope.selectedIslands = SelectedIslands;
-	requestURL = "http://192.168.1.209:9099";
-
-	$scope.filters = 
-		{chickens:false,
-		snakes:false,
-		pigs:false,
-		outpost:false,
-		fort:false,
-		name:""};
-
-	baseFilter = "/islands?exclusive=true&filters=";
-
-	$scope.updateFilter = function() {
-		filter = buildFilter();
-
-	}
-
-	function buildFilter(){
-		filter = baseFilter;
-		
-		filter = filter.concat('chickens:'+$scope.filters.chickens+',');
-		filter = filter.concat('snakes:'+$scope.filters.snakes+',');
-		filter = filter.concat('pigs:'+$scope.filters.pigs+',');
-
-		filter = filter.concat('outpost:'+$scope.filters.outpost+',');
-		filter = filter.concat('fort:'+$scope.filters.fort+',');
-
-		filter = filter.concat('name:'+$scope.filters.name);
-
-		return filter;
-	}
-
-	function filterIslands (filter){
 		addressURL = requestURL.concat(filter);
 
 		var req = {
@@ -67,11 +31,85 @@ sotPirates.controller('filterController', function($scope, SelectedIslands){
 		
 		$http(req)
 			.then(function (response) {
-				updateSelectedIslands(response.data);
-			})
+				var updatedIslands = updateSelectedIslands(response.data)
+				deferred.resolve(updatedIslands);
+			});
+		
+		return deferred.promise;
 	}
 
 	function updateSelectedIslands (newIslands){
-		//Process data here
+		currentIslands = [];
+
+		angular.forEach(newIslands, function(value, key) {
+			currentIslands.push(value);
+		});
+
+		return currentIslands;
+	}
+});
+
+sotPirates.factory('SelectedIslands', function(IslandFilterService){
+	var currentIslands = [];
+	return {islands: currentIslands};
+});
+
+sotPirates.controller('galleryController', function($scope, $http, SelectedIslands, IslandFilterService){
+	$scope.selectedIslands = SelectedIslands;
+
+	function loadInitialIslands(){
+		filter = IslandFilterService.baseFilter;
+
+		promise = IslandFilterService.filterIslands(filter);
+		promise.then(function(newIslands){
+			$scope.selectedIslands.islands = newIslands;
+		});
+	}
+
+	loadInitialIslands();
+});
+
+sotPirates.controller('filterController', function($scope, $http, IslandFilterService, SelectedIslands){
+	$scope.selectedIslands = SelectedIslands;
+
+	$scope.filters = 
+		{chickens:false,
+		snakes:false,
+		pigs:false,
+		outpost:false,
+		fort:false,
+		name:""};
+
+	$scope.updateFilter = function() {
+		filter = buildFilter();
+
+		promise = IslandFilterService.filterIslands(filter);
+		promise.then(function(newIslands){
+			$scope.selectedIslands.islands = newIslands;
+		});
+	}
+
+	function buildFilter(){
+		filter = IslandFilterService.baseFilter;
+		
+		filter = addToFilter(filter, "chickens", $scope.filters.chickens);
+		filter = addToFilter(filter, "snakes", $scope.filters.snakes);
+		filter = addToFilter(filter, "pigs", $scope.filters.pigs);
+
+		filter = addToFilter(filter, "outpost", $scope.filters.outpost);
+		filter = addToFilter(filter, "fort", $scope.filters.fort);
+
+		filter = addToFilter(filter, "name", $scope.filters.name);
+
+		filter = filter.trim(',');
+
+		return filter;
+	}
+
+	function addToFilter(filter, label, value){
+		if (value || value != "")
+			filter = filter.concat(label + ':' + value + ',');
+
+		return filter;
 	}
 });

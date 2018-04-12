@@ -2,27 +2,29 @@
     <div ng-click="addingTrait = !addingTrait" class="fa faux-button-circle abs-bottom" ng-class="{'fa-filter' : !addingTrait, 'fa-times' : addingTrait}"
         title="Find an Island!"></div>
 
-    <div ng-show="addingTrait" class="filter filter-window abs-bottom">
-        <div class="subheader">I'm looking for...</div>
+    <div ng-show="addingTrait" class="filter filter-window abs-bottom bg-parchment">
+        <div class="filter-header pad-top">I be looking for...</div>
+            
+            <div class="sub-header">Animals</div>
             <div class="row filter-row">
-                <div class="col-sm-4"><label><input class="filter-box" type="checkbox" ng-change="updateFilter()" ng-model="filters.chickens">Chickens</label></div>
-                <div class="col-sm-4"><label><input class="filter-box" type="checkbox" ng-change="updateFilter()" ng-model="filters.snakes">Snakes</label></div>
-                <div class="col-sm-4"><label><input class="filter-box" type="checkbox" ng-change="updateFilter()" ng-model="filters.pigs">Pigs</label></div>
+                <div class="col-sm-4"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.chickens"><span class="fa fa-angle-right filter-text"></span>&nbsp;Chickens</label></div>
+                <div class="col-sm-4"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.snakes"><span class="fa fa-angle-left filter-text"></span>&nbsp;Snakes</label></div>
+                <div class="col-sm-4"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.pigs"><span class="fa fa-angle-down filter-text"></span>&nbsp;Pigs</label></div>
             </div>
 
+            <div class="sub-header">Special Islands</span></div>
             <div class="row">
-                <div class="col-sm-4"><label><input class="filter-box" type="checkbox" ng-change="updateFilter()" ng-model="filters.fort">Forts</label></div>
-                <div class="col-sm-4"><label><input class="filter-box" type="checkbox" ng-change="updateFilter()" ng-model="filters.outpost">Outposts</label></div>
-                <div class="col-sm-4"></div>
+                <div class="col-sm-4"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.fort"><span class="fa fa-fort-awesome filter-text"></span>&nbsp;Forts</label></div>
+                <div class="col-sm-6"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.outpost"><span class="fa fa-home filter-text"></span>&nbsp;Outposts</label></div>
+                <div class="col-sm-2"></div>
             </div>
 
+            <div class="sub-header">I know what I be looking for</div>
             <div class="row filter-row">
                 <div class="col-sm-12">
                     <div class="input-group">
                         <label class="input-group-addon">Name</label>
                         <input ng-blur="updateFilter()" type="text" class="form-control" ng-model="filters.name" placeholder="Sanctuary Outpost">
-                    </div>
-                    <div>
                     </div>
                 </div>
             </div>

@@ -1,3 +1,7 @@
+*{
+    font-family: 'Yeon Sung', cursive;
+}
+
 main{
     padding-top: 15vh;
 }
@@ -6,4 +10,17 @@ main{
     position: absolute;
     top: 50%;
     transform: translate(0%, -50%);
+}
+
+.pad-top{
+    padding-top: 10px;
+}
+
+.mar-top{
+    margin-top: 10px;
+}
+
+.bg-parchment{
+    background: url("../assets/parchment-high-res.jpg");
+    background-size: cover;
 }
