@@ -6,6 +6,10 @@ main{
     padding-top: 15vh;
 }
 
+footer{
+    margin-top: 15px;
+}
+
 .center-vert{
     position: absolute;
     top: 50%;
@@ -18,6 +22,10 @@ main{
 
 .mar-top{
     margin-top: 10px;
+}
+
+.big-mar-top{
+    margin-top: 25px;
 }
 
 .bg-parchment{
