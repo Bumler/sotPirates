@@ -17,7 +17,6 @@ public class IslandHelper {
 	 */
 	public static JSONObject islandListToJSON(List<Island> filteredIslands) {
 		JSONObject islands = new JSONObject();
-		islands.put("islandCount", filteredIslands.size());
 
 		for (Island island : filteredIslands) {
 			islands.put(island.getIslandName(), island.getIslandInfo());
