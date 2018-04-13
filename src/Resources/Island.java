@@ -87,7 +87,11 @@ public class Island {
 		}
 	}
 	
-	public JSONObject getAttributes() {
+	/**
+	 * Returns the JSON Object of this island
+	 * @return
+	 */
+	public JSONObject getIslandInfo() {
 		return islandProperties;
 	}
 }

@@ -26,10 +26,10 @@ import io.swagger.annotations.Info;
 import io.swagger.annotations.License;
 import io.swagger.annotations.SwaggerDefinition;
 import utils.Constants;
-import utils.Constants.IslandConstants;
 import utils.IslandManager;
 
-import javax.ws.rs.Consumes;
+import java.io.InputStream;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -44,9 +44,24 @@ import javax.ws.rs.core.Response;
 public class IslandEndpoints {
 
 	@GET
-	@Produces({ "application/json", "application/json" })
-	
-	@ApiOperation(value = "Return the user with the given id", notes = "Returns HTTP 200 if the user is found.")
+	@Path("/{id}")
+	@Produces({ "application/json" })
+	@ApiOperation(value = "Return the island with the given name", notes = "Returns HTTP 200 if the island is found.")
+
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Valid island is found"),
+			@ApiResponse(code = 404, message = "Valid island is not found") })
+
+	public Response getIsland(@PathParam("id") String id) {
+
+		IslandManager im = new IslandManager();
+
+		return im.getIsland(id);
+	}
+
+	@GET
+	@Produces({ "application/json" })
+
+	@ApiOperation(value = "Returns all islands", notes = "Returns HTTP 200 if island(s) are found.")
 
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Valid island is found"),
 			@ApiResponse(code = 404, message = "Valid island is not found") })
@@ -58,6 +73,21 @@ public class IslandEndpoints {
 		IslandManager im = new IslandManager();
 
 		return im.getIslands(filters, exclusive);
+	}
+
+	@GET
+	@Path("/images/{id}")
+	@Produces({ "image/jpeg,image/png" })
+	@ApiOperation(value = "Return the PNG image of the island", notes = "Returns Input Stream if found")
+
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Valid island is found"),
+			@ApiResponse(code = 404, message = "Valid island is not found") })
+
+	public InputStream getIslandImage(@PathParam("id") String id) {
+
+		IslandManager im = new IslandManager();
+
+		return im.getIslandImage(id);
 	}
 
 }
