@@ -3,6 +3,7 @@
     width: 100%;
     padding-top: 100%; /* 1:1 Aspect Ratio */
     position: relative;
+    border-radius: 5px;
 }
 
 .island-text{
