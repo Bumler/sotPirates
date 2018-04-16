@@ -6,6 +6,8 @@
     -moz-box-shadow: 0 0 10px rgba(0,0,0,0.3);
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
     background-color: #d2b48c;
+
+    z-index: 10;
 }
 
 .logo{
@@ -15,10 +17,6 @@
 .logo-text{
     font-size: 60px;
     font-weight: 500;
-}
-
-.filter-box{
-    margin-right: 8px;
 }
 
 .filter-text{

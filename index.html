@@ -36,10 +36,12 @@
     
   </head>
   
-  <header ng-include="'html/header.html'"></header>
-  <main ng-view></main>
-  <div ng-include="'html/filters.html'"></div>
+  <body>
+    <header ng-include="'html/header.html'"><main ng-view></main></header>
+    <main ng-view></main>
+    <div ng-include="'html/filters.html'"></div>
 
-  <footer>
-  </footer>
+    <footer></footer>
+  </body>
+  
 </html>
