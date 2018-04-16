@@ -4,3 +4,9 @@
     padding-top: 100%; /* 1:1 Aspect Ratio */
     position: relative;
 }
+
+.island-text{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
