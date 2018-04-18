@@ -29,13 +29,13 @@
     position: fixed;
     bottom: 15px;
     right: 15px;
-    z-index: 9000;
+    z-index: 900;
 }
 
 .filter-window{
     height: 450px;
     width: 370px;
-    z-index: 8999;
+    z-index: 899;
 }
 
 .filter-header{

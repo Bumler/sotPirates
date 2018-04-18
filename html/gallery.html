@@ -3,7 +3,7 @@
         <div class="col-md-1"></div>
         <div class="col-md-10 col-sm-12">
             <div ng-repeat="island in selectedIslands.islands" class="col-md-3 col-sm-4 col-xs-6 big-mar-top">
-                    <div class="island-card">
+                    <div class="island-card" ng-click="showIsland(island)">
                         <div class="island-text">
                             <div>{{island.name}}</div>
                             <div>

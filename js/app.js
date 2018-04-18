@@ -1,4 +1,4 @@
-var sotPirates = angular.module('sotPirates', ['ngRoute']);
+var sotPirates = angular.module('sotPirates', ['ngRoute', 'ui.bootstrap']);
 
 sotPirates.config(['$routeProvider', function($routeProvider){
 	$routeProvider
@@ -54,7 +54,11 @@ sotPirates.factory('SelectedIslands', function(IslandFilterService){
 	return {islands: currentIslands};
 });
 
-sotPirates.controller('galleryController', function($scope, $http, SelectedIslands, IslandFilterService){
+sotPirates.controller('islandModalController', function($uibModal){
+	
+});
+
+sotPirates.controller('galleryController', function($scope, $http, $uibModal, SelectedIslands, IslandFilterService){
 	$scope.selectedIslands = SelectedIslands;
 
 	function loadInitialIslands(){
@@ -64,6 +68,15 @@ sotPirates.controller('galleryController', function($scope, $http, SelectedIslan
 		promise.then(function(newIslands){
 			$scope.selectedIslands.islands = newIslands;
 		});
+	}
+
+	$scope.showIsland = function(island){
+		$uibModal.open({
+			animation: true,
+			templateUrl: './html/islandModal.html',
+			controller: 'islandModalController',
+			size: 'md'
+		  });
 	}
 
 	loadInitialIslands();
