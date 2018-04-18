@@ -73,9 +73,8 @@ sotPirates.controller('galleryController', function($scope, $http, $uibModal, Se
 	$scope.showIsland = function(island){
 		$uibModal.open({
 			animation: true,
-			templateUrl: './html/islandModal.html',
-			controller: 'islandModalController',
-			size: 'md'
+			templateUrl: 'html/islandModal.html',
+			controller: 'islandModalController'
 		  });
 	}
 
