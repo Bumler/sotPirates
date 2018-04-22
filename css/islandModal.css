@@ -1,0 +1,52 @@
+.modal-content {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.modal-dialog{
+    margin-top: 10%;
+
+    height: 500px;
+    width: 900px;
+}
+
+.secondContainer{
+    height: 100%;
+    width: 40%;
+}
+  
+.mapview{
+    width: 60%;
+    height: 100%;
+    background-color:red;
+}
+  
+.vanityShot {
+    height: 85%;
+    background-color: blue;
+}
+
+.islandInfo {
+    height: 15%;
+
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.islandName{
+    float: left;
+    width: 70%;
+}
+
+.islandIcons{
+    float: right;  
+    width: 30%;
+}
+
+.icon{
+    float: right;
+    padding-left: 3px;
+}
