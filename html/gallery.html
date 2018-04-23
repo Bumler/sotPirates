@@ -5,13 +5,13 @@
             <div ng-repeat="island in selectedIslands.islands" class="col-md-3 col-sm-4 col-xs-6 big-mar-top">
                     <div class="island-card" ng-click="showIsland(island)">
                         <div class="island-text">
-                            <div>{{island.name}}</div>
-                            <div>
-                                <span ng-if="island.chickens=='true'" class="fa fa-angle-right"></span>
-                                <span ng-if="island.snakes=='true'" class="fa fa-angle-left"></span>
-                                <span ng-if="island.pigs=='true'" class="fa fa-angle-down"></span>
-                                <span ng-if="island.fort=='true'" class="fa fa-fort-awesome"></span>
-                                <span ng-if="island.outpost=='true'" class="fa fa-home"></span>
+                            <div class="card-text">{{island.name}}</div>
+                            <div class="card-icons">
+                                <span ng-if="island.chickens=='true'" class="icon fa fa-angle-right"></span>
+                                <span ng-if="island.snakes=='true'" class="icon fa fa-angle-left"></span>
+                                <span ng-if="island.pigs=='true'" class="icon fa fa-angle-down"></span>
+                                <span ng-if="island.fort=='true'" class="icon fa fa-fort-awesome"></span>
+                                <span ng-if="island.outpost=='true'" class="icon fa fa-home"></span>
                             </div>
                         </div> 
                     </div>
