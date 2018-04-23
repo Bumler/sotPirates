@@ -54,8 +54,8 @@ sotPirates.factory('SelectedIslands', function(IslandFilterService){
 	return {islands: currentIslands};
 });
 
-sotPirates.controller('islandModalController', function($uibModal){
-	
+sotPirates.controller('islandModalController', function($uibModal, $scope, island){
+	$scope.island = island;
 });
 
 sotPirates.controller('galleryController', function($scope, $http, $uibModal, SelectedIslands, IslandFilterService){
@@ -70,11 +70,14 @@ sotPirates.controller('galleryController', function($scope, $http, $uibModal, Se
 		});
 	}
 
-	$scope.showIsland = function(island){
+	$scope.showIsland = function(islandToShow){
 		$uibModal.open({
 			animation: true,
 			templateUrl: 'html/islandModal.html',
-			controller: 'islandModalController'
+			controller: 'islandModalController',
+			resolve:{
+				island : islandToShow
+			}
 		  });
 	}
 
