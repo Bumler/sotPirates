@@ -27,16 +27,16 @@
 
 .abs-bottom {
     position: fixed;
-    right: 15px;
+    bottom: 15px;
     z-index: 900;
 }
 
 .bottom-a{
-    bottom: 105px;
+    right: 105px;
 }
 
 .bottom-b{
-    bottom: 15px;
+    right: 15px;
 }
 
 .filter-window{
