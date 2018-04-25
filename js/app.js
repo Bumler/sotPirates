@@ -92,7 +92,7 @@ sotPirates.controller('mapController', function($scope){
 
 });
 
-sotPirates.controller('filterController', function($scope, $http, $location,IslandFilterService, SelectedIslands){
+sotPirates.controller('controlsController', function($scope, $http, $location,IslandFilterService, SelectedIslands){
 	$scope.selectedIslands = SelectedIslands;
 
 	$scope.filters = 
