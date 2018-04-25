@@ -6,6 +6,10 @@ sotPirates.config(['$routeProvider', function($routeProvider){
 		templateUrl: 'html/gallery.html',
 		controller: 'galleryController'
 	})
+	.when('/map', {
+		templateUrl: 'html/map.html',
+		controller: 'mapController'
+	})
 	.otherwise({
 		redirectTo: '/gallery'
 	});
@@ -84,7 +88,11 @@ sotPirates.controller('galleryController', function($scope, $http, $uibModal, Se
 	loadInitialIslands();
 });
 
-sotPirates.controller('filterController', function($scope, $http, IslandFilterService, SelectedIslands){
+sotPirates.controller('mapController', function($scope){
+
+});
+
+sotPirates.controller('filterController', function($scope, $http, $location,IslandFilterService, SelectedIslands){
 	$scope.selectedIslands = SelectedIslands;
 
 	$scope.filters = 
@@ -94,6 +102,13 @@ sotPirates.controller('filterController', function($scope, $http, IslandFilterSe
 		outpost:false,
 		fort:false,
 		name:""};
+
+	$scope.changeView = function(){
+		if ($location.path() === '/gallery')
+			$location.path('/map');
+		else
+			$location.path('/gallery');
+	}
 
 	$scope.updateFilter = function() {
 		filter = buildFilter();
