@@ -11,10 +11,14 @@ html {
 main{
     padding-top: 15vh;
     z-index: 1;
+
+    background: azure;
 }
 
 footer{
     margin-top: 25px;
+
+    background: azure;
 }
 
 .center-vert{
