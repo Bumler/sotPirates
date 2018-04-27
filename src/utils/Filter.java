@@ -52,6 +52,7 @@ public class Filter {
 
 	/**
 	 * If one attribute does not match return false.
+	 * The island name is an exception. Returns false only if the island does not contain the given name
 	 * 
 	 * @param island
 	 * @param filters
@@ -59,10 +60,18 @@ public class Filter {
 	 */
 	private static boolean matchesExclusive(Island island, List<Attribute> filters) {
 		for (Attribute attribute : filters) {
-			if (!island.getAttribute(attribute.getName()).equals(attribute.getValue())) {
-				return false;
+			if (attribute.getName().equals(IslandConstants.NAME)) {
+				if (!island.getIslandName().toLowerCase().contains(attribute.getValue().toString().toLowerCase())) {
+					return false;
+				}
+			}
+			else {
+				if (!island.getAttribute(attribute.getName()).equals(attribute.getValue())) {
+					return false;
+				}
 			}
 		}
+		
 		return true;
 	}
 

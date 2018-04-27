@@ -2,6 +2,10 @@
     font-family: 'Yeon Sung', cursive;
 }
 
+html, body{
+    height: 100%;
+}
+
 html {
     overflow: -moz-scrollbars-vertical; 
     overflow-y: scroll;
@@ -9,16 +13,13 @@ html {
 
 
 main{
-    padding-top: 15vh;
+    padding-top: 10vh;
     z-index: 1;
 
     background: azure;
-}
 
-footer{
-    padding-top: 25px;
-
-    background: azure;
+    padding-bottom: 25px;
+    min-height: 100%;
 }
 
 .center-vert{
