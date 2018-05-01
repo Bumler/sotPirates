@@ -53,26 +53,25 @@ sotPirates.service('IslandFilterService', function($http, $q){
 	}
 });
 
-sotPirates.factory('SelectedIslands', function(IslandFilterService){
+sotPirates.factory('SelectedIslands', function($http, IslandFilterService){
 	var currentIslands = [];
-	return {islands: currentIslands};
+
+	filter = IslandFilterService.baseFilter;
+
+	promise = IslandFilterService.filterIslands(filter);
+	promise.then(function(newIslands){
+		currentIslands = newIslands;
+	});
+	
+	return {currentIslands};
 });
 
 sotPirates.controller('islandModalController', function($uibModal, $scope, island){
 	$scope.island = island;
 });
 
-sotPirates.controller('galleryController', function($scope, $http, $uibModal, SelectedIslands, IslandFilterService){
+sotPirates.controller('galleryController', function($scope, $uibModal, SelectedIslands){
 	$scope.selectedIslands = SelectedIslands;
-
-	function loadInitialIslands(){
-		filter = IslandFilterService.baseFilter;
-
-		promise = IslandFilterService.filterIslands(filter);
-		promise.then(function(newIslands){
-			$scope.selectedIslands.islands = newIslands;
-		});
-	}
 
 	$scope.showIsland = function(islandToShow){
 		$uibModal.open({
@@ -84,12 +83,10 @@ sotPirates.controller('galleryController', function($scope, $http, $uibModal, Se
 			}
 		  });
 	}
-
-	loadInitialIslands();
 });
 
-sotPirates.controller('mapController', function($scope){
-
+sotPirates.controller('mapController', function($scope, SelectedIslands){
+	$scope.selectedIslands = SelectedIslands;
 });
 
 sotPirates.controller('controlsController', function($scope, $http, $location,IslandFilterService, SelectedIslands){
@@ -142,4 +139,15 @@ sotPirates.controller('controlsController', function($scope, $http, $location,Is
 
 		return filter;
 	}
+
+	function loadInitialIslands(){
+		filter = IslandFilterService.baseFilter;
+
+		promise = IslandFilterService.filterIslands(filter);
+		promise.then(function(newIslands){
+			$scope.selectedIslands.islands = newIslands;
+		});
+	}
+
+	loadInitialIslands();
 });
