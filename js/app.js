@@ -16,11 +16,71 @@ sotPirates.config(['$routeProvider', function($routeProvider){
 
 }]);
 
-sotPirates.service('IslandFilterService', function($http, $q){
-	requestURL = "http://localhost:9099";
-	this.baseFilter = "/islands?exclusive=true&filters=";
+sotPirates.factory('SelectedIslands', function(){
+	var selectedIslands = {};
+	selectedIslands.islands = [];
+	selectedIslands.marked = [];
+
+	return {selectedIslands};
+});
+
+sotPirates.factory('IslandMarker', function($location, SelectedIslands){
+	markedIsland = SelectedIslands.marked;
+
+	return{
+		MarkOnMap : function(island){
+			SelectedIslands.marked.push(island);
+			$location.path('/map');
+		}
+	}
+})
+
+sotPirates.controller('islandModalController', function($uibModal, $scope, island){
+	$scope.island = island;
+});
+
+sotPirates.controller('galleryController', function($scope, $uibModal, SelectedIslands, IslandMarker){
+	$scope.selectedIslands = SelectedIslands;
+	$scope.MarkOnMap = IslandMarker.MarkOnMap;
+
+	$scope.showIsland = function(islandToShow){
+		$uibModal.open({
+			animation: true,
+			templateUrl: 'html/islandModal.html',
+			controller: 'islandModalController',
+			resolve:{
+				island : islandToShow
+			}
+		  });
+	}
+});
+
+sotPirates.controller('mapController', function($scope, SelectedIslands){
+	$scope.selectedIslands = SelectedIslands;
+});
+
+sotPirates.controller('controlsController', function($scope, $http, $q, $location, SelectedIslands){
+	$scope.selectedIslands = SelectedIslands;
 	
-	this.filterIslands = function(filter){
+	requestURL = "http://localhost:9099";
+	baseFilter = "/islands?exclusive=true&filters=";
+
+	$scope.filters = 
+		{chickens:false,
+		snakes:false,
+		pigs:false,
+		outpost:false,
+		fort:false,
+		name:""};
+
+	$scope.changeView = function(){
+		if ($location.path() === '/gallery')
+			$location.path('/map');
+		else
+			$location.path('/gallery');
+	}
+
+	function filterIslands (filter){
 		var deferred = $q.defer();
 
 		addressURL = requestURL.concat(filter);
@@ -51,73 +111,18 @@ sotPirates.service('IslandFilterService', function($http, $q){
 
 		return currentIslands;
 	}
-});
-
-sotPirates.factory('SelectedIslands', function($http, IslandFilterService){
-	var currentIslands = [];
-
-	filter = IslandFilterService.baseFilter;
-
-	promise = IslandFilterService.filterIslands(filter);
-	promise.then(function(newIslands){
-		currentIslands = newIslands;
-	});
-	
-	return {currentIslands};
-});
-
-sotPirates.controller('islandModalController', function($uibModal, $scope, island){
-	$scope.island = island;
-});
-
-sotPirates.controller('galleryController', function($scope, $uibModal, SelectedIslands){
-	$scope.selectedIslands = SelectedIslands;
-
-	$scope.showIsland = function(islandToShow){
-		$uibModal.open({
-			animation: true,
-			templateUrl: 'html/islandModal.html',
-			controller: 'islandModalController',
-			resolve:{
-				island : islandToShow
-			}
-		  });
-	}
-});
-
-sotPirates.controller('mapController', function($scope, SelectedIslands){
-	$scope.selectedIslands = SelectedIslands;
-});
-
-sotPirates.controller('controlsController', function($scope, $http, $location,IslandFilterService, SelectedIslands){
-	$scope.selectedIslands = SelectedIslands;
-
-	$scope.filters = 
-		{chickens:false,
-		snakes:false,
-		pigs:false,
-		outpost:false,
-		fort:false,
-		name:""};
-
-	$scope.changeView = function(){
-		if ($location.path() === '/gallery')
-			$location.path('/map');
-		else
-			$location.path('/gallery');
-	}
 
 	$scope.updateFilter = function() {
 		filter = buildFilter();
 
-		promise = IslandFilterService.filterIslands(filter);
+		promise = filterIslands(filter);
 		promise.then(function(newIslands){
 			$scope.selectedIslands.islands = newIslands;
 		});
 	}
 
 	function buildFilter(){
-		filter = IslandFilterService.baseFilter;
+		filter = baseFilter;
 		
 		filter = addToFilter(filter, "chickens", $scope.filters.chickens);
 		filter = addToFilter(filter, "snakes", $scope.filters.snakes);
@@ -141,9 +146,9 @@ sotPirates.controller('controlsController', function($scope, $http, $location,Is
 	}
 
 	function loadInitialIslands(){
-		filter = IslandFilterService.baseFilter;
+		filter = baseFilter;
 
-		promise = IslandFilterService.filterIslands(filter);
+		promise = filterIslands(filter);
 		promise.then(function(newIslands){
 			$scope.selectedIslands.islands = newIslands;
 		});
