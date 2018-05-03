@@ -45,8 +45,14 @@ sotPirates.factory('SelectedIslands', function($location){
 	}
 });
 
-sotPirates.controller('islandModalController', function($uibModal, $scope, island){
+sotPirates.controller('islandModalController', function($uibModal, $scope, island, SelectedIslands){
 	$scope.island = island;
+
+	$scope.MarkOnMap = function(island){
+		SelectedIslands.MarkIsland(island);
+
+		this.$close();
+	} 
 });
 
 sotPirates.controller('galleryController', function($scope, $uibModal, SelectedIslands){
