@@ -44,3 +44,8 @@ main{
     background: url("../assets/parchment-high-res.jpg");
     background-size: cover;
 }
+
+.icon{
+    float: right;
+    padding-left: 3px;
+}

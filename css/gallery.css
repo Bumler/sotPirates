@@ -9,7 +9,7 @@
     cursor: pointer;
 }
 
-.island-text{
+.card-top{
     position: absolute;
     top: 10px;
     padding: 0px 15px;
@@ -27,4 +27,14 @@
 
 .card-icons{
     float: right;
+}
+
+.card-bottom{
+    position: absolute;
+    bottom: 0px;
+    padding: 0px 15px;
+    width: 100%;
+    display: block;
+    font-size: 64px;
+    color: #9F8159
 }
