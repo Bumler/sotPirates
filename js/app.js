@@ -17,19 +17,34 @@ sotPirates.config(['$routeProvider', function($routeProvider){
 }]);
 
 sotPirates.factory('SelectedIslands', function(){
-	var selectedIslands = {};
-	selectedIslands.islands = [];
-	selectedIslands.marked = [];
+	filteredIslands = [];
+	//SelectedIslands.markedIslands = [];
 
-	return {selectedIslands};
+	return {
+		FilteredIslands : filteredIslands,
+		UpdateFilteredIsands : updateFilteredIslands,
+		markedIslands : {}
+	}
+
+	function getFilteredIslands (){
+		return filteredIslands;
+	}
+
+	function updateFilteredIslands (newIslands){
+		//We can't simply set filtered islands to new islands because the reference is watched
+		//this feels like a dirty fix and should be checked on
+		filteredIslands.length = 0;
+
+		newIslands.forEach(function(island){
+			filteredIslands.push(island);
+		});
+	}
 });
 
 sotPirates.factory('IslandMarker', function($location, SelectedIslands){
-	markedIsland = SelectedIslands.marked;
-
 	return{
-		MarkOnMap : function(island){
-			SelectedIslands.marked.push(island);
+		MarkOnMap : function(island, selectedIslands){
+			selectedIslands.marked.push(island);
 			$location.path('/map');
 		}
 	}
@@ -40,7 +55,7 @@ sotPirates.controller('islandModalController', function($uibModal, $scope, islan
 });
 
 sotPirates.controller('galleryController', function($scope, $uibModal, SelectedIslands, IslandMarker){
-	$scope.selectedIslands = SelectedIslands;
+	$scope.filteredIslands = SelectedIslands.FilteredIslands;
 	$scope.MarkOnMap = IslandMarker.MarkOnMap;
 
 	$scope.showIsland = function(islandToShow){
@@ -56,12 +71,10 @@ sotPirates.controller('galleryController', function($scope, $uibModal, SelectedI
 });
 
 sotPirates.controller('mapController', function($scope, SelectedIslands){
-	$scope.selectedIslands = SelectedIslands;
+	$scope.filteredIslands = SelectedIslands.FilteredIslands;
 });
 
 sotPirates.controller('controlsController', function($scope, $http, $q, $location, SelectedIslands){
-	$scope.selectedIslands = SelectedIslands;
-	
 	requestURL = "http://localhost:9099";
 	baseFilter = "/islands?exclusive=true&filters=";
 
@@ -115,10 +128,7 @@ sotPirates.controller('controlsController', function($scope, $http, $q, $locatio
 	$scope.updateFilter = function() {
 		filter = buildFilter();
 
-		promise = filterIslands(filter);
-		promise.then(function(newIslands){
-			$scope.selectedIslands.islands = newIslands;
-		});
+		requestIslands(filter);
 	}
 
 	function buildFilter(){
@@ -145,13 +155,17 @@ sotPirates.controller('controlsController', function($scope, $http, $q, $locatio
 		return filter;
 	}
 
+	function requestIslands (filter){
+		promise = filterIslands(filter);
+		promise.then(function(newIslands){
+			SelectedIslands.UpdateFilteredIsands(newIslands);
+		});
+	}
+
 	function loadInitialIslands(){
 		filter = baseFilter;
 
-		promise = filterIslands(filter);
-		promise.then(function(newIslands){
-			$scope.selectedIslands.islands = newIslands;
-		});
+		requestIslands(filter);
 	}
 
 	loadInitialIslands();
