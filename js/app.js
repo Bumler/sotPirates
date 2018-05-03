@@ -16,18 +16,15 @@ sotPirates.config(['$routeProvider', function($routeProvider){
 
 }]);
 
-sotPirates.factory('SelectedIslands', function(){
+sotPirates.factory('SelectedIslands', function($location){
 	filteredIslands = [];
-	//SelectedIslands.markedIslands = [];
+	markedIslands = [];
 
 	return {
 		FilteredIslands : filteredIslands,
 		UpdateFilteredIsands : updateFilteredIslands,
-		markedIslands : {}
-	}
-
-	function getFilteredIslands (){
-		return filteredIslands;
+		MarkedIslands : markedIslands,
+		MarkIsland : markIsland
 	}
 
 	function updateFilteredIslands (newIslands){
@@ -39,24 +36,22 @@ sotPirates.factory('SelectedIslands', function(){
 			filteredIslands.push(island);
 		});
 	}
-});
 
-sotPirates.factory('IslandMarker', function($location, SelectedIslands){
-	return{
-		MarkOnMap : function(island, selectedIslands){
-			selectedIslands.marked.push(island);
-			$location.path('/map');
-		}
+	function markIsland (island, event){
+		if (markedIslands.indexOf(island) < 0)
+			markedIslands.push(island);
+		
+		$location.path('/map');
 	}
-})
+});
 
 sotPirates.controller('islandModalController', function($uibModal, $scope, island){
 	$scope.island = island;
 });
 
-sotPirates.controller('galleryController', function($scope, $uibModal, SelectedIslands, IslandMarker){
+sotPirates.controller('galleryController', function($scope, $uibModal, SelectedIslands){
 	$scope.filteredIslands = SelectedIslands.FilteredIslands;
-	$scope.MarkOnMap = IslandMarker.MarkOnMap;
+	$scope.MarkOnMap = SelectedIslands.MarkIsland;
 
 	$scope.showIsland = function(islandToShow){
 		$uibModal.open({
@@ -72,6 +67,7 @@ sotPirates.controller('galleryController', function($scope, $uibModal, SelectedI
 
 sotPirates.controller('mapController', function($scope, SelectedIslands){
 	$scope.filteredIslands = SelectedIslands.FilteredIslands;
+	$scope.markedIslands = SelectedIslands.MarkedIslands;
 });
 
 sotPirates.controller('controlsController', function($scope, $http, $q, $location, SelectedIslands){
