@@ -3,7 +3,6 @@
     width: 100%;
 
     margin: 0px 15px 15px 0px;
-    padding: 0px 15px 15px 10px;
 
     -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.3);
     -moz-box-shadow: 0 0 10px rgba(0,0,0,0.3);
@@ -40,7 +39,7 @@
 }
 
 .filter-window{
-    height: 450px;
+    height: 435px;
     width: 370px;
     z-index: 899;
 }
@@ -48,15 +47,28 @@
 .filter-header{
     font-size: 30px;
     font-weight: 500;
+
+    padding: 10px;
+
+    border-radius: 5px 5px 0px 0px;
+
+    background: -moz-linear-gradient(rgba(159,129,89,.3),rgba(159,129,89,.3));
+    background: -webkit-linear-gradient(rgba(159,129,89,.3),rgba(159,129,89,.3));
+    background: linear-gradient(rgba(159,129,89,.3),rgba(159,129,89,.3));
+}
+
+.filter-row{
+    padding: 5px 10px;
+    min-height: 112px;
 }
 
 .sub-header{
-    margin-top: 10px;
+    padding: 10px 10px 0px 10px;
     font-size: 24px;
 }
 
 label{
     font-weight: normal;
     margin-bottom: 0px;
-    font-size: 18px;
+    font-size: 24px;
 }
