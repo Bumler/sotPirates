@@ -11,30 +11,38 @@
         <uib-tabset class="filterTabList" active="activeJustified" justified="true">
             <uib-tab index="0" heading="Animals">
                 <div class="row filter-row">
-                    <div class="col-sm-4"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.chickens"><span class="fa fa-angle-right filter-text"></span>&nbsp;Chickens</label></div>
-                    <div class="col-sm-4"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.snakes"><span class="fa fa-angle-left filter-text"></span>&nbsp;Snakes</label></div>
-                    <div class="col-sm-4"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.pigs"><span class="fa fa-angle-down filter-text"></span>&nbsp;Pigs</label></div>
+                    <div class="col-xs-12"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.chickens"><span class="fa fa-angle-right filter-text"></span>&nbsp;Chickens</label></div>
+                    <div class="col-xs-12"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.snakes"><span class="fa fa-angle-left filter-text"></span>&nbsp;Snakes</label></div>
+                    <div class="col-xs-12"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.pigs"><span class="fa fa-angle-down filter-text"></span>&nbsp;Pigs</label></div>
                 </div>
             </uib-tab>
             <uib-tab index="1" heading="Special Islands">
-                <div class="row">
-                        <div class="col-sm-4"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.fort"><span class="fa fa-fort-awesome filter-text"></span>&nbsp;Forts</label></div>
-                        <div class="col-sm-6"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.outpost"><span class="fa fa-home filter-text"></span>&nbsp;Outposts</label></div>
-                        <div class="col-sm-2"></div>
+                <div class="row filter-row">
+                        <div class="col-xs-12"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.fort"><span class="fa fa-fort-awesome filter-text"></span>&nbsp;Forts</label></div>
+                        <div class="col-xs-12"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.outpost"><span class="fa fa-home filter-text"></span>&nbsp;Outposts</label></div>
+                        <div class="col-xs-12"></div>
                     </div>
             </uib-tab>
-            <uib-tab index="2" heading="Long Justified">Long Labeled Justified content</uib-tab>
+            <uib-tab index="2" heading="Islands With...">Shit like docks and stuff</uib-tab>
         </uib-tabset>
 
-            <div class="sub-header">I know what I be looking for</div>
-            <div class="row filter-row">
-                <div class="col-sm-12">
-                    <div class="input-group">
-                        <label class="input-group-addon">Name</label>
-                        <input ng-keyup="updateFilter()" type="text" class="form-control" ng-model="filters.name" placeholder="Sanctuary Outpost">
-                    </div>
+        <div class="sub-header">Active Filters: 
+            <span ng-if="filters.chickens==true" class="fa fa-angle-right"></span>
+            <span ng-if="filters.snakes==true" class="fa fa-angle-left"></span>
+            <span ng-if="filters.pigs==true" class="fa fa-angle-down"></span>
+            <span ng-if="filters.fort==true" class="fa fa-fort-awesome"></span>
+            <span ng-if="filters.outpost==true" class="fa fa-home"></span>
+        </div>
+
+        <div class="sub-header">I know what I be looking for</div>
+        <div class="row filter-row">
+            <div class="col-sm-12">
+                <div class="input-group">
+                    <label class="input-group-addon">Name</label>
+                    <input ng-keyup="updateFilter()" type="text" class="form-control" ng-model="filters.name" placeholder="Sanctuary Outpost">
                 </div>
             </div>
+        </div>
         </form>
     </div>
 </div>

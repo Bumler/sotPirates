@@ -50,22 +50,25 @@
 
     padding: 10px;
 
-    color: wheat;
-
     border-radius: 5px 5px 0px 0px;
 
-    background: -moz-linear-gradient(rgba(159,129,89,.5),rgba(159,129,89,.5));
-    background: -webkit-linear-gradient(rgba(159,129,89,.5),rgba(159,129,89,.5));
-    background: linear-gradient(rgba(159,129,89,.5),rgba(159,129,89,.5));
+    background: -moz-linear-gradient(rgba(159,129,89,.3),rgba(159,129,89,.3));
+    background: -webkit-linear-gradient(rgba(159,129,89,.3),rgba(159,129,89,.3));
+    background: linear-gradient(rgba(159,129,89,.3),rgba(159,129,89,.3));
+}
+
+.filter-row{
+    padding: 5px 10px;
+    min-height: 112px;
 }
 
 .sub-header{
-    margin-top: 10px;
+    padding: 10px 10px 0px 10px;
     font-size: 24px;
 }
 
 label{
     font-weight: normal;
     margin-bottom: 0px;
-    font-size: 18px;
+    font-size: 24px;
 }
