@@ -53,3 +53,7 @@ main{
 .clickable{
     cursor: pointer;
 }
+
+.removable:hover{
+    color: darkred;
+}
