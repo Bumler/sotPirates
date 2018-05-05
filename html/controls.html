@@ -5,22 +5,26 @@
     <div ng-click="addingTrait = !addingTrait" class="fa faux-button-circle abs-bottom bottom-b" ng-class="{'fa-filter' : !addingTrait, 'fa-times' : addingTrait}"
         title="Find an Island!"></div>
 
-    <div ng-show="addingTrait" class="filter filter-window abs-bottom bottom-b bg-parchment">
-        <div class="filter-header pad-top">I be looking for...</div>
-            
-            <div class="sub-header">Animals</div>
-            <div class="row filter-row">
-                <div class="col-sm-4"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.chickens"><span class="fa fa-angle-right filter-text"></span>&nbsp;Chickens</label></div>
-                <div class="col-sm-4"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.snakes"><span class="fa fa-angle-left filter-text"></span>&nbsp;Snakes</label></div>
-                <div class="col-sm-4"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.pigs"><span class="fa fa-angle-down filter-text"></span>&nbsp;Pigs</label></div>
-            </div>
+    <div ng-show="addingTrait" class="filter filter-window abs-bottom bottom-b bg-parchment boxShadow">
+        <div class="filter-header">I be looking for...</div>
 
-            <div class="sub-header">Special Islands</span></div>
-            <div class="row">
-                <div class="col-sm-4"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.fort"><span class="fa fa-fort-awesome filter-text"></span>&nbsp;Forts</label></div>
-                <div class="col-sm-6"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.outpost"><span class="fa fa-home filter-text"></span>&nbsp;Outposts</label></div>
-                <div class="col-sm-2"></div>
-            </div>
+        <uib-tabset class="filterTabList" active="activeJustified" justified="true">
+            <uib-tab index="0" heading="Animals">
+                <div class="row filter-row">
+                    <div class="col-sm-4"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.chickens"><span class="fa fa-angle-right filter-text"></span>&nbsp;Chickens</label></div>
+                    <div class="col-sm-4"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.snakes"><span class="fa fa-angle-left filter-text"></span>&nbsp;Snakes</label></div>
+                    <div class="col-sm-4"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.pigs"><span class="fa fa-angle-down filter-text"></span>&nbsp;Pigs</label></div>
+                </div>
+            </uib-tab>
+            <uib-tab index="1" heading="Special Islands">
+                <div class="row">
+                        <div class="col-sm-4"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.fort"><span class="fa fa-fort-awesome filter-text"></span>&nbsp;Forts</label></div>
+                        <div class="col-sm-6"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.outpost"><span class="fa fa-home filter-text"></span>&nbsp;Outposts</label></div>
+                        <div class="col-sm-2"></div>
+                    </div>
+            </uib-tab>
+            <uib-tab index="2" heading="Long Justified">Long Labeled Justified content</uib-tab>
+        </uib-tabset>
 
             <div class="sub-header">I know what I be looking for</div>
             <div class="row filter-row">

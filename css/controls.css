@@ -3,7 +3,6 @@
     width: 100%;
 
     margin: 0px 15px 15px 0px;
-    padding: 0px 15px 15px 10px;
 
     -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.3);
     -moz-box-shadow: 0 0 10px rgba(0,0,0,0.3);
@@ -48,6 +47,16 @@
 .filter-header{
     font-size: 30px;
     font-weight: 500;
+
+    padding: 10px;
+
+    color: wheat;
+
+    border-radius: 5px 5px 0px 0px;
+
+    background: -moz-linear-gradient(rgba(159,129,89,.5),rgba(159,129,89,.5));
+    background: -webkit-linear-gradient(rgba(159,129,89,.5),rgba(159,129,89,.5));
+    background: linear-gradient(rgba(159,129,89,.5),rgba(159,129,89,.5));
 }
 
 .sub-header{
