@@ -27,11 +27,11 @@
         </uib-tabset>
 
         <div class="sub-header">Active Filters: 
-            <span ng-if="filters.chickens==true" class="clickable fa fa-angle-right" ng-click="filters.chickens = false; updateFilter()"></span>
-            <span ng-if="filters.snakes==true" class="clickable fa fa-angle-left" ng-click="filters.snakes = false; updateFilter()"></span>
-            <span ng-if="filters.pigs==true" class="clickable fa fa-angle-down" ng-click="filters.pigs = false; updateFilter()"></span>
-            <span ng-if="filters.fort==true" class="clickable fa fa-fort-awesome" ng-click="filters.fort = false; updateFilter()"></span>
-            <span ng-if="filters.outpost==true" class="clickable fa fa-home" ng-click="filters.outpost = false; updateFilter()"></span>
+            <span ng-if="filters.chickens==true" class="removable clickable fa fa-angle-right" ng-click="filters.chickens = false; updateFilter()"></span>
+            <span ng-if="filters.snakes==true" class="removable clickable fa fa-angle-left" ng-click="filters.snakes = false; updateFilter()"></span>
+            <span ng-if="filters.pigs==true" class="removable clickable fa fa-angle-down" ng-click="filters.pigs = false; updateFilter()"></span>
+            <span ng-if="filters.fort==true" class="removable clickable fa fa-fort-awesome" ng-click="filters.fort = false; updateFilter()"></span>
+            <span ng-if="filters.outpost==true" class="removable clickable fa fa-home" ng-click="filters.outpost = false; updateFilter()"></span>
         </div>
 
         <div class="sub-header">I know what I be looking for</div>

@@ -2,6 +2,8 @@
     display: flex;
     height: 100%;
     width: 100%;
+
+    border: 0px;
 }
 
 .modal-dialog{
@@ -16,15 +18,19 @@
     width: 40%;
 }
   
-.mapview{
+.vanityShot{
     width: 60%;
     height: 100%;
-    background-color:red;
+    background-color:lightblue;
+
+    border-radius: 6px 0px 0px 6px;
 }
   
-.vanityShot {
+.mapview {
     height: 85%;
-    background-color: blue;
+    background-color: beige;
+
+    border-radius: 0px 6px 0px 0px;
 }
 
 .islandInfo {
