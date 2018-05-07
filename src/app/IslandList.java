@@ -60,7 +60,7 @@ public class IslandList {
 		islands.add(new Island("Rapier Cay", "D9", "false", "false", "false", "true", "false"));
 		islands.add(new Island("Rum Runner Isle", "J11", "false", "false", "false", "false", "true"));
 		islands.add(new Island("Sailors' Bounty", "B4", "false", "false", "false", "true", "true"));	
-		islands.add(new Island("Sailor's Knot Stronghold", "E17", "false", "true", "false", "false", "false"));
+		islands.add(new Island("Sailors' Knot Stronghold", "E17", "false", "true", "false", "false", "false"));
 		islands.add(new Island("Salty Sands", "I3", "false", "false", "false", "false", "false"));
 		islands.add(new Island("Sanctuary Outpost", "F7/F8/G7/G8", "true", "false", "false", "false", "false"));
 		islands.add(new Island("Sandy Shallows", "E5", "false", "false", "true", "false", "false"));
