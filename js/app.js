@@ -35,6 +35,8 @@ sotPirates.factory('SelectedIslands', function($location){
 		newIslands.forEach(function(island){
 			filteredIslands.push(island);
 		});
+
+		console.log(filteredIslands.length);
 	}
 
 	function markIsland (island, event){
@@ -46,6 +48,7 @@ sotPirates.factory('SelectedIslands', function($location){
 });
 
 sotPirates.controller('islandModalController', function($uibModal, $scope, island, SelectedIslands){
+	requestURL = "http://localhost:9099/islands/images/";
 	$scope.island = island;
 
 	$scope.MarkOnMap = function(island){
