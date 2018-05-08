@@ -1,3 +1,8 @@
+.modal-open{
+    /* Prevents the modal from blocking the scroll functionality */
+    height: auto;
+}
+
 .modal-content {
     display: flex;
     height: 100%;
@@ -10,33 +15,34 @@
     margin-top: 10%;
 
     height: 500px;
-    width: 900px;
+    width: 1270px;
 }
 
 .secondContainer{
     height: 100%;
-    width: 40%;
+    width: 30%;
 }
   
 .vanityShot{
-    width: 60%;
+    width: 70%;
     height: 100%;
-    background-color:lightblue;
+}
 
+.vanityBorder{
     border-radius: 6px 0px 0px 6px;
 }
   
 .mapview {
-    height: 85%;
+    height: 76.22%;
     background-color: beige;
 
     border-radius: 0px 6px 0px 0px;
 }
 
 .islandInfo {
-    height: 15%;
+    height: 23.88%;
 
-    font-size: 24px;
+    font-size: 32px;
     display: flex;
     align-items: center;
     padding: 10px;
@@ -50,4 +56,9 @@
 .islandIcons{
     float: right;  
     width: 30%;
+}
+
+img{
+    height: 100%;
+    width: 100%;
 }
