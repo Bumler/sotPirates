@@ -1,3 +1,8 @@
+.modal-open{
+    /* Prevents the modal from blocking the scroll functionality */
+    height: auto;
+}
+
 .modal-content {
     display: flex;
     height: 100%;
