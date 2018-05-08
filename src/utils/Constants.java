@@ -8,8 +8,12 @@ public class Constants {
 	 * @author ryanpelaez
 	 *
 	 */
-	public static final String FILTERS = "filters";
-	public static final String EXCLUSIVE = "exclusive";
+	public static class ParamConstants {
+		public static final String FILTERS = "filters";
+		public static final String EXCLUSIVE = "exclusive";
+		public static final String IS_MAP = "isMap";
+		public static final String IS_MOBILE = "isMobile";
+	}
 
 	public static class httpsConstants {
 		public static final String CONTENT_TYPE_HEADER = "Content-Type";

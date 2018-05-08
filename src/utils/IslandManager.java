@@ -100,21 +100,32 @@ public class IslandManager {
 		return buildResponse(responseHeaders, responseCode, responsePayload.toString());
 	}
 
-	
-	//The islands are stored in a local folder called images
-	private static final java.nio.file.Path BASE_DIR = Paths.get("images");
+	// The islands are stored in a local folder called images
+	private static final java.nio.file.Path IMAGES_ISLANDS_DIR = Paths.get("images/Islands");
+	private static final java.nio.file.Path IMAGES_MAPS_DIR = Paths.get("images/Maps");
 
 	/**
-	 * Return the PNG image of the island
+	 * 
+	 * Return the PNG image of the island.<br>
+	 * 
+	 * <b>Important:</b>By default if the isMap attribute is <i>not</i> in the URL,
+	 * it will assume it is looking for 'island' view.
 	 * 
 	 * @param islandName
-	 * @return image of island
-	 * @throws IOException - Image is not found.
+	 * @param isMobile
+	 * @param isMap <br>
+	 * 	 -<i>True</i>: 'Map' View <br>
+	 *   -<i>False</i>: 'island' View <br>
+	 *   -<i>null</i>: 'island' View <br>
+	 * @return Image of island
+	 * @throws IOException
+	 *             - Image is not found.
 	 */
-	public InputStream getIslandImage(String islandName) {
+	public InputStream getIslandImage(String islandName, String isMap, String isMobile) {
 
-		String islandPNG = islandName + ".png";
-		java.nio.file.Path dest = BASE_DIR.resolve(islandPNG);
+		String islandPNG = getImageName(islandName, isMap);
+		java.nio.file.Path dest = getImagePath(islandPNG, isMap);
+
 		System.out.println(dest.toAbsolutePath());
 		if (!Files.exists(dest)) {
 			throw new WebApplicationException(Status.NOT_FOUND);
@@ -127,6 +138,34 @@ public class IslandManager {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	/**
+	 * Generates the PNG name for the island image. By default it assumes the image
+	 * is of the 'island' view and not 'map'
+	 * 
+	 * @param islandName
+	 * @param isMap
+	 * @return "IslandImage">.png
+	 */
+	private static String getImageName(String islandName, String isMap) {
+
+		StringBuilder islandPNG = new StringBuilder();
+
+		if (isMap != null && isMap.equalsIgnoreCase("true")) {
+			islandPNG.append("Map ");
+		}
+		islandPNG.append(islandName);
+		islandPNG.append(".png");
+
+		return islandPNG.toString();
+	}
+
+	private static java.nio.file.Path getImagePath(String islandPNG, String isMap) {
+		if (isMap != null && isMap.equalsIgnoreCase("true")) {
+			return IMAGES_MAPS_DIR.resolve(islandPNG);
+		}
+		return IMAGES_ISLANDS_DIR.resolve(islandPNG);
 	}
 
 	/**

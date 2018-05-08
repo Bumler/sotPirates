@@ -26,6 +26,7 @@ import io.swagger.annotations.Info;
 import io.swagger.annotations.License;
 import io.swagger.annotations.SwaggerDefinition;
 import utils.Constants;
+import utils.Constants.ParamConstants;
 import utils.IslandManager;
 
 import java.io.InputStream;
@@ -67,8 +68,8 @@ public class IslandEndpoints {
 			@ApiResponse(code = 404, message = "Valid island is not found") })
 
 	public Response getIslands(
-			@ApiParam(value = "Filters for islands.", required = false) @QueryParam(Constants.FILTERS) String filters,
-			@ApiParam(value = "Determines if the filters are AND or OR.", required = false) @QueryParam(Constants.EXCLUSIVE) String exclusive) {
+			@ApiParam(value = "Filters for islands.", required = false) @QueryParam(ParamConstants.FILTERS) String filters,
+			@ApiParam(value = "Determines if the filters are AND or OR.", required = false) @QueryParam(ParamConstants.EXCLUSIVE) String exclusive) {
 
 		IslandManager im = new IslandManager();
 
@@ -83,11 +84,13 @@ public class IslandEndpoints {
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Valid island is found"),
 			@ApiResponse(code = 404, message = "Valid island is not found") })
 
-	public InputStream getIslandImage(@PathParam("id") String id) {
+	public InputStream getIslandImage(@PathParam("id") String id,
+			@ApiParam(value = "Flag to determine if the image is of 'island' or 'map' view", required = false) @QueryParam(ParamConstants.IS_MAP) String isMap,
+			@ApiParam(value = "Flag to determine if the request is coming from mobile or not", required = false) @QueryParam(ParamConstants.IS_MOBILE) String isMobile) {
 
 		IslandManager im = new IslandManager();
 
-		return im.getIslandImage(id);
+		return im.getIslandImage(id, isMap, isMobile);
 	}
 
 }
