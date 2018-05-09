@@ -23,8 +23,8 @@ sotPirates.factory('sotEndpoints', function(){
 	}
 
 	function SetIslandImages (island){
-		island.mapView = this.baseURL.concat("/islands/images/").concat(island.name).concat("?isMap=true");
-		island.vanityShot = this.baseURL.concat("/islands/images/").concat(island.name);
+		island.mapView = this.baseURL.concat("/islands/images/").concat(island.NAME).concat("?isMap=true");
+		island.vanityShot = this.baseURL.concat("/islands/images/").concat(island.NAME);
 	}
 });
 
@@ -72,7 +72,7 @@ sotPirates.factory('IslandFactory', function($location, sotEndpoints){
 
 	function getIsland (targetIsland){
 		for (i = 0; i < islands.length; i++)
-			if (islands[i].name === targetIsland.name)
+			if (islands[i].NAME === targetIsland.NAME)
 				return islands[i];
 	}
 
@@ -114,7 +114,7 @@ sotPirates.controller('mapController', function($scope, IslandFactory){
 });
 
 sotPirates.controller('controlsController', function($scope, $http, $q, $location, sotEndpoints, IslandFactory){
-	baseFilter = "/islands?exclusive=true&filters=";
+	baseFilter = "/islands?";
 
 	$scope.filters = 
 		{chickens:false,
@@ -135,6 +135,8 @@ sotPirates.controller('controlsController', function($scope, $http, $q, $locatio
 		var deferred = $q.defer();
 
 		addressURL = sotEndpoints.baseURL.concat(filter);
+
+		debugger; 
 
 		var req = {
 			method: 'GET',
@@ -164,9 +166,16 @@ sotPirates.controller('controlsController', function($scope, $http, $q, $locatio
 	}
 
 	$scope.updateFilter = function() {
-		filter = buildFilter();
+		filter = baseFilter;
+
+		filter = filter.concat(NameParam());
 
 		requestIslands(filter);
+	}
+
+	function NameParam(){
+		header = "NAME="
+		return header.concat($scope.filters.name);
 	}
 
 	function buildFilter(){
