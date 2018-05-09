@@ -19,7 +19,6 @@ import javax.ws.rs.core.Response.Status;
 
 import org.json.JSONObject;
 
-import Resources.Attribute;
 import Resources.Island;
 import app.IslandList;
 import utils.Constants.httpsConstants;
@@ -40,13 +39,13 @@ public class IslandManager {
 	 * @param isExclusive
 	 * @return
 	 */
-	public Response getIslands(String filters, String isExclusive) {
+	public Response getIslands(String islandName, String filters, String isExclusive) {
 
 		JSONObject responsePayload;
 
 		// Check to see if there are filters. If there are none, assume we are grabbing
 		// all islands
-		if (filters != null && !filters.isEmpty()) {
+		if ((islandName != null && !islandName.isEmpty()) || filters != null && !filters.isEmpty()) {
 			boolean exclusiveSearch = IslandHelper.determineExclusivity(isExclusive);
 			// Check if the isExclusive parameter was passed. Assume we are
 			// filtering exclusively
@@ -55,9 +54,10 @@ public class IslandManager {
 			} else {
 				exclusiveSearch = Boolean.parseBoolean(isExclusive);
 			}
-			List<Attribute> attributes = IslandHelper.determineAttributes(filters);
+			List<Constants.Attribute> attributes = IslandHelper.determineAttributes(filters);
+			
 			// Send the islands and filters to be filtered
-			List<Island> filteredIslands = Filter.filterIslands(islands, attributes, exclusiveSearch);
+			List<Island> filteredIslands = Filter.filterIslands(islands, islandName, attributes, exclusiveSearch);
 
 			responsePayload = IslandHelper.islandListToJSON(filteredIslands);
 		} else {
@@ -78,11 +78,13 @@ public class IslandManager {
 	 * @return
 	 */
 	public Response getIsland(String islandName) {
+		System.out.println("Searching for island: " + islandName);
 		JSONObject responsePayload = new JSONObject();
 		int responseCode = HttpsURLConnection.HTTP_OK;
 		boolean islandFound = false;
 		for (Island island : islands) {
-			if (islandName.toLowerCase().equals(island.getIslandName().toLowerCase())) {
+			if (islandName.toLowerCase().equals(island.getName().toLowerCase())) {
+				System.out.println("HERE");
 				responsePayload = island.getIslandInfo();
 				islandFound = true;
 			}
@@ -113,10 +115,11 @@ public class IslandManager {
 	 * 
 	 * @param islandName
 	 * @param isMobile
-	 * @param isMap <br>
-	 * 	 -<i>True</i>: 'Map' View <br>
-	 *   -<i>False</i>: 'island' View <br>
-	 *   -<i>null</i>: 'island' View <br>
+	 * @param isMap
+	 *            <br>
+	 *            -<i>True</i>: 'Map' View <br>
+	 *            -<i>False</i>: 'island' View <br>
+	 *            -<i>null</i>: 'island' View <br>
 	 * @return Image of island
 	 * @throws IOException
 	 *             - Image is not found.

@@ -3,9 +3,8 @@ package utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import Resources.Attribute;
 import Resources.Island;
-import utils.Constants.IslandConstants;
+import utils.Constants.Attribute;
 
 /**
  * Custom class used to filter Islands.
@@ -23,11 +22,12 @@ public class Filter {
 	 * @param filters
 	 * @return filteredIslands - ArrayList<Island>
 	 */
-	public static List<Island> filterIslands(List<Island> islands, List<Attribute> filters, boolean exclusiveSearch) {
+	public static List<Island> filterIslands(List<Island> islands, String islandName, List<Attribute> filters,
+			boolean exclusiveSearch) {
 		List<Island> filteredIslands = new ArrayList<>();
 
 		for (Island island : islands) {
-			if (matchesFilter(island, filters, exclusiveSearch)) {
+			if (matchesFilter(island, islandName, filters, exclusiveSearch)) {
 				filteredIslands.add(island);
 			}
 		}
@@ -43,35 +43,38 @@ public class Filter {
 	 * @param exclusiveSearch
 	 * @return
 	 */
-	private static boolean matchesFilter(Island island, List<Attribute> filters, boolean exclusiveSearch) {
+	private static boolean matchesFilter(Island island, String islandName, List<Attribute> filters,
+			boolean exclusiveSearch) {
+
 		if (exclusiveSearch) {
-			return matchesExclusive(island, filters);
+			return matchesExclusive(island, islandName, filters);
 		}
-		return matchesInclusive(island, filters);
+		return matchesInclusive(island, islandName, filters);
 	}
 
 	/**
-	 * If one attribute does not match return false.
-	 * The island name is an exception. Returns false only if the island does not contain the given name
+	 * If one attribute does not match return false. The island name is an
+	 * exception. Returns false only if the island does not contain the given name
 	 * 
 	 * @param island
 	 * @param filters
 	 * @return
 	 */
-	private static boolean matchesExclusive(Island island, List<Attribute> filters) {
-		for (Attribute attribute : filters) {
-			if (attribute.getName().equals(IslandConstants.NAME)) {
-				if (!island.getIslandName().toLowerCase().contains(attribute.getValue().toString().toLowerCase())) {
+	private static boolean matchesExclusive(Island island, String islandName, List<Attribute> filters) {
+
+		if (islandName != null && !containsName(island, islandName)) {
+			return false;
+		}
+		if (filters != null) {
+			for (Attribute attribute : filters) {
+
+				if (!island.getAttribute(attribute)) {
 					return false;
 				}
-			}
-			else {
-				if (!island.getAttribute(attribute.getName()).equals(attribute.getValue())) {
-					return false;
-				}
+
 			}
 		}
-		
+
 		return true;
 	}
 
@@ -82,18 +85,31 @@ public class Filter {
 	 * @param filters
 	 * @return
 	 */
-	private static boolean matchesInclusive(Island island, List<Attribute> filters) {
-		for (Attribute attribute : filters) {
-			if (attribute.getName().equals(IslandConstants.NAME)) {
-				if (island.getIslandName().toLowerCase().contains(attribute.getValue().toString().toLowerCase())) {
+	private static boolean matchesInclusive(Island island, String islandName, List<Constants.Attribute> filters) {
+
+		if (islandName != null && containsName(island, islandName)) {
+			return true;
+		}
+		if (filters != null) {
+			for (Constants.Attribute attribute : filters) {
+				if (island.getAttribute(attribute)) {
 					return true;
 				}
-			} else {
-				if (island.getAttribute(attribute.getName()).equals(attribute.getValue())) {
-					return true;
-				}
+
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Returns whether or not the island that came in the URL is contained in
+	 * selected island name.
+	 * 
+	 * @param island
+	 * @param islandName
+	 * @return
+	 */
+	private static boolean containsName(Island island, String islandName) {
+		return island.getName().toLowerCase().contains(islandName.toLowerCase());
 	}
 }

@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.json.JSONObject;
 
-import Resources.Attribute;
 import Resources.Island;
 
 public class IslandHelper {
@@ -19,7 +18,7 @@ public class IslandHelper {
 		JSONObject islands = new JSONObject();
 
 		for (Island island : filteredIslands) {
-			islands.put(island.getIslandName(), island.getIslandInfo());
+			islands.put(island.getName(), island.getIslandInfo());
 		}
 		return islands;
 	}
@@ -47,17 +46,16 @@ public class IslandHelper {
 	 * @param filters
 	 * @return List of attributes
 	 */
-	public static List<Attribute> determineAttributes(String filters) {
+	public static List<Constants.Attribute> determineAttributes(String filters) {
+		if (filters == null || filters.isEmpty()) {
+			return null;
+		}
 
-		List<Attribute> attributesList = new ArrayList<>();
+		List<Constants.Attribute> attributesList = new ArrayList<>();
 
 		String[] attributeArray = filters.split(",");
-		String[] attributeProperties;
 		for (String attribute : attributeArray) {
-			attributeProperties = attribute.split(":");
-			if (attributeProperties.length == 2) {
-				attributesList.add(new Attribute(attributeProperties[0], attributeProperties[1]));
-			}
+			attributesList.add(utils.Constants.Attribute.valueOf(attribute.toUpperCase()));
 		}
 		return attributesList;
 	}

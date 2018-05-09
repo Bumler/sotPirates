@@ -45,18 +45,18 @@ import javax.ws.rs.core.Response;
 public class IslandEndpoints {
 
 	@GET
-	@Path("/{id}")
+	@Path("/{islandName}")
 	@Produces({ "application/json" })
 	@ApiOperation(value = "Return the island with the given name", notes = "Returns HTTP 200 if the island is found.")
 
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Valid island is found"),
 			@ApiResponse(code = 404, message = "Valid island is not found") })
 
-	public Response getIsland(@PathParam("id") String id) {
+	public Response getIsland(@PathParam("islandName") String islandName) {
 
 		IslandManager im = new IslandManager();
 
-		return im.getIsland(id);
+		return im.getIsland(islandName);
 	}
 
 	@GET
@@ -68,29 +68,29 @@ public class IslandEndpoints {
 			@ApiResponse(code = 404, message = "Valid island is not found") })
 
 	public Response getIslands(
+			@ApiParam(value = "Name of Island", required = false) @QueryParam(ParamConstants.NAME) String islandName,
 			@ApiParam(value = "Filters for islands.", required = false) @QueryParam(ParamConstants.FILTERS) String filters,
-			@ApiParam(value = "Determines if the filters are AND or OR.", required = false) @QueryParam(ParamConstants.EXCLUSIVE) String exclusive) {
+			@ApiParam(value = "Determines if the filters are AND or OR.", required = false) @QueryParam(ParamConstants.EXCLUSIVE) String isExclusive) {
 
 		IslandManager im = new IslandManager();
-
-		return im.getIslands(filters, exclusive);
+		return im.getIslands(islandName, filters, isExclusive);
 	}
 
 	@GET
-	@Path("/images/{id}")
+	@Path("/images/{islandName}")
 	@Produces({ "image/jpeg,image/png" })
 	@ApiOperation(value = "Return the PNG image of the island", notes = "Returns Input Stream if found")
 
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Valid island is found"),
 			@ApiResponse(code = 404, message = "Valid island is not found") })
 
-	public InputStream getIslandImage(@PathParam("id") String id,
+	public InputStream getIslandImage(@PathParam("islandName") String islandName,
 			@ApiParam(value = "Flag to determine if the image is of 'island' or 'map' view", required = false) @QueryParam(ParamConstants.IS_MAP) String isMap,
 			@ApiParam(value = "Flag to determine if the request is coming from mobile or not", required = false) @QueryParam(ParamConstants.IS_MOBILE) String isMobile) {
 
 		IslandManager im = new IslandManager();
 
-		return im.getIslandImage(id, isMap, isMobile);
+		return im.getIslandImage(islandName, isMap, isMobile);
 	}
 
 }
