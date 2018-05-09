@@ -18,11 +18,16 @@ sotPirates.config(['$routeProvider', function($routeProvider){
 
 sotPirates.factory('sotEndpoints', function(){
 	return{
-		baseURL : "http://localhost:9099"
+		baseURL : "http://localhost:9099",
+		setMapView : SetMapView
+	}
+
+	function SetMapView (island){
+		island.mapView = this.baseURL.concat("/islands/images/").concat(island.name).concat("?isMap=true");
 	}
 });
 
-sotPirates.factory('SelectedIslands', function($location){
+sotPirates.factory('SelectedIslands', function($location, sotEndpoints){
 	filteredIslands = [];
 	markedIslands = [];
 
@@ -39,6 +44,7 @@ sotPirates.factory('SelectedIslands', function($location){
 		filteredIslands.length = 0;
 
 		newIslands.forEach(function(island){
+			sotEndpoints.setMapView(island);
 			filteredIslands.push(island);
 		});
 	}
@@ -53,18 +59,13 @@ sotPirates.factory('SelectedIslands', function($location){
 
 sotPirates.controller('islandModalController', function($uibModal, $scope, island, sotEndpoints, SelectedIslands){
 	$scope.island = island;
+	$scope.vanityURL = sotEndpoints.baseURL.concat("/islands/images/").concat(island.name);
 
 	$scope.MarkOnMap = function(island){
 		SelectedIslands.MarkIsland(island);
 
 		this.$close();
 	};
-
-	function setImageURLs(){
-		$scope.vanityURL = sotEndpoints.baseURL.concat("/islands/images/").concat(island.name);
-	}
-
-	setImageURLs();
 });
 
 sotPirates.controller('galleryController', function($scope, $uibModal, SelectedIslands){

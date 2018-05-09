@@ -1,10 +1,8 @@
 .island-card{
-    background-image: url("../assets/mockIsland.jpg");
-    background-size: contain;
     width: 100%;
-    padding-top: 100%; /* 1:1 Aspect Ratio */
     position: relative;
     border-radius: 5px;
+    padding-top: 100%;
 
     cursor: pointer;
 }
@@ -19,6 +17,12 @@
 
     font-size: 18px;
     color: #d2b48c;
+}
+
+.galleryImage{
+    border-radius: 5px;
+    position: absolute;
+    margin-top: -100%;
 }
 
 .card-text{
@@ -36,5 +40,5 @@
     width: 100%;
     display: block;
     font-size: 64px;
-    color: #9F8159
+    color: #d2b48c;
 }
