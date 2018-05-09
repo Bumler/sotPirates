@@ -1,5 +1,5 @@
 <span class="vanityShot vanityBorder">
-    <img class="vanityBorder" ng-src="{{vanityURL}}">
+    <img class="vanityBorder" ng-src="{{island.vanityShot}}">
     <div class="card-bottom">
             <div ng-click="MarkOnMap(island)" class="clickable fa fa-bullseye"></div>
     </div> 
@@ -7,6 +7,7 @@
 
 <span class="secondContainer">
     <div class="mapview">
+        <img class="mapViewBorder" ng-src="{{island.mapView}}">
     </div>
     <div class="islandInfo">
         <span class="islandName">{{island.name}}</span>
