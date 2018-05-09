@@ -16,6 +16,12 @@ sotPirates.config(['$routeProvider', function($routeProvider){
 
 }]);
 
+sotPirates.factory('sotEndpoints', function(){
+	return{
+		baseURL : "http://localhost:9099"
+	}
+});
+
 sotPirates.factory('SelectedIslands', function($location){
 	filteredIslands = [];
 	markedIslands = [];
@@ -35,8 +41,6 @@ sotPirates.factory('SelectedIslands', function($location){
 		newIslands.forEach(function(island){
 			filteredIslands.push(island);
 		});
-
-		console.log(filteredIslands.length);
 	}
 
 	function markIsland (island, event){
@@ -47,15 +51,20 @@ sotPirates.factory('SelectedIslands', function($location){
 	}
 });
 
-sotPirates.controller('islandModalController', function($uibModal, $scope, island, SelectedIslands){
-	requestURL = "http://localhost:9099/islands/images/";
+sotPirates.controller('islandModalController', function($uibModal, $scope, island, sotEndpoints, SelectedIslands){
 	$scope.island = island;
 
 	$scope.MarkOnMap = function(island){
 		SelectedIslands.MarkIsland(island);
 
 		this.$close();
-	} 
+	};
+
+	function setImageURLs(){
+		$scope.vanityURL = sotEndpoints.baseURL.concat("/islands/images/").concat(island.name);
+	}
+
+	setImageURLs();
 });
 
 sotPirates.controller('galleryController', function($scope, $uibModal, SelectedIslands){
@@ -79,8 +88,7 @@ sotPirates.controller('mapController', function($scope, SelectedIslands){
 	$scope.markedIslands = SelectedIslands.MarkedIslands;
 });
 
-sotPirates.controller('controlsController', function($scope, $http, $q, $location, SelectedIslands){
-	requestURL = "http://localhost:9099";
+sotPirates.controller('controlsController', function($scope, $http, $q, $location, sotEndpoints, SelectedIslands){
 	baseFilter = "/islands?exclusive=true&filters=";
 
 	$scope.filters = 
@@ -101,7 +109,7 @@ sotPirates.controller('controlsController', function($scope, $http, $q, $locatio
 	function filterIslands (filter){
 		var deferred = $q.defer();
 
-		addressURL = requestURL.concat(filter);
+		addressURL = sotEndpoints.baseURL.concat(filter);
 
 		var req = {
 			method: 'GET',
