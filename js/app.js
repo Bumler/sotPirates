@@ -18,58 +18,84 @@ sotPirates.config(['$routeProvider', function($routeProvider){
 
 sotPirates.factory('sotEndpoints', function(){
 	return{
-		baseURL : "http://localhost:9099"
+		baseURL : "http://localhost:9099",
+		setMapView : SetIslandImages
+	}
+
+	function SetIslandImages (island){
+		island.mapView = this.baseURL.concat("/islands/images/").concat(island.name).concat("?isMap=true");
+		island.vanityShot = this.baseURL.concat("/islands/images/").concat(island.name);
 	}
 });
 
-sotPirates.factory('SelectedIslands', function($location){
-	filteredIslands = [];
-	markedIslands = [];
+sotPirates.factory('IslandFactory', function($location, sotEndpoints){
+	islands = [];
 
 	return {
-		FilteredIslands : filteredIslands,
-		UpdateFilteredIsands : updateFilteredIslands,
-		MarkedIslands : markedIslands,
+		Islands : islands,
+		UpdateFilteredIslands : updateFilteredIslands,
 		MarkIsland : markIsland
 	}
 
-	function updateFilteredIslands (newIslands){
-		//We can't simply set filtered islands to new islands because the reference is watched
-		//this feels like a dirty fix and should be checked on
-		filteredIslands.length = 0;
-
+	function loadInitial (newIslands){
 		newIslands.forEach(function(island){
-			filteredIslands.push(island);
+			sotEndpoints.setMapView(island);
+			island.showing = true;
+			island.marked = false;
+
+			islands.push(island);
 		});
 	}
 
-	function markIsland (island, event){
-		if (markedIslands.indexOf(island) < 0)
-			markedIslands.push(island);
+	function updateFilteredIslands (filteredIslands){
+		if (islands.length == 0)
+			loadInitial(filteredIslands);
 		
+		else{
+			hideAllIslands();
+			debugger;
+			showFiltered(filteredIslands);
+		}
+	}
+
+	function hideAllIslands(){
+		islands.forEach(function(island){
+			island.showing = false;
+		});
+	}
+
+	function showFiltered(filteredIslands){
+		filteredIslands.forEach(function(filteredIsland){
+			getIsland(filteredIsland).showing = true;
+		});
+	}
+
+	function getIsland (targetIsland){
+		for (i = 0; i < islands.length; i++)
+			if (islands[i].name === targetIsland.name)
+				return islands[i];
+	}
+
+	function markIsland (island, event){
+		getIsland(island).marked = true;
+
 		$location.path('/map');
 	}
 });
 
-sotPirates.controller('islandModalController', function($uibModal, $scope, island, sotEndpoints, SelectedIslands){
+sotPirates.controller('islandModalController', function($uibModal, $scope, island, IslandFactory){
 	$scope.island = island;
 
 	$scope.MarkOnMap = function(island){
-		SelectedIslands.MarkIsland(island);
+		IslandFactory.MarkIsland(island);
 
 		this.$close();
 	};
-
-	function setImageURLs(){
-		$scope.vanityURL = sotEndpoints.baseURL.concat("/islands/images/").concat(island.name);
-	}
-
-	setImageURLs();
 });
 
-sotPirates.controller('galleryController', function($scope, $uibModal, SelectedIslands){
-	$scope.filteredIslands = SelectedIslands.FilteredIslands;
-	$scope.MarkOnMap = SelectedIslands.MarkIsland;
+sotPirates.controller('galleryController', function($scope, $uibModal, IslandFactory){
+	$scope.Islands = IslandFactory.Islands;
+	$scope.MarkOnMap = IslandFactory.MarkIsland;
 
 	$scope.showIsland = function(islandToShow){
 		$uibModal.open({
@@ -83,12 +109,11 @@ sotPirates.controller('galleryController', function($scope, $uibModal, SelectedI
 	}
 });
 
-sotPirates.controller('mapController', function($scope, SelectedIslands){
-	$scope.filteredIslands = SelectedIslands.FilteredIslands;
-	$scope.markedIslands = SelectedIslands.MarkedIslands;
+sotPirates.controller('mapController', function($scope, IslandFactory){
+	$scope.Islands = IslandFactory.Islands;
 });
 
-sotPirates.controller('controlsController', function($scope, $http, $q, $location, sotEndpoints, SelectedIslands){
+sotPirates.controller('controlsController', function($scope, $http, $q, $location, sotEndpoints, IslandFactory){
 	baseFilter = "/islands?exclusive=true&filters=";
 
 	$scope.filters = 
@@ -171,7 +196,7 @@ sotPirates.controller('controlsController', function($scope, $http, $q, $locatio
 	function requestIslands (filter){
 		promise = filterIslands(filter);
 		promise.then(function(newIslands){
-			SelectedIslands.UpdateFilteredIsands(newIslands);
+			IslandFactory.UpdateFilteredIslands(newIslands);
 		});
 	}
 

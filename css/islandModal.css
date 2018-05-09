@@ -35,7 +35,9 @@
 .mapview {
     height: 76.22%;
     background-color: beige;
+}
 
+.mapviewBorder{
     border-radius: 0px 6px 0px 0px;
 }
 
