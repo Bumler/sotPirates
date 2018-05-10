@@ -38,7 +38,7 @@ sotPirates.factory('sotEndpoints', function(){
    				'Content-Type': 'application/json'
  			}
 		 };
-
+		 console.log(addressURL);
 		 return req;
 	}
 });
@@ -125,7 +125,7 @@ sotPirates.controller('controlsController', function($scope, $http, $q, $locatio
 	baseFilter = "/islands?";
 
 	$scope.name = "";
-
+	$scope.isExclusive = true;
 	$scope.filters = 
 		{chickens:false,
 		snakes:false,
@@ -168,7 +168,7 @@ sotPirates.controller('controlsController', function($scope, $http, $q, $locatio
 
 	function ExclusiveParam(){
 		header = "isExclusive=";
-		return header.concat(true);
+		return header.concat($scope.isExclusive);
 	}
 
 	function requestIslands (filter){

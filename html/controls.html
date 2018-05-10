@@ -43,6 +43,9 @@
                 </div>
             </div>
         </div>
-        </form>
+
+        <button type="button" class="btn btn-primary" ng-model="isExclusive" uib-btn-checkbox ng-change="updateFilter()">
+            {{isExclusive?'Exclusive':'Inclusive'}}
+        </button>
     </div>
 </div>
