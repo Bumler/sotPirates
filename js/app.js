@@ -19,12 +19,27 @@ sotPirates.config(['$routeProvider', function($routeProvider){
 sotPirates.factory('sotEndpoints', function(){
 	return{
 		baseURL : "http://localhost:9099",
-		setMapView : SetIslandImages
+		setMapView : SetIslandImages,
+		GET : formatGetRequest
 	}
 
 	function SetIslandImages (island){
 		island.mapView = this.baseURL.concat("/islands/images/").concat(island.NAME).concat("?isMap=true");
 		island.vanityShot = this.baseURL.concat("/islands/images/").concat(island.NAME);
+	}
+
+	function formatGetRequest(body){
+		addressURL = this.baseURL.concat(body);
+
+		var req = {
+			method: 'GET',
+ 			url: addressURL,
+ 			headers: {
+   				'Content-Type': 'application/json'
+ 			}
+		 };
+
+		 return req;
 	}
 });
 
@@ -131,38 +146,6 @@ sotPirates.controller('controlsController', function($scope, $http, $q, $locatio
 			$location.path('/gallery');
 	}
 
-	function filterIslands (filter){
-		var deferred = $q.defer();
-
-		addressURL = sotEndpoints.baseURL.concat(filter);
-		debugger;
-		var req = {
-			method: 'GET',
- 			url: addressURL,
- 			headers: {
-   				'Content-Type': 'application/json'
- 			}
- 		}
-		
-		$http(req)
-			.then(function (response) {
-				var updatedIslands = updateSelectedIslands(response.data)
-				deferred.resolve(updatedIslands);
-			});
-		
-		return deferred.promise;
-	}
-
-	function updateSelectedIslands (newIslands){
-		currentIslands = [];
-
-		angular.forEach(newIslands, function(value, key) {
-			currentIslands.push(value);
-		});
-
-		return currentIslands;
-	}
-
 	$scope.updateFilter = function() {
 		filter = baseFilter;
 
@@ -194,11 +177,17 @@ sotPirates.controller('controlsController', function($scope, $http, $q, $locatio
 		return header.concat(true);
 	}
 
-	function addToFilter(filter, label, value){
-		if (value || value != "")
-			filter = filter.concat(label + ':' + value + ',');
-
-		return filter;
+	function filterIslands (filter){
+		var deferred = $q.defer();
+		var req = sotEndpoints.GET(filter);
+		
+		$http(req)
+			.then(function (response) {
+				var updatedIslands = updateSelectedIslands(response.data)
+				deferred.resolve(updatedIslands);
+			});
+		
+		return deferred.promise;
 	}
 
 	function requestIslands (filter){
@@ -208,11 +197,16 @@ sotPirates.controller('controlsController', function($scope, $http, $q, $locatio
 		});
 	}
 
-	function loadInitialIslands(){
-		filter = baseFilter;
+	function updateSelectedIslands (newIslands){
+		currentIslands = [];
 
-		requestIslands(filter);
+		angular.forEach(newIslands, function(value, key) {
+			currentIslands.push(value);
+		});
+
+		return currentIslands;
 	}
 
-	loadInitialIslands();
+	//Initial island load
+	requestIslands(baseFilter);
 });
