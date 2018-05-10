@@ -53,7 +53,6 @@ sotPirates.factory('IslandFactory', function($location, sotEndpoints){
 		
 		else{
 			hideAllIslands();
-			debugger;
 			showFiltered(filteredIslands);
 		}
 	}
@@ -116,13 +115,14 @@ sotPirates.controller('mapController', function($scope, IslandFactory){
 sotPirates.controller('controlsController', function($scope, $http, $q, $location, sotEndpoints, IslandFactory){
 	baseFilter = "/islands?";
 
+	$scope.name = "";
+
 	$scope.filters = 
 		{chickens:false,
 		snakes:false,
 		pigs:false,
 		outpost:false,
-		fort:false,
-		name:""};
+		fort:false};
 
 	$scope.changeView = function(){
 		if ($location.path() === '/gallery')
@@ -135,9 +135,7 @@ sotPirates.controller('controlsController', function($scope, $http, $q, $locatio
 		var deferred = $q.defer();
 
 		addressURL = sotEndpoints.baseURL.concat(filter);
-
-		debugger; 
-
+		debugger;
 		var req = {
 			method: 'GET',
  			url: addressURL,
@@ -168,31 +166,32 @@ sotPirates.controller('controlsController', function($scope, $http, $q, $locatio
 	$scope.updateFilter = function() {
 		filter = baseFilter;
 
-		filter = filter.concat(NameParam());
-
+		filter = filter.concat(NameParam()).concat("&");
+		filter = filter.concat(FilterParam()).concat("&");
+		filter = filter.concat(ExclusiveParam());
+		
 		requestIslands(filter);
 	}
 
 	function NameParam(){
-		header = "NAME="
-		return header.concat($scope.filters.name);
+		header = "name=";
+		return header.concat($scope.name);
 	}
 
-	function buildFilter(){
-		filter = baseFilter;
-		
-		filter = addToFilter(filter, "chickens", $scope.filters.chickens);
-		filter = addToFilter(filter, "snakes", $scope.filters.snakes);
-		filter = addToFilter(filter, "pigs", $scope.filters.pigs);
+	function FilterParam(){
+		filterParam = "filters=";
 
-		filter = addToFilter(filter, "outpost", $scope.filters.outpost);
-		filter = addToFilter(filter, "fort", $scope.filters.fort);
+		for (filter in $scope.filters){
+			if ($scope.filters[filter])
+				filterParam = filterParam.concat(filter).concat(",");
+		}
 
-		filter = addToFilter(filter, "name", $scope.filters.name);
+		return filterParam;
+	}
 
-		filter = filter.trim(',');
-
-		return filter;
+	function ExclusiveParam(){
+		header = "isExclusive=";
+		return header.concat(true);
 	}
 
 	function addToFilter(filter, label, value){
