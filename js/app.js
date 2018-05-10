@@ -151,8 +151,13 @@ sotPirates.controller('controlsController', function($scope, $http, $q, $locatio
 	}
 
 	function NameParam(){
-		header = "name=";
-		return header.concat($scope.name);
+		if ($scope.name.length === 0)
+			return "";
+		
+		else{
+			header = "name=";
+			return header.concat($scope.name);
+		}
 	}
 
 	function FilterParam(){
