@@ -2,17 +2,17 @@
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10 col-sm-12">
-            <div ng-repeat="island in Islands" ng-if="island.showing" class="col-md-3 col-sm-4 col-xs-6 big-mar-top">
+            <div ng-repeat="island in Islands" ng-hide="!island.showing" class="col-md-3 col-sm-4 col-xs-6 big-mar-top">
                     <div class="island-card" ng-click="showIsland(island)">
                         <img class="galleryImage" ng-src="{{island.mapView}}" />
                         <div class="card-top">
-                            <div class="card-text">{{island.name}}</div>
+                            <div class="card-text">{{island.NAME}}</div>
                             <div class="card-icons">
-                                <span ng-if="island.chickens=='true'" class="removable icon fa fa-angle-right"></span>
-                                <span ng-if="island.snakes=='true'" class="icon fa fa-angle-left"></span>
-                                <span ng-if="island.pigs=='true'" class="icon fa fa-angle-down"></span>
-                                <span ng-if="island.fort=='true'" class="icon fa fa-fort-awesome"></span>
-                                <span ng-if="island.outpost=='true'" class="icon fa fa-home"></span>
+                                <span ng-if="island.CHICKENS" class="removable icon fa fa-angle-right"></span>
+                                <span ng-if="island.SNAKES" class="icon fa fa-angle-left"></span>
+                                <span ng-if="island.PIGS" class="icon fa fa-angle-down"></span>
+                                <span ng-if="island.FORT" class="icon fa fa-fort-awesome"></span>
+                                <span ng-if="island.OUTPOST" class="icon fa fa-home"></span>
                             </div>
                         </div>
                         <div class="card-bottom">
