@@ -10,7 +10,7 @@ public class Constants {
 	 */
 	
 	public enum Attribute{
-		DOCKS, CHICKENS, SNAKES, PIGS, FORT, OUTPOST
+		DOCKS, CHICKENS, SNAKES, PIGS, FORT, OUTPOST, SINGLE, MULTIPLE
 	}
 	
 	public static class ParamConstants {

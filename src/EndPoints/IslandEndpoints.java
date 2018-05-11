@@ -25,11 +25,11 @@ import io.swagger.annotations.Contact;
 import io.swagger.annotations.Info;
 import io.swagger.annotations.License;
 import io.swagger.annotations.SwaggerDefinition;
-import utils.Constants;
 import utils.Constants.ParamConstants;
 import utils.IslandManager;
 
 import java.io.InputStream;
+import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -38,11 +38,21 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
+import Exceptions.InvalidAttributeException;
+import Resources.Island;
+import app.IslandList;
+
 @Api(value = "islands")
 @SwaggerDefinition(info = @Info(title = "/islands", version = "1.0", description = "Endpoint to grab islands", license = @License(name = "Apache 2.0", url = "http://www.apache.org/licenses/LICENSE-2.0"), contact = @Contact(name = "SoT Pirates", email = "sotpirates@gmail.com", url = "https://www.sotpirates.com")))
 @Path("/islands")
 
 public class IslandEndpoints {
+
+	List<Island> islands;
+
+	public  IslandEndpoints() throws InvalidAttributeException {
+		islands = IslandList.getIslands();
+	}
 
 	@GET
 	@Path("/{islandName}")
@@ -54,7 +64,7 @@ public class IslandEndpoints {
 
 	public Response getIsland(@PathParam("islandName") String islandName) {
 
-		IslandManager im = new IslandManager();
+		IslandManager im = new IslandManager(islands);
 
 		return im.getIsland(islandName);
 	}
@@ -72,7 +82,7 @@ public class IslandEndpoints {
 			@ApiParam(value = "Filters for islands.", required = false) @QueryParam(ParamConstants.FILTERS) String filters,
 			@ApiParam(value = "Determines if the filters are AND or OR.", required = false) @QueryParam(ParamConstants.EXCLUSIVE) String isExclusive) {
 
-		IslandManager im = new IslandManager();
+		IslandManager im = new IslandManager(islands);
 		return im.getIslands(islandName, filters, isExclusive);
 	}
 
@@ -88,7 +98,7 @@ public class IslandEndpoints {
 			@ApiParam(value = "Flag to determine if the image is of 'island' or 'map' view", required = false) @QueryParam(ParamConstants.IS_MAP) String isMap,
 			@ApiParam(value = "Flag to determine if the request is coming from mobile or not", required = false) @QueryParam(ParamConstants.IS_MOBILE) String isMobile) {
 
-		IslandManager im = new IslandManager();
+		IslandManager im = new IslandManager(islands);
 
 		return im.getIslandImage(islandName, isMap, isMobile);
 	}

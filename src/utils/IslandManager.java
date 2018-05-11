@@ -1,19 +1,15 @@
 package utils;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
@@ -27,9 +23,9 @@ public class IslandManager {
 
 	static List<Island> islands;
 
-	public IslandManager() {
+	public IslandManager(List<Island> islands) {
 		// Get the list of islands
-		islands = IslandList.getIslands();
+		this.islands = islands;
 	}
 
 	/**

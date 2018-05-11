@@ -6,6 +6,7 @@ import java.util.jar.Attributes;
 
 import org.json.JSONObject;
 
+import Exceptions.InvalidAttributeException;
 import utils.Constants;
 import utils.Constants.Attribute;
 import utils.Constants.IslandConstants;
@@ -23,28 +24,68 @@ public class Island {
 	private List<Attribute> supportedAttributes = new ArrayList<>();
 	private JSONObject islandProperties = new JSONObject();
 
-	public Island(String islandName, String location, Attribute... attributes) {
+	public Island(String islandName, Attribute singleOrMultiple, String location, Attribute... attributes)
+			throws InvalidAttributeException {
+
 		this.name = islandName;
 		this.location = location;
 
-		for (Attribute attribute : attributes) {
-			supportedAttributes.add(attribute);
-		}
-		
+		checkAddIslandType(singleOrMultiple);
+
+		checkAddAttributes(attributes);
+
 		generateJSON();
 	}
 
+	/**
+	 * Checks to see if the attribute being passed in is either single or multiple
+	 * 
+	 * @param singleOrMultiple
+	 * @throws InvalidAttributeException 
+	 */
+	private void checkAddIslandType(Attribute singleOrMultiple) throws InvalidAttributeException {
+		if (isIslandTypeAttribute(singleOrMultiple)) {
+			supportedAttributes.add(singleOrMultiple);
+		} else {
+			String error = "singleOrMultiple argument for island '" + name
+					+ "' is invalid. Must be SINGLE or MULTIPLE";
+			throw new InvalidAttributeException(error);
+		}
+	}
+
+	private void checkAddAttributes(Attribute... attributes) throws InvalidAttributeException {
+		for (Attribute attribute : attributes) {
+			if (!isIslandTypeAttribute(attribute)) {
+				supportedAttributes.add(attribute);
+			} else {
+				String error = "Attribute SINGLE or MULTIPLE for island '" + name
+						+ "' is not allowed as part of these attributes. Must be passed in directly through the singleOrMultiple argument in the constructor.";
+				throw new InvalidAttributeException(error);
+			}
+		}
+	}
 
 	private void generateJSON() {
 
 		Attribute[] allProperties = Attribute.values();
-		
+
 		islandProperties.put("NAME", this.name);
 		islandProperties.put("LOCATION", this.location);
-		
+
 		for (Attribute attribute : allProperties) {
 			islandProperties.put(String.valueOf(attribute), getAttribute(attribute));
 		}
+	}
+
+	/**
+	 * Determines if the Attribute is SINGLE or MULTIPLE
+	 * 
+	 * @param attribute
+	 * @return <b>true</b> if attribute is SINGLE or MULTIPLE<br>
+	 *         <b>false</b> if attribute is anything else
+	 */
+	private boolean isIslandTypeAttribute(Attribute attribute) {
+		return (attribute.equals(Attribute.SINGLE) || attribute.equals(Attribute.MULTIPLE));
 	}
 
 	/**
@@ -56,15 +97,21 @@ public class Island {
 		return name;
 	}
 
+	/**
+	 * Returns the location of this island
+	 * 
+	 * @return
+	 */
 	public String getLocation() {
 		return this.location;
 	}
 
 	/**
-	 * Returns the value of the attribute
+	 * Returns whether or not the island contains the specified attribute
 	 * 
 	 * @param attribute
-	 * @return Value of attribute
+	 * @return <b>true</b> if island contains attribute<br>
+	 *         <b>false</b> if island does not
 	 */
 	public boolean getAttribute(Attribute attribute) {
 		for (Attribute islandAttribute : supportedAttributes) {
