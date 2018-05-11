@@ -2,14 +2,10 @@ package Resources;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.jar.Attributes;
-
 import org.json.JSONObject;
 
 import Exceptions.InvalidAttributeException;
-import utils.Constants;
 import utils.Constants.Attribute;
-import utils.Constants.IslandConstants;
 
 /**
  * Class used to contain properties about a given Island.
@@ -24,6 +20,22 @@ public class Island {
 	private List<Attribute> supportedAttributes = new ArrayList<>();
 	private JSONObject islandProperties = new JSONObject();
 
+	/**
+	 * 
+	 * Creates an Island Object.
+	 * 
+	 * @param islandName
+	 *            - Name of the island
+	 * @param singleOrMultiple
+	 *            - SINGLE or MULTIPLE depending on whether or not this island is
+	 *            broken down into multiple islands or is one giant one
+	 * @param location
+	 *            - Location of the island on the map
+	 * @param attributes
+	 *            - a list of attributes that this island has
+	 * @throws InvalidAttributeException
+	 *             - If the attribute passed in is invalid or in the wrong location
+	 */
 	public Island(String islandName, Attribute singleOrMultiple, String location, Attribute... attributes)
 			throws InvalidAttributeException {
 
@@ -41,14 +53,13 @@ public class Island {
 	 * Checks to see if the attribute being passed in is either single or multiple
 	 * 
 	 * @param singleOrMultiple
-	 * @throws InvalidAttributeException 
+	 * @throws InvalidAttributeException
 	 */
 	private void checkAddIslandType(Attribute singleOrMultiple) throws InvalidAttributeException {
 		if (isIslandTypeAttribute(singleOrMultiple)) {
 			supportedAttributes.add(singleOrMultiple);
 		} else {
-			String error = "singleOrMultiple argument for island '" + name
-					+ "' is invalid. Must be SINGLE or MULTIPLE";
+			String error = "singleOrMultiple argument for island '" + name + "' is invalid. Must be SINGLE or MULTIPLE";
 			throw new InvalidAttributeException(error);
 		}
 	}

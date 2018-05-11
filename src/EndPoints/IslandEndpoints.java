@@ -46,6 +46,11 @@ import app.IslandList;
 @SwaggerDefinition(info = @Info(title = "/islands", version = "1.0", description = "Endpoint to grab islands", license = @License(name = "Apache 2.0", url = "http://www.apache.org/licenses/LICENSE-2.0"), contact = @Contact(name = "SoT Pirates", email = "sotpirates@gmail.com", url = "https://www.sotpirates.com")))
 @Path("/islands")
 
+/**
+ * Class containing the island endpoints to sotpirates.
+ * @author ryanpelaez
+ *
+ */
 public class IslandEndpoints {
 
 	List<Island> islands;

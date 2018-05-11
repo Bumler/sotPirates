@@ -18,8 +18,16 @@ public class Filter {
 	 * Send in a list of islands and filters and get back a list of islands that
 	 * meet the criteria
 	 * 
-	 * @param islands
+	 * @param islands-
+	 *            Island object to be compared
+	 * @param islandName
+	 *            - Name of the islandName that was passed in with request
 	 * @param filters
+	 *            - Filters that were passed in with request
+	 * @param exclusiveSearch
+	 *            - true or false to determine whether or not this request is
+	 *            exclusive or inclusive
+	 * 
 	 * @return filteredIslands - ArrayList<Island>
 	 */
 	public static List<Island> filterIslands(List<Island> islands, String islandName, List<Attribute> filters,
@@ -39,8 +47,11 @@ public class Filter {
 	 * Then determines if the island matches the filters.
 	 * 
 	 * @param island
+	 *            - Island object to be compared
+	 * @param islandName
+	 *            - Name of the islandName that was passed in with request
 	 * @param filters
-	 * @param exclusiveSearch
+	 *            - Filters that were passed in with request
 	 * @return
 	 */
 	private static boolean matchesFilter(Island island, String islandName, List<Attribute> filters,
@@ -57,7 +68,11 @@ public class Filter {
 	 * exception. Returns false only if the island does not contain the given name
 	 * 
 	 * @param island
+	 *            - Island object to be compared
+	 * @param islandName
+	 *            - Name of the islandName that was passed in with request
 	 * @param filters
+	 *            - Filters that were passed in with request
 	 * @return
 	 */
 	private static boolean matchesExclusive(Island island, String islandName, List<Attribute> filters) {
@@ -79,10 +94,14 @@ public class Filter {
 	}
 
 	/**
-	 * if at least one attribute matches. return true
+	 * If at least one attribute matches. return true
 	 * 
 	 * @param island
+	 *            - Island object to be compared
+	 * @param islandName
+	 *            - Name of the islandName that was passed in with request
 	 * @param filters
+	 *            - Filters that were passed in with request
 	 * @return
 	 */
 	private static boolean matchesInclusive(Island island, String islandName, List<Constants.Attribute> filters) {

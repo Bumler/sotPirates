@@ -19,6 +19,11 @@ import Resources.Island;
 import app.IslandList;
 import utils.Constants.httpsConstants;
 
+/**
+ * 
+ * @author ryanpelaez
+ *
+ */
 public class IslandManager {
 
 	static List<Island> islands;
@@ -160,6 +165,12 @@ public class IslandManager {
 		return islandPNG.toString();
 	}
 
+	/**
+	 * Gets the relative path to the desired image
+	 * @param islandPNG
+	 * @param isMap
+	 * @return
+	 */
 	private static java.nio.file.Path getImagePath(String islandPNG, String isMap) {
 		if (isMap != null && isMap.equalsIgnoreCase("true")) {
 			return IMAGES_MAPS_DIR.resolve(islandPNG);

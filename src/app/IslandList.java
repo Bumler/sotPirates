@@ -6,11 +6,15 @@ import java.util.List;
 import Exceptions.InvalidAttributeException;
 import Resources.Island;
 import utils.Constants.Attribute;
-
+/**
+ * Class containing all of the islands
+ * @author ryanpelaez
+ *
+ */
 public class IslandList {
 
 	/**
-	 * Contains a hardcoded list of Islands in SoT
+	 * Get all of the islands 
 	 * 
 	 * @return
 	 * @throws InvalidAttributeException 

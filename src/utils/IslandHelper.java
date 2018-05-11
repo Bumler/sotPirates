@@ -7,6 +7,11 @@ import org.json.JSONObject;
 
 import Resources.Island;
 
+/**
+ * 
+ * @author ryanpelaez
+ *
+ */
 public class IslandHelper {
 	/**
 	 * Converts a list of islands into a JSON

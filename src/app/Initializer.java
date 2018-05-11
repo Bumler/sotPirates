@@ -8,6 +8,11 @@ import EndPoints.IslandEndpoints;
 import Exceptions.InvalidAttributeException;
 import Resources.Island;
 
+/**
+ * Main class to deploy the service
+ * @author ryanpelaez
+ *
+ */
 public class Initializer {
 
 	static List<Island> islands;
