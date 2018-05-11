@@ -18,58 +18,92 @@ sotPirates.config(['$routeProvider', function($routeProvider){
 
 sotPirates.factory('sotEndpoints', function(){
 	return{
-		baseURL : "http://localhost:9099"
+		baseURL : "http://localhost:9099",
+		setMapView : SetIslandImages,
+		GET : formatGetRequest
+	}
+
+	function SetIslandImages (island){
+		island.mapView = this.baseURL.concat("/islands/images/").concat(island.NAME).concat("?isMap=true");
+		island.vanityShot = this.baseURL.concat("/islands/images/").concat(island.NAME);
+	}
+
+	function formatGetRequest(body){
+		addressURL = this.baseURL.concat(body);
+
+		var req = {
+			method: 'GET',
+ 			url: addressURL,
+ 			headers: {
+   				'Content-Type': 'application/json'
+ 			}
+		 };
+		 console.log(addressURL);
+		 return req;
 	}
 });
 
-sotPirates.factory('SelectedIslands', function($location){
-	filteredIslands = [];
-	markedIslands = [];
+sotPirates.factory('IslandFactory', function($location, sotEndpoints){
+	islands = {};
 
 	return {
-		FilteredIslands : filteredIslands,
-		UpdateFilteredIsands : updateFilteredIslands,
-		MarkedIslands : markedIslands,
+		Islands : islands,
+		UpdateFilteredIslands : updateFilteredIslands,
 		MarkIsland : markIsland
 	}
 
-	function updateFilteredIslands (newIslands){
-		//We can't simply set filtered islands to new islands because the reference is watched
-		//this feels like a dirty fix and should be checked on
-		filteredIslands.length = 0;
+	function loadInitial (newIslands){
+		for (islandName in newIslands){
+			island = newIslands[islandName];
 
-		newIslands.forEach(function(island){
-			filteredIslands.push(island);
-		});
+			sotEndpoints.setMapView(island);
+			island.showing = true;
+			island.marked = false;
+
+			islands[islandName] = island;
+		}
+	}
+
+	function updateFilteredIslands (filteredIslands){
+		if (Object.keys(islands).length === 0)
+			loadInitial(filteredIslands);
+		
+		else{
+			hideAllIslands();
+			showFiltered(filteredIslands);
+		}
+	}
+
+	function hideAllIslands(){
+		for (island in islands)
+			islands[island].showing = false;
+	}
+
+	function showFiltered(filteredIslands){
+		for (island in filteredIslands)
+			islands[island].showing = true;
 	}
 
 	function markIsland (island, event){
-		if (markedIslands.indexOf(island) < 0)
-			markedIslands.push(island);
-		
+		islands[island.NAME].marked = true;
+
 		$location.path('/map');
 	}
 });
 
-sotPirates.controller('islandModalController', function($uibModal, $scope, island, sotEndpoints, SelectedIslands){
+sotPirates.controller('islandModalController', function($uibModal, $scope, island, IslandFactory){
 	$scope.island = island;
 
 	$scope.MarkOnMap = function(island){
-		SelectedIslands.MarkIsland(island);
+		IslandFactory.MarkIsland(island);
 
 		this.$close();
 	};
-
-	function setImageURLs(){
-		$scope.vanityURL = sotEndpoints.baseURL.concat("/islands/images/").concat(island.name);
-	}
-
-	setImageURLs();
 });
 
-sotPirates.controller('galleryController', function($scope, $uibModal, SelectedIslands){
-	$scope.filteredIslands = SelectedIslands.FilteredIslands;
-	$scope.MarkOnMap = SelectedIslands.MarkIsland;
+sotPirates.controller('galleryController', function($scope, $uibModal, IslandFactory){
+	$scope.Islands = IslandFactory.Islands;
+	$scope.MarkOnMap = IslandFactory.MarkIsland;
 
 	$scope.showIsland = function(islandToShow){
 		$uibModal.open({
@@ -83,21 +117,21 @@ sotPirates.controller('galleryController', function($scope, $uibModal, SelectedI
 	}
 });
 
-sotPirates.controller('mapController', function($scope, SelectedIslands){
-	$scope.filteredIslands = SelectedIslands.FilteredIslands;
-	$scope.markedIslands = SelectedIslands.MarkedIslands;
+sotPirates.controller('mapController', function($scope, IslandFactory){
+	$scope.Islands = IslandFactory.Islands;
 });
 
-sotPirates.controller('controlsController', function($scope, $http, $q, $location, sotEndpoints, SelectedIslands){
-	baseFilter = "/islands?exclusive=true&filters=";
+sotPirates.controller('controlsController', function($scope, $http, $q, $location, sotEndpoints, IslandFactory){
+	baseFilter = "/islands?";
 
+	$scope.name = "";
+	$scope.isExclusive = true;
 	$scope.filters = 
 		{chickens:false,
 		snakes:false,
 		pigs:false,
 		outpost:false,
-		fort:false,
-		name:""};
+		fort:false};
 
 	$scope.changeView = function(){
 		if ($location.path() === '/gallery')
@@ -106,80 +140,61 @@ sotPirates.controller('controlsController', function($scope, $http, $q, $locatio
 			$location.path('/gallery');
 	}
 
-	function filterIslands (filter){
-		var deferred = $q.defer();
-
-		addressURL = sotEndpoints.baseURL.concat(filter);
-
-		var req = {
-			method: 'GET',
- 			url: addressURL,
- 			headers: {
-   				'Content-Type': 'application/json'
- 			}
- 		}
-		
-		$http(req)
-			.then(function (response) {
-				var updatedIslands = updateSelectedIslands(response.data)
-				deferred.resolve(updatedIslands);
-			});
-		
-		return deferred.promise;
-	}
-
-	function updateSelectedIslands (newIslands){
-		currentIslands = [];
-
-		angular.forEach(newIslands, function(value, key) {
-			currentIslands.push(value);
-		});
-
-		return currentIslands;
-	}
-
 	$scope.updateFilter = function() {
-		filter = buildFilter();
+		filter = baseFilter;
 
+		filter = filter.concat(NameParam()).concat("&");
+		filter = filter.concat(FilterParam()).concat("&");
+		filter = filter.concat(ExclusiveParam());
+		
 		requestIslands(filter);
 	}
 
-	function buildFilter(){
-		filter = baseFilter;
+	function NameParam(){
+		if ($scope.name.length === 0)
+			return "";
 		
-		filter = addToFilter(filter, "chickens", $scope.filters.chickens);
-		filter = addToFilter(filter, "snakes", $scope.filters.snakes);
-		filter = addToFilter(filter, "pigs", $scope.filters.pigs);
-
-		filter = addToFilter(filter, "outpost", $scope.filters.outpost);
-		filter = addToFilter(filter, "fort", $scope.filters.fort);
-
-		filter = addToFilter(filter, "name", $scope.filters.name);
-
-		filter = filter.trim(',');
-
-		return filter;
+		else{
+			header = "name=";
+			return header.concat($scope.name);
+		}
 	}
 
-	function addToFilter(filter, label, value){
-		if (value || value != "")
-			filter = filter.concat(label + ':' + value + ',');
+	function FilterParam(){
+		filterParam = "filters=";
 
-		return filter;
+		for (filter in $scope.filters){
+			if ($scope.filters[filter])
+				filterParam = filterParam.concat(filter).concat(",");
+		}
+
+		return filterParam;
+	}
+
+	function ExclusiveParam(){
+		header = "isExclusive=";
+		return header.concat($scope.isExclusive);
 	}
 
 	function requestIslands (filter){
 		promise = filterIslands(filter);
 		promise.then(function(newIslands){
-			SelectedIslands.UpdateFilteredIsands(newIslands);
+			IslandFactory.UpdateFilteredIslands(newIslands);
 		});
 	}
 
-	function loadInitialIslands(){
-		filter = baseFilter;
-
-		requestIslands(filter);
+	function filterIslands (filter){
+		var deferred = $q.defer();
+		var req = sotEndpoints.GET(filter);
+		
+		$http(req)
+			.then(function (response) {
+				deferred.resolve(response.data);
+			});
+		
+		return deferred.promise;
 	}
 
-	loadInitialIslands();
+	//Initial island load
+	requestIslands(baseFilter);
 });

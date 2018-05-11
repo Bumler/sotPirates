@@ -1,5 +1,5 @@
 <span class="vanityShot vanityBorder">
-    <img class="vanityBorder" ng-src="{{vanityURL}}">
+    <img class="vanityBorder" ng-src="{{island.vanityShot}}">
     <div class="card-bottom">
             <div ng-click="MarkOnMap(island)" class="clickable fa fa-bullseye"></div>
     </div> 
@@ -7,16 +7,17 @@
 
 <span class="secondContainer">
     <div class="mapview">
+        <img class="mapViewBorder" ng-src="{{island.mapView}}">
     </div>
     <div class="islandInfo">
-        <span class="islandName">{{island.name}}</span>
+        <span class="islandName">{{island.NAME}}</span>
         
         <span class="islandIcons">
-            <span ng-if="island.chickens=='true'" class="icon fa fa-angle-right"></span>
-            <span ng-if="island.snakes=='true'" class="icon fa fa-angle-left"></span>
-            <span ng-if="island.pigs=='true'" class="icon fa fa-angle-down"></span>
-            <span ng-if="island.fort=='true'" class="icon fa fa-fort-awesome"></span>
-            <span ng-if="island.outpost=='true'" class="icon fa fa-home"></span>
+            <span ng-if="island.CHICKENS" class="icon fa fa-angle-right"></span>
+            <span ng-if="island.SNAKES" class="icon fa fa-angle-left"></span>
+            <span ng-if="island.PIGS" class="icon fa fa-angle-down"></span>
+            <span ng-if="island.FORT" class="icon fa fa-fort-awesome"></span>
+            <span ng-if="island.OUTPOST" class="icon fa fa-home"></span>
         </span>
     </div>
 </span>

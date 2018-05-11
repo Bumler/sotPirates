@@ -76,3 +76,24 @@ label{
 .nav-tabs.nav-justified>li>a{
     border-radius: 0px;
 }
+
+.inclusiveBtn{
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    width: 25%;
+}
+
+.btn-primary:hover, .btn-primary:hover:focus, .btn-primary:active, .btn-primary:active:focus, .btn-primary.active, .btn-primary.active:focus{
+    background-color: #9F8159;
+    border-color:  #9F8159;
+    outline: 0px;
+    color: white;
+}
+
+.btn-primary.active:hover, .btn-primary.active:active, .btn-primary.active:active:focus, .btn-primary, .btn-primary:focus{
+    background-color: #d2b48c;
+    border-color:  #d2b48c;
+    outline: 0px;
+    color: black;
+}

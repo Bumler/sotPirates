@@ -39,10 +39,13 @@
             <div class="col-sm-12">
                 <div class="input-group">
                     <label class="input-group-addon">Name</label>
-                    <input ng-keyup="updateFilter()" type="text" class="form-control" ng-model="filters.name" placeholder="Sanctuary Outpost">
+                    <input ng-keyup="updateFilter()" type="text" class="form-control" ng-model="name" placeholder="Sanctuary Outpost">
                 </div>
             </div>
         </div>
-        </form>
+
+        <button type="button" class="btn inclusiveBtn btn-primary" ng-model="isExclusive" uib-btn-checkbox ng-change="updateFilter()">
+            {{isExclusive?'Exclusive':'Inclusive'}}
+        </button>
     </div>
 </div>
