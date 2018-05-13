@@ -18,12 +18,18 @@
             </uib-tab>
             <uib-tab index="1" heading="Special Islands">
                 <div class="row filter-row">
-                        <div class="col-xs-12"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.fort"><span class="fa fa-fort-awesome filter-text"></span>&nbsp;Forts</label></div>
-                        <div class="col-xs-12"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.outpost"><span class="fa fa-home filter-text"></span>&nbsp;Outposts</label></div>
-                        <div class="col-xs-12"></div>
-                    </div>
+                    <div class="col-xs-12"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.fort"><span class="fa fa-fort-awesome filter-text"></span>&nbsp;Forts</label></div>
+                    <div class="col-xs-12"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.outpost"><span class="fa fa-home filter-text"></span>&nbsp;Outposts</label></div>
+                    <div class="col-xs-12"></div>
+                </div>
             </uib-tab>
-            <uib-tab index="2" heading="Islands With...">Shit like docks and stuff</uib-tab>
+            <uib-tab index="2" heading="Islands With...">
+                <div class="row filter-row">
+                    <div class="col-xs-12"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.docks"><span class="fa fa-angle-double-left filter-text"></span>&nbsp;Docks</label></div>
+                    <div class="col-xs-12"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.single"><span class="fa fa-angle-double-up filter-text"></span>&nbsp;Single Island</label></div>
+                    <div class="col-xs-12"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.multiple"><span class="fa fa-angle-double-down filter-text"></span>&nbsp;Multiple Islands</label></div>
+                </div>  
+            </uib-tab>
         </uib-tabset>
 
         <div class="sub-header">Active Filters: 

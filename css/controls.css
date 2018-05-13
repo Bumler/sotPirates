@@ -71,6 +71,7 @@ label{
     font-weight: normal;
     margin-bottom: 0px;
     font-size: 24px;
+    cursor: pointer;
 }
 
 .nav-tabs.nav-justified>li>a{
