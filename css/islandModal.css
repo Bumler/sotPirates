@@ -26,6 +26,8 @@
 .vanityShot{
     width: 70%;
     height: 100%;
+
+    position: relative;
 }
 
 .vanityBorder{
@@ -44,7 +46,6 @@
 .islandInfo {
     height: 23.88%;
 
-    font-size: 32px;
     display: flex;
     align-items: center;
     padding: 10px;
@@ -58,6 +59,10 @@
 .islandIcons{
     float: right;  
     width: 30%;
+}
+
+.modalText{
+    font-size: 32px;
 }
 
 img{

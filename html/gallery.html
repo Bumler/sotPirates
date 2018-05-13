@@ -19,7 +19,8 @@
                             </div>
                         </div>
                         <div class="card-bottom">
-                            <div ng-click="MarkOnMap(island); $event.stopPropagation();" class="fa fa-bullseye"></div>
+                            <div class="card-mark fa fa-bullseye" ng-click="MarkOnMap(island); $event.stopPropagation();"></div>
+                            <div class="card-location">{{island.LOCATION}}</div>
                         </div> 
                     </div>
             </div>
