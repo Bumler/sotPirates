@@ -10,6 +10,10 @@ sotPirates.config(['$routeProvider', function($routeProvider){
 		templateUrl: 'html/map.html',
 		controller: 'mapController'
 	})
+	.when('/about', {
+		templateUrl: 'html/about.html',
+		controller: 'aboutController'
+	})
 	.otherwise({
 		redirectTo: '/gallery'
 	});
@@ -121,6 +125,12 @@ sotPirates.controller('mapController', function($scope, IslandFactory){
 	$scope.Islands = IslandFactory.Islands;
 });
 
+sotPirates.controller('footerController', function($scope, $location){
+	$scope.goToAbout = function(){
+		$location.path('/about');	
+	}
+});
+
 sotPirates.controller('controlsController', function($scope, $http, $q, $location, sotEndpoints, IslandFactory){
 	baseFilter = "/islands?";
 
@@ -131,7 +141,10 @@ sotPirates.controller('controlsController', function($scope, $http, $q, $locatio
 		snakes:false,
 		pigs:false,
 		outpost:false,
-		fort:false};
+		fort:false,
+		docks: false,
+		single: false,
+		multiple: false};
 
 	$scope.changeView = function(){
 		if ($location.path() === '/gallery')
