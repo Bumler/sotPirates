@@ -103,6 +103,10 @@ sotPirates.controller('islandModalController', function($uibModal, $scope, islan
 
 		this.$close();
 	};
+
+	$scope.close = function(){
+		this.$close();
+	}
 });
 
 sotPirates.controller('galleryController', function($scope, $uibModal, IslandFactory){

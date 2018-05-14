@@ -69,3 +69,11 @@ img{
     height: 100%;
     width: 100%;
 }
+
+.close{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+
+    cursor: pointer;
+}
