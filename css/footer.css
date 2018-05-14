@@ -1,0 +1,15 @@
+.footer-text{
+    padding-top: 25px;
+}
+
+footer{
+    height: 20vh;
+    background: -webkit-linear-gradient(rgba(159,129,89,.9),rgba(159,129,89,.9));
+    background: linear-gradient(rgba(159,129,89,.9),rgba(159,129,89,.9));
+
+    text-align: center;
+}
+
+a{
+    cursor: pointer;
+}
