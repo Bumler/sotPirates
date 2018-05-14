@@ -125,9 +125,10 @@ sotPirates.controller('mapController', function($scope, IslandFactory){
 	$scope.Islands = IslandFactory.Islands;
 });
 
-sotPirates.controller('footerController', function($scope, $location){
+sotPirates.controller('footerController', function($scope, $location, $window){
 	$scope.goToAbout = function(){
 		$location.path('/about');	
+		$window.scrollTo(0, 0);
 	}
 });
 
