@@ -30,11 +30,11 @@
     z-index: 900;
 }
 
-.bottom-a{
-    right: 105px;
+.map-button{
+    left: 15px;
 }
 
-.bottom-b{
+.filter-position{
     right: 15px;
 }
 
