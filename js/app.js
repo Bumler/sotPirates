@@ -198,3 +198,6 @@ sotPirates.controller('controlsController', function($scope, $http, $q, $locatio
 	//Initial island load
 	requestIslands(baseFilter);
 });
+
+sotPirates.controller('aboutController', function(){
+});
