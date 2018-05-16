@@ -5,6 +5,8 @@
     padding-top: 100%;
 
     cursor: pointer;
+
+    color: #d2b48c;
 }
 
 .card-top{
@@ -14,9 +16,6 @@
     width: 100%;
 
     display: block;
-
-    font-size: 18px;
-    color: #d2b48c;
 }
 
 .galleryImage{
@@ -27,20 +26,22 @@
     margin-top: -100%;
 }
 
-.card-text{
+.card-name{
     float: left;
+    width: 70%;
 }
 
 .card-icons{
+    /* hacky fix to ensure that the icons are aligned with island text */
+    padding-top: 5px;
     float: right;
+    width: 30%;
 }
 
 .card-mark{
     position: absolute;
     bottom: 10px;
     left: 15px;
-    font-size: 48px;
-    color: #d2b48c;
 }
 
 .card-location{
@@ -48,6 +49,24 @@
     bottom: 10px;
     right: 15px;
     float: right;
-    font-size: 18px;
-    color: #d2b48c;
 }
+
+@media only screen and (max-width: 767px) {
+    .card-text{
+        font-size: 14px;
+    }
+
+    .mark-text{
+        font-size: 36px;
+    }
+} 
+
+@media only screen and (min-width: 768px) {
+    .card-text{
+        font-size: 18px;
+    }
+
+    .mark-text{
+        font-size: 48px;
+    }
+} 
