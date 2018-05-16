@@ -98,3 +98,9 @@ label{
     outline: 0px;
     color: black;
 }
+
+/* This prevents nab tabs from resizing on mobile */
+.nav-tabs.nav-justified>li {
+    display: table-cell;
+    width: 1%;
+}
