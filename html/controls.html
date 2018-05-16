@@ -1,11 +1,11 @@
 <div ng-controller="controlsController">
-    <div ng-click="changeView()" class="fa fa-map faux-button-circle abs-bottom bottom-a"
+    <div ng-click="changeView()" class="fa fa-map faux-button-circle abs-bottom map-button"
         title="Switch to the map!"></div>
 
-    <div ng-click="addingTrait = !addingTrait" class="fa faux-button-circle abs-bottom bottom-b" ng-class="{'fa-filter' : !addingTrait, 'fa-times' : addingTrait}"
+    <div ng-click="addingTrait = !addingTrait" class="fa faux-button-circle abs-bottom filter-position" ng-class="{'fa-filter' : !addingTrait, 'fa-times' : addingTrait}"
         title="Find an Island!"></div>
 
-    <div ng-show="addingTrait" class="filter filter-window abs-bottom bottom-b bg-parchment boxShadow">
+    <div ng-show="addingTrait" class="filter filter-window abs-bottom filter-position bg-parchment boxShadow">
         <div class="filter-header">I be looking for...</div>
 
         <uib-tabset class="filterTabList" active="activeJustified" justified="true">
@@ -38,6 +38,9 @@
             <span ng-if="filters.pigs==true" class="removable clickable fa fa-angle-down" ng-click="filters.pigs = false; updateFilter()"></span>
             <span ng-if="filters.fort==true" class="removable clickable fa fa-fort-awesome" ng-click="filters.fort = false; updateFilter()"></span>
             <span ng-if="filters.outpost==true" class="removable clickable fa fa-home" ng-click="filters.outpost = false; updateFilter()"></span>
+            <span ng-if="filters.docks==true" class="removable clickable fa fa-angle-double-left" ng-click="filters.docks = false; updateFilter()"></span>
+            <span ng-if="filters.single==true" class="removable clickable fa fa-angle-double-up" ng-click="filters.single = false; updateFilter()"></span>
+            <span ng-if="filters.multiple==true" class="removable clickable fa fa-angle-double-down" ng-click="filters.multiple = false; updateFilter()"></span>
         </div>
 
         <div class="sub-header">I know what I be looking for</div>

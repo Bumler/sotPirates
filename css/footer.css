@@ -1,0 +1,31 @@
+.footer-text{
+    padding-top: 25px;
+}
+
+footer{
+    padding-bottom: 10vh;
+    background: -webkit-linear-gradient(rgba(159,129,89,.9),rgba(159,129,89,.9));
+    background: linear-gradient(rgba(159,129,89,.9),rgba(159,129,89,.9));
+
+    text-align: center;
+}
+
+a{
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 767px) {
+    .disclaimer-text{
+        font-size: 12px;
+    }
+} 
+
+@media only screen and (min-width: 768px) {
+    .disclaimer-text{
+        font-size: 14px;
+    }
+
+    .footer-text{
+        font-size: 16px;
+    }
+}

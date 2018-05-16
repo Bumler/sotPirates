@@ -1,11 +1,12 @@
 <span class="vanityShot vanityBorder">
     <img class="vanityBorder" ng-src="{{island.vanityShot}}">
-    <div ng-click="MarkOnMap(island)" class="card-mark clickable fa fa-bullseye"></div>
+    <div ng-click="MarkOnMap(island)" class="card-mark mark-text clickable fa fa-bullseye"></div>
     <div class="card-location modalText">{{island.LOCATION}}</div>
 </span>
 
 <span class="secondContainer modalText">
     <div class="mapview">
+        <span ng-click="close()" class="close modal-text fa fa-times"></span>
         <img class="mapViewBorder" ng-src="{{island.mapView}}">
     </div>
     <div class="islandInfo">
