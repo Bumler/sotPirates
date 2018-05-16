@@ -30,11 +30,11 @@
     z-index: 900;
 }
 
-.bottom-a{
-    right: 105px;
+.map-button{
+    left: 15px;
 }
 
-.bottom-b{
+.filter-position{
     right: 15px;
 }
 
@@ -97,4 +97,10 @@ label{
     border-color:  #d2b48c;
     outline: 0px;
     color: black;
+}
+
+/* This prevents nab tabs from resizing on mobile */
+.nav-tabs.nav-justified>li {
+    display: table-cell;
+    width: 1%;
 }

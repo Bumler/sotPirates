@@ -11,13 +11,6 @@
     border: 0px;
 }
 
-.modal-dialog{
-    margin-top: 10%;
-
-    height: 500px;
-    width: 1270px;
-}
-
 .secondContainer{
     height: 100%;
     width: 30%;
@@ -76,4 +69,76 @@ img{
     right: 5px;
 
     cursor: pointer;
+}
+
+@media only screen and (min-width: 1350px){
+    .modal-dialog{
+        margin-top: 10%;
+    
+        height: 500px;
+        width: 1270px;
+    }
+} 
+
+@media only screen and (min-width: 992px) and (max-width: 1349px) {
+    .modal-dialog{
+        margin-top: 20%;
+    
+        height: 362px;
+        width: 920px;
+    }
+} 
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .modal-dialog{
+        margin-top: 30%;
+    
+        height: 279px;
+        width: 710px;
+    }
+
+    .modalText{
+        font-size: 24px;
+    }
+} 
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .modal-dialog{
+        margin-top: 30%;
+    
+        height: 279px;
+        width: 710px;
+    }
+
+    .modalText{
+        font-size: 18px;
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 767px) {
+    .modal-dialog{
+        margin: auto;
+        margin-top: 40%;
+    
+        height: 226px;
+        width: 575px;
+    }
+
+    .modalText{
+        font-size: 16px;
+    }
+}
+
+@media only screen and (min-width: 450px) and (max-width: 599px){
+    .modal-dialog{
+        margin: auto;
+        margin-top: 30%;
+    
+        height: 167px;
+        width: 425px;
+    }
+
+    .modalText{
+        font-size: 14px;
+    }
 }
