@@ -49,9 +49,11 @@ sotPirates.factory('sotEndpoints', function(){
 
 sotPirates.factory('IslandFactory', function(sotEndpoints){
 	islands = {};
+	this.showFlagged = false;
 
 	return {
 		Islands : islands,
+		ShowFlagged : this.showFlagged,
 		UpdateFilteredIslands : updateFilteredIslands,
 		FlagIsland : flagIsland
 	}
@@ -85,7 +87,7 @@ sotPirates.factory('IslandFactory', function(sotEndpoints){
 
 	function showFiltered(filteredIslands){
 		for (island in filteredIslands)
-				islands[island].showing = true;
+			islands[island].showing = true;
 	}
 
 	function flagIsland (island, event){
@@ -135,6 +137,9 @@ sotPirates.controller('controlsController', function($scope, $http, $q, $locatio
 
 	$scope.name = "";
 	$scope.isExclusive = true;
+	$scope.specialFilter = {};
+	$scope.specialFilter.showFlagged = IslandFactory.ShowFlagged;
+
 	$scope.filters = 
 		{chickens:false,
 		snakes:false,
@@ -159,7 +164,7 @@ sotPirates.controller('controlsController', function($scope, $http, $q, $locatio
 		filter = filter.concat(NameParam()).concat("&");
 		filter = filter.concat(FilterParam()).concat("&");
 		filter = filter.concat(ExclusiveParam());
-		debugger;
+
 		requestIslands(filter, $scope.filters.flagged);
 	}
 
@@ -193,7 +198,6 @@ sotPirates.controller('controlsController', function($scope, $http, $q, $locatio
 		promise = filterIslands(filter);
 		
 		promise.then(function(newIslands){
-			debugger;
 			IslandFactory.UpdateFilteredIslands(newIslands);
 		});
 	}
