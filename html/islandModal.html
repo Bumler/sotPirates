@@ -1,6 +1,6 @@
 <span class="vanityShot vanityBorder">
     <img class="vanityBorder" ng-src="{{island.vanityShot}}">
-    <div ng-click="MarkOnMap(island)" class="card-mark mark-text clickable fa fa-bullseye"></div>
+    <div ng-click="FlagIsland(island)" class="card-mark mark-text clickable fa" ng-class="{'fa-flag' : island.flagged, 'fa-bullseye' : !island.flagged}"></div>
     <div class="card-location modalText">{{island.LOCATION}}</div>
 </span>
 

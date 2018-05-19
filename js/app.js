@@ -47,13 +47,13 @@ sotPirates.factory('sotEndpoints', function(){
 	}
 });
 
-sotPirates.factory('IslandFactory', function($location, sotEndpoints){
+sotPirates.factory('IslandFactory', function(sotEndpoints){
 	islands = {};
 
 	return {
 		Islands : islands,
 		UpdateFilteredIslands : updateFilteredIslands,
-		MarkIsland : markIsland
+		FlagIsland : flagIsland
 	}
 
 	function loadInitial (newIslands){
@@ -62,7 +62,7 @@ sotPirates.factory('IslandFactory', function($location, sotEndpoints){
 
 			sotEndpoints.setMapView(island);
 			island.showing = true;
-			island.marked = false;
+			island.flagged = false;
 
 			islands[islandName] = island;
 		}
@@ -85,24 +85,18 @@ sotPirates.factory('IslandFactory', function($location, sotEndpoints){
 
 	function showFiltered(filteredIslands){
 		for (island in filteredIslands)
-			islands[island].showing = true;
+				islands[island].showing = true;
 	}
 
-	function markIsland (island, event){
-		islands[island.NAME].marked = true;
-
-		$location.path('/map');
+	function flagIsland (island, event){
+		islands[island.NAME].flagged = !islands[island.NAME].flagged;
 	}
 });
 
 sotPirates.controller('islandModalController', function($uibModal, $scope, island, IslandFactory){
 	$scope.island = island;
 
-	$scope.MarkOnMap = function(island){
-		IslandFactory.MarkIsland(island);
-
-		this.$close();
-	};
+	$scope.FlagIsland = IslandFactory.FlagIsland;
 
 	$scope.close = function(){
 		this.$close();
@@ -111,7 +105,7 @@ sotPirates.controller('islandModalController', function($uibModal, $scope, islan
 
 sotPirates.controller('galleryController', function($scope, $uibModal, IslandFactory){
 	$scope.Islands = IslandFactory.Islands;
-	$scope.MarkOnMap = IslandFactory.MarkIsland;
+	$scope.FlagIsland = IslandFactory.FlagIsland;
 
 	$scope.showIsland = function(islandToShow){
 		$uibModal.open({
@@ -149,7 +143,8 @@ sotPirates.controller('controlsController', function($scope, $http, $q, $locatio
 		fort:false,
 		docks: false,
 		single: false,
-		multiple: false};
+		multiple: false,
+		flagged: false};
 
 	$scope.changeView = function(){
 		if ($location.path() === '/gallery')
@@ -164,8 +159,8 @@ sotPirates.controller('controlsController', function($scope, $http, $q, $locatio
 		filter = filter.concat(NameParam()).concat("&");
 		filter = filter.concat(FilterParam()).concat("&");
 		filter = filter.concat(ExclusiveParam());
-		
-		requestIslands(filter);
+		debugger;
+		requestIslands(filter, $scope.filters.flagged);
 	}
 
 	function NameParam(){
@@ -196,7 +191,9 @@ sotPirates.controller('controlsController', function($scope, $http, $q, $locatio
 
 	function requestIslands (filter){
 		promise = filterIslands(filter);
+		
 		promise.then(function(newIslands){
+			debugger;
 			IslandFactory.UpdateFilteredIslands(newIslands);
 		});
 	}
