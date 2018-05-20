@@ -109,6 +109,19 @@ sotPirates.controller('galleryController', function($scope, $uibModal, IslandFac
 	$scope.Islands = IslandFactory.Islands;
 	$scope.FlagIsland = IslandFactory.FlagIsland;
 
+	$scope.hideIsland = function(island){
+		if (IslandFactory.ShowFlagged)
+			if (island.showing && island.flagged)
+				return false;
+			else
+				return true;
+		else
+			if (island.showing)
+				return false;
+			else
+				return true;
+	}
+
 	$scope.showIsland = function(islandToShow){
 		$uibModal.open({
 			animation: true,
@@ -159,6 +172,8 @@ sotPirates.controller('controlsController', function($scope, $http, $q, $locatio
 	}
 
 	$scope.updateFilter = function() {
+		IslandFactory.ShowFlagged = $scope.specialFilter.showFlagged;
+
 		filter = baseFilter;
 
 		filter = filter.concat(NameParam()).concat("&");
