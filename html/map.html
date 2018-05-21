@@ -4,10 +4,11 @@
         <div class="col-sm-8 col-xs-12">
             <div class="flagged-islands big-mar-top">
                 <span ng-repeat="island in Islands" ng-click="FlagIsland(island)" class="flagged-label" ng-if="island.flagged">
-                    {{island.NAME}}
+                    {{island.NAME}} - {{island.LOCATION}}
                 </span>
             </div> 
             <img class="top-mar" src="assets/SOTMap.jpg" alt="A map of sea of thieves" />
+            <div class="top-mar coming-soon-text">Interactive Map Coming Soon!!!</div>
         </div>
     </div>
 </div>

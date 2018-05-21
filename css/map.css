@@ -18,3 +18,9 @@
     background: darkred;
     color: white;
 }
+
+.coming-soon-text{
+    font-size: 24px;
+    color: darkred;
+    text-align: center;
+}
