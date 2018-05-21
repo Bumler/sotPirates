@@ -57,3 +57,7 @@ main{
 .removable:hover{
     color: darkred;
 }
+
+.padded-content{
+    padding: 0px 15px;
+}

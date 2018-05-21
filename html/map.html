@@ -1,4 +1,13 @@
-<div>This is the map</div>
-<div ng-repeat="island in Islands">
-    <div ng-if = "island.marked">{{island.NAME}}</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 col-xs-12">
+            <div class="flagged-islands big-mar-top">
+                <span ng-repeat="island in Islands" class="flagged-label" ng-if="island.flagged">
+                    {{island.NAME}}
+                </span>
+            </div> 
+            <img class="top-mar" src="assets/SOTMap.jpg" alt="A map of sea of thieves" />
+        </div>
+    </div>
 </div>
