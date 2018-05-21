@@ -1,14 +1,14 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-8 col-xs-12">
-            <div class="flagged-islands big-mar-top">
+        <div class="col-md-2 col-sm-1"></div>
+        <div class="col-md-8 col-sm-10 col-xs-12">
+            <div class="flagged-islands mar-top">
                 <span ng-repeat="island in Islands" ng-click="FlagIsland(island)" class="flagged-label" ng-if="island.flagged">
                     {{island.NAME}} - {{island.LOCATION}}
                 </span>
             </div> 
-            <img class="top-mar" src="assets/SOTMap.jpg" alt="A map of sea of thieves" />
-            <div class="top-mar coming-soon-text">Interactive Map Coming Soon!!!</div>
+            <img src="assets/SOTMap.jpg" alt="A map of sea of thieves" />
+            <div class="mar-top coming-soon-text">Interactive Map Coming Soon!!!</div>
         </div>
     </div>
 </div>

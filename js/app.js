@@ -146,7 +146,7 @@ sotPirates.controller('footerController', function($scope, $location, $window){
 	}
 });
 
-sotPirates.controller('controlsController', function($scope, $http, $q, $location, sotEndpoints, IslandFactory){
+sotPirates.controller('controlsController', function($scope, $http, $q, $location, $window, sotEndpoints, IslandFactory){
 	baseFilter = "/islands?";
 
 	$scope.name = "";
@@ -165,9 +165,18 @@ sotPirates.controller('controlsController', function($scope, $http, $q, $locatio
 		multiple: false,
 		flagged: false};
 
+	$scope.OnMapPage = function(){
+		if($location.path() === "/map")
+			return true;
+		else
+			return false;	
+	}
+
 	$scope.changeView = function(){
-		if ($location.path() === '/gallery')
+		if ($location.path() === '/gallery'){
 			$location.path('/map');
+			$window.scrollTo(0, 0);
+		}
 		else
 			$location.path('/gallery');
 	}

@@ -1,5 +1,5 @@
 <div ng-controller="controlsController">
-    <div ng-click="changeView()" class="fa fa-map faux-button-circle abs-bottom map-button"
+    <div ng-click="changeView()" class="fa faux-button-circle abs-bottom map-button" ng-class="{'fa-map' : !OnMapPage(), 'fa-th' : OnMapPage()}"
         title="Switch to the map!"></div>
 
     <div ng-click="addingTrait = !addingTrait" class="fa faux-button-circle abs-bottom filter-position" ng-class="{'fa-filter' : !addingTrait, 'fa-times' : addingTrait}"
