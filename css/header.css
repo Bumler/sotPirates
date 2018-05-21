@@ -10,23 +10,19 @@
     z-index: 10;
 }
 
-.logo{
-    width:100%;
-}
-
-.filter-text{
-    margin-left: 5px;
-}
-
 .header-section{
     height: 10vh;
     position: relative;
 }
 
+.logo-text{
+    cursor: pointer;
+    font-weight: 500;
+}
+
 @media only screen and (min-height: 800px){
     .logo-text{
         font-size: 60px;
-        font-weight: 500;
     }
 } 
 

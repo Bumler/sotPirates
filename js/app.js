@@ -245,3 +245,10 @@ sotPirates.controller('controlsController', function($scope, $http, $q, $locatio
 
 sotPirates.controller('aboutController', function(){
 });
+
+sotPirates.controller('headerController', function($scope, $location){
+	$scope.refresh = function(){
+		$location.path('/gallery');	
+		location.reload();
+	}
+});
