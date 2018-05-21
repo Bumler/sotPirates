@@ -136,6 +136,7 @@ sotPirates.controller('galleryController', function($scope, $uibModal, IslandFac
 
 sotPirates.controller('mapController', function($scope, IslandFactory){
 	$scope.Islands = IslandFactory.Islands;
+	$scope.FlagIsland = IslandFactory.FlagIsland;
 });
 
 sotPirates.controller('footerController', function($scope, $location, $window){

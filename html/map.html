@@ -3,7 +3,7 @@
         <div class="col-sm-2"></div>
         <div class="col-sm-8 col-xs-12">
             <div class="flagged-islands big-mar-top">
-                <span ng-repeat="island in Islands" class="flagged-label" ng-if="island.flagged">
+                <span ng-repeat="island in Islands" ng-click="FlagIsland(island)" class="flagged-label" ng-if="island.flagged">
                     {{island.NAME}}
                 </span>
             </div> 
