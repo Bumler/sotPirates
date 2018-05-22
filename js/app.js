@@ -22,7 +22,7 @@ sotPirates.config(['$routeProvider', function($routeProvider){
 
 sotPirates.factory('sotEndpoints', function(){
 	return{
-		baseURL : "http://localhost:9099",
+		baseURL : "http://sotPirates.com:9099",
 		setMapView : SetIslandImages,
 		GET : formatGetRequest
 	}
