@@ -22,7 +22,7 @@ sotPirates.config(['$routeProvider', function($routeProvider){
 
 sotPirates.factory('sotEndpoints', function(){
 	return{
-		baseURL : "http://localhost:9099",
+		baseURL : "http://sotPirates.com:9099",
 		setMapView : SetIslandImages,
 		GET : formatGetRequest
 	}
@@ -245,6 +245,7 @@ sotPirates.controller('controlsController', function($scope, $http, $q, $locatio
 
 sotPirates.controller('aboutController', function(){
 });
+<<<<<<< HEAD
 
 sotPirates.controller('headerController', function($scope, $location){
 	$scope.refresh = function(){
@@ -252,3 +253,5 @@ sotPirates.controller('headerController', function($scope, $location){
 		location.reload();
 	}
 });
+=======
+>>>>>>> c433387baa936213f9f733450a31acb370717575

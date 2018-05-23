@@ -11,9 +11,9 @@
         <uib-tabset class="filterTabList" active="activeJustified" justified="true">
             <uib-tab index="0" heading="Animals">
                 <div class="row filter-row">
-                    <div class="col-xs-12"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.chickens"><span class="fa fa-angle-right filter-text"></span>&nbsp;Chickens</label></div>
-                    <div class="col-xs-12"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.snakes"><span class="fa fa-angle-left filter-text"></span>&nbsp;Snakes</label></div>
-                    <div class="col-xs-12"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.pigs"><span class="fa fa-angle-down filter-text"></span>&nbsp;Pigs</label></div>
+                    <div class="col-xs-12"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.chickens"><span class="icon-Chicken filter-text"></span>&nbsp;Chickens</label></div>
+                    <div class="col-xs-12"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.snakes"><span class="icon-Snake filter-text"></span>&nbsp;Snakes</label></div>
+                    <div class="col-xs-12"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.pigs"><span class="icon-Pig filter-text"></span>&nbsp;Pigs</label></div>
                 </div>
             </uib-tab>
             <uib-tab index="1" heading="Special Islands">
@@ -25,23 +25,23 @@
             </uib-tab>
             <uib-tab index="2" heading="Islands With...">
                 <div class="row filter-row">
-                    <div class="col-xs-12"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.docks"><span class="fa fa-angle-double-left filter-text"></span>&nbsp;Docks</label></div>
-                    <div class="col-xs-12"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.single"><span class="fa fa-angle-double-up filter-text"></span>&nbsp;Single Island</label></div>
-                    <div class="col-xs-12"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.multiple"><span class="fa fa-angle-double-down filter-text"></span>&nbsp;Multiple Islands</label></div>
+                    <div class="col-xs-12"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.docks"><span class="icon-Dock filter-text"></span>&nbsp;Docks</label></div>
+                    <div class="col-xs-12"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.single"><span class="icon-Island filter-text"></span>&nbsp;Single Island</label></div>
+                    <div class="col-xs-12"><label><input type="checkbox" ng-change="updateFilter()" ng-model="filters.multiple"><span class="icon-MultIsland filter-text"></span>&nbsp;Multiple Islands</label></div>
                 </div>  
             </uib-tab>
         </uib-tabset>
 
         <div class="sub-header">Active Filters: 
-            <span ng-if="filters.chickens==true" class="removable clickable fa fa-angle-right" ng-click="filters.chickens = false; updateFilter()"></span>
-            <span ng-if="filters.snakes==true" class="removable clickable fa fa-angle-left" ng-click="filters.snakes = false; updateFilter()"></span>
-            <span ng-if="filters.pigs==true" class="removable clickable fa fa-angle-down" ng-click="filters.pigs = false; updateFilter()"></span>
+            <span ng-if="filters.chickens==true" class="removable clickable icon-Chicken" ng-click="filters.chickens = false; updateFilter()"></span>
+            <span ng-if="filters.snakes==true" class="removable clickable icon-Snake" ng-click="filters.snakes = false; updateFilter()"></span>
+            <span ng-if="filters.pigs==true" class="removable clickable icon-Pig" ng-click="filters.pigs = false; updateFilter()"></span>
             <span ng-if="filters.fort==true" class="removable clickable fa fa-fort-awesome" ng-click="filters.fort = false; updateFilter()"></span>
             <span ng-if="filters.outpost==true" class="removable clickable fa fa-home" ng-click="filters.outpost = false; updateFilter()"></span>
-            <span ng-if="filters.docks==true" class="removable clickable fa fa-angle-double-left" ng-click="filters.docks = false; updateFilter()"></span>
             <span ng-if="specialFilter.showFlagged==true" class="removable clickable fa fa-flag" ng-click="specialFilter.showFlagged = false; updateFilter()"></span>
-            <span ng-if="filters.single==true" class="removable clickable fa fa-angle-double-up" ng-click="filters.single = false; updateFilter()"></span>
-            <span ng-if="filters.multiple==true" class="removable clickable fa fa-angle-double-down" ng-click="filters.multiple = false; updateFilter()"></span>
+            <span ng-if="filters.docks==true" class="removable clickable icon-Dock" ng-click="filters.docks = false; updateFilter()"></span>
+            <span ng-if="filters.single==true" class="removable clickable icon-Island" ng-click="filters.single = false; updateFilter()"></span>
+            <span ng-if="filters.multiple==true" class="removable clickable icon-MultIsland" ng-click="filters.multiple = false; updateFilter()"></span>
         </div>
 
         <div class="sub-header">I know what I be looking for</div>

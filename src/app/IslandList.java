@@ -39,10 +39,10 @@ public class IslandList {
 		islands.add(new Island("Cutlass Cay", Attribute.MULTIPLE, "Q22", Attribute.SNAKES));
 		islands.add(new Island("Dagger Tooth Outpost", Attribute.SINGLE,"Q8/Q9", Attribute.DOCKS, Attribute.OUTPOST));
 		islands.add(new Island("Devil's Ridge",Attribute.SINGLE, "U24", Attribute.PIGS, Attribute.SNAKES));
-		islands.add(new Island("Discovery Ridge", Attribute.MULTIPLE, "E20/E21", Attribute.CHICKENS, Attribute.SNAKES));
+		islands.add(new Island("Discovery Ridge", Attribute.MULTIPLE, "E21", Attribute.CHICKENS, Attribute.SNAKES));
 		islands.add(new Island("Fools Lagoon", Attribute.MULTIPLE, "K17", Attribute.PIGS));
 		islands.add(new Island("Galleon's Grave Outpost", Attribute.SINGLE,"X9", Attribute.DOCKS, Attribute.OUTPOST));
-		islands.add(new Island("Golden Sands Outpost", Attribute.MULTIPLE, "E12/F12", Attribute.DOCKS, Attribute.OUTPOST));
+		islands.add(new Island("Golden Sands Outpost", Attribute.MULTIPLE, "D12/E12", Attribute.DOCKS, Attribute.OUTPOST));
 		islands.add(new Island("Hidden Spring Keep", Attribute.SINGLE,"K9", Attribute.DOCKS, Attribute.FORT));
 		islands.add(new Island("Isle of the Last Words", Attribute.SINGLE,"S10", Attribute.SNAKES));
 		islands.add(new Island("Keel Haul Fort", Attribute.SINGLE,"C7", Attribute.DOCKS, Attribute.FORT));
@@ -77,10 +77,10 @@ public class IslandList {
 		islands.add(new Island("Shark Bait Cove", Attribute.MULTIPLE, "I24", Attribute.CHICKENS, Attribute.PIGS, Attribute.DOCKS));
 		islands.add(new Island("Shark Fin Camp",Attribute.SINGLE, "U5", Attribute.FORT));
 		islands.add(new Island("Shark Tooth Key", Attribute.MULTIPLE, "U15", Attribute.PIGS));
-		islands.add(new Island("Shipwreck Bay", Attribute.MULTIPLE, "P12/Q12", Attribute.CHICKENS, Attribute.PIGS));
+		islands.add(new Island("Shipwreck Bay", Attribute.MULTIPLE, "Q12", Attribute.CHICKENS, Attribute.PIGS));
 		islands.add(new Island("Shiver Retreat", Attribute.SINGLE,"V13", Attribute.PIGS));
 		islands.add(new Island("Skull Keep", Attribute.MULTIPLE, "U11", Attribute.DOCKS, Attribute.FORT));
-		islands.add(new Island("Smugglers' Bay",  Attribute.SINGLE, "F2/F3", Attribute.CHICKENS));
+		islands.add(new Island("Smugglers' Bay",  Attribute.SINGLE, "F2/F3/G2/G3", Attribute.CHICKENS));
 		islands.add(new Island("Snake Island", Attribute.MULTIPLE, "M19/N19", Attribute.PIGS, Attribute.SNAKES));
 		islands.add(new Island("The Crooked Masts",  Attribute.SINGLE, "T13", Attribute.CHICKENS, Attribute.SNAKES));
 		islands.add(new Island("The Crow's Nest Fortress",  Attribute.SINGLE, "S22", Attribute.DOCKS, Attribute.FORT));
