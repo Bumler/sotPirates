@@ -32,16 +32,11 @@
 
 .map-button{
     left: 15px;
+    z-index: 500;
 }
 
 .filter-position{
     right: 15px;
-}
-
-.filter-window{
-    height: 435px;
-    width: 370px;
-    z-index: 899;
 }
 
 .filter-header{
@@ -104,3 +99,18 @@ label{
     display: table-cell;
     width: 1%;
 }
+
+.filter-window{
+    height: 435px;
+    width: 370px;
+    z-index: 899;
+}
+
+@media only screen and (max-width: 400px) {
+    .filter-window{
+        width: 275px;
+    }
+    .sub-header{
+        font-size: 20px;
+    }
+} 
