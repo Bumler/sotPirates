@@ -245,7 +245,6 @@ sotPirates.controller('controlsController', function($scope, $http, $q, $locatio
 
 sotPirates.controller('aboutController', function(){
 });
-<<<<<<< HEAD
 
 sotPirates.controller('headerController', function($scope, $location){
 	$scope.refresh = function(){
@@ -253,5 +252,3 @@ sotPirates.controller('headerController', function($scope, $location){
 		location.reload();
 	}
 });
-=======
->>>>>>> c433387baa936213f9f733450a31acb370717575
