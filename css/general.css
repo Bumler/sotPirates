@@ -63,7 +63,7 @@ main{
 
 .ad-bottom{
     position: fixed;
-    bottom: 5px;
-    left: 0;
+    bottom: 10px;
+    left: 50%;
     transform: translate(-50%, 0);
 }
