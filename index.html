@@ -60,6 +60,7 @@
       gtag('config', 'UA-119308890-1');
     </script>
     
+    <!-- Chitika -->
   </head>
   
   <body>
@@ -67,6 +68,22 @@
     <main ng-view></main>
     <div ng-include="'html/controls.html'"></div>
     <footer ng-include="'html/footer.html'"></footer>
+
+    <div>
+      <div class="ad-bottom">
+        <script type="text/javascript">
+          ( function() {
+            if (window.CHITIKA === undefined) { window.CHITIKA = { 'units' : [] }; };
+            var unit = {"calltype":"async[2]","publisher":"SotPirate","width":728,"height":90,"sid":"Chitika Default"};
+            var placement_id = window.CHITIKA.units.length;
+            window.CHITIKA.units.push(unit);
+            document.write('<div id="chitikaAdBlock-' + placement_id + '"></div>');
+        }());
+        </script>
+        <script type="text/javascript" src="//cdn.chitika.net/getads.js" async></script>
+      </div>
+    </div>
+    
   </body>
   
 </html>
