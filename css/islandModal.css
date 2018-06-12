@@ -18,21 +18,7 @@
 }
 
 .islandInfo {
-    height: 23.88%;
-
-    display: flex;
-    align-items: center;
     padding: 10px;
-}
-
-.islandName{
-    float: left;
-    width: 70%;
-}
-
-.islandIcons{
-    float: right;  
-    width: 30%;
 }
 
 .modalText{
@@ -61,6 +47,13 @@ img{
         border: 0px;
     }
 
+    .islandInfo {
+        height: 23.88%;
+    
+        display: flex;
+        align-items: center;
+    }
+
     .vanityBorder{
         border-radius: 6px 0px 0px 6px;
     }
@@ -71,6 +64,16 @@ img{
     
         position: relative;
     }
+
+    .islandName{
+        float: left;
+        width: 70%;
+    }
+    
+    .islandIcons{
+        float: right;  
+        width: 30%;
+    }
 }
 
 @media only screen and (max-width: 599px){
@@ -80,7 +83,21 @@ img{
     }
 
     .modal-content{
-        margin-top: 10%;
+        margin-top: 5%;
+    }
+
+    .modal-dialog{
+        font-size: 16px;
+    }
+
+    .islandInfo {
+        text-align: center;
+    }
+
+    .islandIcons{
+        position: absolute;
+        float: right;  
+        width: 30%;
     }
 }
 
@@ -138,44 +155,5 @@ img{
 
     .modalText{
         font-size: 16px;
-    }
-}
-
-@media only screen and (min-width: 450px) and (max-width: 599px){
-    .modal-dialog{
-        margin: auto;
-    
-        height: 167px;
-        width: 425px;
-    }
-
-    .modalText{
-        font-size: 14px;
-    }
-}
-
-@media only screen and (min-width: 375px) and (max-width: 449px){
-    .modal-dialog{
-        margin: auto;
-    
-        height: 145px;
-        width: 370px;
-    }
-
-    .modalText{
-        font-size: 10px;
-    }
-}
-
-@media only screen and (min-width: 320px) and (max-width: 374px){
-    .modal-dialog{
-        margin: auto;
-    
-        height: 126px;
-        width: 320px;
-    }
-
-    .modalText{
-        font-size: 8px;
     }
 }
