@@ -3,28 +3,9 @@
     height: auto;
 }
 
-.modal-content {
-    display: flex;
-    height: 100%;
-    width: 100%;
-
-    border: 0px;
-}
-
 .secondContainer{
     height: 100%;
     width: 30%;
-}
-  
-.vanityShot{
-    width: 70%;
-    height: 100%;
-
-    position: relative;
-}
-
-.vanityBorder{
-    border-radius: 6px 0px 0px 6px;
 }
   
 .mapview {
@@ -69,6 +50,38 @@ img{
     right: 5px;
 
     cursor: pointer;
+}
+
+@media only screen and (min-width: 600px){
+    .modal-content {
+        display: flex;
+        height: 100%;
+        width: 100%;
+    
+        border: 0px;
+    }
+
+    .vanityBorder{
+        border-radius: 6px 0px 0px 6px;
+    }
+
+    .vanityShot{
+        width: 70%;
+        height: 100%;
+    
+        position: relative;
+    }
+}
+
+@media only screen and (max-width: 599px){
+    .vanityShot{
+        width: 100%;
+        display: block;
+    }
+
+    .modal-content{
+        margin-top: 10%;
+    }
 }
 
 @media only screen and (min-width: 1350px){
@@ -118,7 +131,6 @@ img{
 @media only screen and (min-width: 600px) and (max-width: 767px) {
     .modal-dialog{
         margin: auto;
-        margin-top: 40%;
     
         height: 226px;
         width: 575px;
@@ -132,7 +144,6 @@ img{
 @media only screen and (min-width: 450px) and (max-width: 599px){
     .modal-dialog{
         margin: auto;
-        margin-top: 20%;
     
         height: 167px;
         width: 425px;
@@ -146,7 +157,6 @@ img{
 @media only screen and (min-width: 375px) and (max-width: 449px){
     .modal-dialog{
         margin: auto;
-        margin-top: 50%;
     
         height: 145px;
         width: 370px;
@@ -160,7 +170,6 @@ img{
 @media only screen and (min-width: 320px) and (max-width: 374px){
     .modal-dialog{
         margin: auto;
-        margin-top: 50%;
     
         height: 126px;
         width: 320px;
