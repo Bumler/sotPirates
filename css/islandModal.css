@@ -3,55 +3,8 @@
     height: auto;
 }
 
-.modal-content {
-    display: flex;
-    height: 100%;
-    width: 100%;
-
-    border: 0px;
-}
-
-.secondContainer{
-    height: 100%;
-    width: 30%;
-}
-  
-.vanityShot{
-    width: 70%;
-    height: 100%;
-
-    position: relative;
-}
-
-.vanityBorder{
-    border-radius: 6px 0px 0px 6px;
-}
-  
-.mapview {
-    height: 76.22%;
-    background-color: beige;
-}
-
-.mapviewBorder{
-    border-radius: 0px 6px 0px 0px;
-}
-
 .islandInfo {
-    height: 23.88%;
-
-    display: flex;
-    align-items: center;
     padding: 10px;
-}
-
-.islandName{
-    float: left;
-    width: 70%;
-}
-
-.islandIcons{
-    float: right;  
-    width: 30%;
 }
 
 .modalText{
@@ -64,11 +17,65 @@ img{
 }
 
 .close{
+    color: #d2b48c;
+
     position: absolute;
     top: 5px;
     right: 5px;
 
     cursor: pointer;
+}
+
+@media only screen and (min-width: 600px){
+    .modal-content {
+        display: flex;
+        height: 100%;
+        width: 100%;
+    
+        border: 0px;
+    }
+
+    .secondContainer{
+        height: 100%;
+        width: 30%;
+    }
+      
+    .mapview {
+        height: 76.22%;
+        background-color: beige;
+    }
+    
+    .mapviewBorder{
+        border-radius: 0px 6px 0px 0px;
+    }
+
+    .islandInfo {
+        height: 23.88%;
+    
+        display: flex;
+        align-items: center;
+    }
+
+    .vanityBorder{
+        border-radius: 6px 0px 0px 6px;
+    }
+
+    .vanityShot{
+        width: 70%;
+        height: 100%;
+    
+        position: relative;
+    }
+
+    .islandName{
+        float: left;
+        width: 70%;
+    }
+    
+    .islandIcons{
+        float: right;  
+        width: 30%;
+    }
 }
 
 @media only screen and (min-width: 1350px){
@@ -118,7 +125,6 @@ img{
 @media only screen and (min-width: 600px) and (max-width: 767px) {
     .modal-dialog{
         margin: auto;
-        margin-top: 40%;
     
         height: 226px;
         width: 575px;
@@ -129,44 +135,45 @@ img{
     }
 }
 
-@media only screen and (min-width: 450px) and (max-width: 599px){
+
+@media only screen and (max-width: 599px){
+    .vanityShot{
+        width: 100%;
+        display: block;
+    }
+
+    .vanityBorder{
+        border-radius: 6px 6px 0px 0px;
+    }
+
+    .modal-content{
+        margin-top: 5%;
+    }
+
     .modal-dialog{
-        margin: auto;
-        margin-top: 20%;
-    
-        height: 167px;
-        width: 425px;
+        font-size: 16px;
     }
 
-    .modalText{
-        font-size: 14px;
-    }
-}
-
-@media only screen and (min-width: 375px) and (max-width: 449px){
-    .modal-dialog{
-        margin: auto;
-        margin-top: 50%;
-    
-        height: 145px;
-        width: 370px;
+    .islandInfo {
+        text-align: center;
     }
 
-    .modalText{
-        font-size: 10px;
-    }
-}
-
-@media only screen and (min-width: 320px) and (max-width: 374px){
-    .modal-dialog{
-        margin: auto;
-        margin-top: 50%;
-    
-        height: 126px;
-        width: 320px;
+    .islandIcons{
+        color: #d2b48c;
+        position: absolute;
+        top: 5px;
+        left: 5px;
     }
 
-    .modalText{
-        font-size: 8px;
+    .vanityShot > .card-location{
+        position: absolute;
+        bottom: 70px;
+        right: 5px;
+    }
+
+    .vanityShot > .card-mark{
+        position: absolute;
+        bottom: 70px;
+        left: 5px;
     }
 }
