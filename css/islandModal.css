@@ -3,20 +3,6 @@
     height: auto;
 }
 
-.secondContainer{
-    height: 100%;
-    width: 30%;
-}
-  
-.mapview {
-    height: 76.22%;
-    background-color: beige;
-}
-
-.mapviewBorder{
-    border-radius: 0px 6px 0px 0px;
-}
-
 .islandInfo {
     padding: 10px;
 }
@@ -49,6 +35,20 @@ img{
         border: 0px;
     }
 
+    .secondContainer{
+        height: 100%;
+        width: 30%;
+    }
+      
+    .mapview {
+        height: 76.22%;
+        background-color: beige;
+    }
+    
+    .mapviewBorder{
+        border-radius: 0px 6px 0px 0px;
+    }
+
     .islandInfo {
         height: 23.88%;
     
@@ -75,48 +75,6 @@ img{
     .islandIcons{
         float: right;  
         width: 30%;
-    }
-}
-
-@media only screen and (max-width: 599px){
-    .vanityShot{
-        width: 100%;
-        display: block;
-    }
-
-    .vanityBorder{
-        border-radius: 6px 6px 0px 0px;
-    }
-
-    .modal-content{
-        margin-top: 5%;
-    }
-
-    .modal-dialog{
-        font-size: 16px;
-    }
-
-    .islandInfo {
-        text-align: center;
-    }
-
-    .islandIcons{
-        color: #d2b48c;
-        position: absolute;
-        top: 5px;
-        left: 5px;
-    }
-
-    .vanityShot > .card-location{
-        position: absolute;
-        bottom: 70px;
-        right: 5px;
-    }
-
-    .vanityShot > .card-mark{
-        position: absolute;
-        bottom: 70px;
-        left: 5px;
     }
 }
 
@@ -174,5 +132,48 @@ img{
 
     .modalText{
         font-size: 16px;
+    }
+}
+
+
+@media only screen and (max-width: 599px){
+    .vanityShot{
+        width: 100%;
+        display: block;
+    }
+
+    .vanityBorder{
+        border-radius: 6px 6px 0px 0px;
+    }
+
+    .modal-content{
+        margin-top: 5%;
+    }
+
+    .modal-dialog{
+        font-size: 16px;
+    }
+
+    .islandInfo {
+        text-align: center;
+    }
+
+    .islandIcons{
+        color: #d2b48c;
+        position: absolute;
+        top: 5px;
+        left: 5px;
+    }
+
+    .vanityShot > .card-location{
+        position: absolute;
+        bottom: 70px;
+        right: 5px;
+    }
+
+    .vanityShot > .card-mark{
+        position: absolute;
+        bottom: 70px;
+        left: 5px;
     }
 }
