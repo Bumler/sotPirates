@@ -28,8 +28,17 @@ sotPirates.factory('sotEndpoints', function(){
 	}
 
 	function SetIslandImages (island){
-		island.mapView = this.baseURL.concat("/islands/images/").concat(island.NAME).concat("?isMap=true");
-		island.vanityShot = this.baseURL.concat("/islands/images/").concat(island.NAME);
+		var isMobile = determineMobile();
+
+		island.mapView = this.baseURL.concat("/islands/images/").concat(island.NAME).concat("?isMap=true&isMobile=" + isMobile);
+		island.vanityShot = this.baseURL.concat("/islands/images/").concat(island.NAME).concat("?isMobile=" + isMobile);
+	}
+
+	function determineMobile (){
+		if (window.innerWidth < 450)
+			return true;
+		else
+			return false;
 	}
 
 	function formatGetRequest(body){

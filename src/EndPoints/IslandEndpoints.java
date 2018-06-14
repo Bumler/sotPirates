@@ -94,7 +94,7 @@ public class IslandEndpoints {
 	@GET
 	@Path("/images/{islandName}")
 	@Produces({ "image/jpeg,image/png" })
-	@ApiOperation(value = "Return the PNG image of the island", notes = "Returns Input Stream if found")
+	@ApiOperation(value = "Return the JPG image of the island", notes = "Returns Input Stream if found")
 
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Valid island is found"),
 			@ApiResponse(code = 404, message = "Valid island is not found") })
