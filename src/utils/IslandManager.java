@@ -18,6 +18,7 @@ import org.json.JSONObject;
 import Resources.Island;
 import app.IslandList;
 import utils.Constants.httpsConstants;
+import utils.Constants.pathConstants;
 
 /**
  * 
@@ -103,10 +104,6 @@ public class IslandManager {
 		return buildResponse(responseHeaders, responseCode, responsePayload.toString());
 	}
 
-	// The islands are stored in a local folder called images
-	private static final java.nio.file.Path IMAGES_DESKTOP_ISLANDS_DIR = Paths.get("images/desktop/Islands");
-	private static final java.nio.file.Path IMAGES_DESKTOP_MAPS_DIR = Paths.get("images/desktop/Maps");
-
 	/**
 	 * 
 	 * Return the PNG image of the island.<br>
@@ -173,9 +170,9 @@ public class IslandManager {
 	 */
 	private static java.nio.file.Path getImagePath(String islandPNG, String isMap) {
 		if (isMap != null && isMap.equalsIgnoreCase("true")) {
-			return IMAGES_DESKTOP_MAPS_DIR.resolve(islandPNG);
+			return pathConstants.IMAGES_DESKTOP_MAPS_DIR.resolve(islandPNG);
 		}
-		return IMAGES_DESKTOP_ISLANDS_DIR.resolve(islandPNG);
+		return pathConstants.IMAGES_DESKTOP_ISLANDS_DIR.resolve(islandPNG);
 	}
 
 	/**

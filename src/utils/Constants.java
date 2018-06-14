@@ -1,5 +1,7 @@
 package utils;
 
+import java.nio.file.Paths;
+
 /**
  * Constants used throughout this product.
  * @author ryanpelaez
@@ -38,5 +40,13 @@ public class Constants {
 		public static final String CONTENT_TYPE_HEADER = "Content-Type";
 		public static final String APP_JSON = "application/json";
 
+	}
+	
+	public static class pathConstants {
+		// The islands are stored in a local folder called images
+		public static final java.nio.file.Path IMAGES_DESKTOP_ISLANDS_DIR = Paths.get("images/desktop/Islands");
+		public static final java.nio.file.Path IMAGES_DESKTOP_MAPS_DIR = Paths.get("images/desktop/Maps");
+		public static final java.nio.file.Path IMAGES_MOBILE_ISLANDS_DIR = Paths.get("images/mobile/Islands");
+		public static final java.nio.file.Path IMAGES_MOBILE_MAPS_DIR = Paths.get("images/mobile/Maps");
 	}
 }
