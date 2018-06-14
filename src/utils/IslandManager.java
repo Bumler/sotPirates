@@ -22,7 +22,7 @@ import utils.Constants.pathConstants;
 
 /**
  * 
- * @author ryanpelaez
+ * @author ryanpelaez and henrybulmer
  *
  */
 public class IslandManager {
@@ -169,7 +169,6 @@ public class IslandManager {
 	 * @return
 	 */
 	private static java.nio.file.Path getImagePath(String islandJPG, String isMap, String isMobile) {
-		System.out.println(isMobile);
 		if (isMap != null && isMap.equalsIgnoreCase("true")) {
 			if (isMobile != null && isMobile.equalsIgnoreCase("true"))
 				return pathConstants.IMAGES_MOBILE_MAPS_DIR.resolve(islandJPG);
