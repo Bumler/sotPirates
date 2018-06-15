@@ -12,6 +12,10 @@ A descriptive island tracker for Sea of Thieves. - http://www.sotpirates.com
 ## Contributions
 ### <b>Henry Bulmer</b> 
 <i>Frontend</i>
+- Built UI from scratch using bootstrap with a focus on usability for mobile.
+- Handled routing, back end calls and created modals with AngularJS
+- Take in user inputs for filters and display the results presented from the backend.
+- Did some minor backend work implementing a parameter to send smaller images for mobile devices.
 
 ### <b>Ryan Pelaez</b>
 <i>Backend</i>
